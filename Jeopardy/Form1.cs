@@ -91,47 +91,23 @@ namespace Jeopardy
             clue.Visible = true;
 
             int valueIndex = 0;
-            if (doubleJeopardy)
+            switch (value)
             {
-                switch (value)
-                {
-                    case "400":
-                        valueIndex = 0;
-                        break;
-                    case "800":
-                        valueIndex = 1;
-                        break;
-                    case "1200":
-                        valueIndex = 2;
-                        break;
-                    case "1600":
-                        valueIndex = 3;
-                        break;
-                    case "2000":
-                        valueIndex = 4;
-                        break;
-                }
-            }
-            else
-            {
-                switch (value)
-                {
-                    case "200":
-                        valueIndex = 0;
-                        break;
-                    case "400":
-                        valueIndex = 1;
-                        break;
-                    case "600":
-                        valueIndex = 2;
-                        break;
-                    case "800":
-                        valueIndex = 3;
-                        break;
-                    case "1000":
-                        valueIndex = 4;
-                        break;
-                }
+                case "200":
+                    valueIndex = 0;
+                    break;
+                case "400":
+                    valueIndex = 1;
+                    break;
+                case "600":
+                    valueIndex = 2;
+                    break;
+                case "800":
+                    valueIndex = 3;
+                    break;
+                case "1000":
+                    valueIndex = 4;
+                    break;
             }
 
             Clue[] cl = clues[categories[catID]].clues;
