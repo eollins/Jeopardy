@@ -577,9 +577,11 @@
             this.p1score.Name = "p1score";
             this.p1score.Size = new System.Drawing.Size(166, 58);
             this.p1score.TabIndex = 36;
+            this.p1score.Tag = "q1";
             this.p1score.Text = "$0";
             this.p1score.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.p1score.Visible = false;
+            this.p1score.Click += new System.EventHandler(this.p6score_Click);
             // 
             // p2score
             // 
@@ -588,9 +590,11 @@
             this.p2score.Name = "p2score";
             this.p2score.Size = new System.Drawing.Size(146, 58);
             this.p2score.TabIndex = 38;
+            this.p2score.Tag = "q2";
             this.p2score.Text = "$0";
             this.p2score.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.p2score.Visible = false;
+            this.p2score.Click += new System.EventHandler(this.p6score_Click);
             // 
             // p3score
             // 
@@ -599,9 +603,11 @@
             this.p3score.Name = "p3score";
             this.p3score.Size = new System.Drawing.Size(146, 58);
             this.p3score.TabIndex = 40;
+            this.p3score.Tag = "q3";
             this.p3score.Text = "$0";
             this.p3score.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.p3score.Visible = false;
+            this.p3score.Click += new System.EventHandler(this.p6score_Click);
             // 
             // p4score
             // 
@@ -610,9 +616,11 @@
             this.p4score.Name = "p4score";
             this.p4score.Size = new System.Drawing.Size(146, 58);
             this.p4score.TabIndex = 42;
+            this.p4score.Tag = "q4";
             this.p4score.Text = "$0";
             this.p4score.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.p4score.Visible = false;
+            this.p4score.Click += new System.EventHandler(this.p6score_Click);
             // 
             // p5score
             // 
@@ -621,9 +629,11 @@
             this.p5score.Name = "p5score";
             this.p5score.Size = new System.Drawing.Size(146, 58);
             this.p5score.TabIndex = 44;
+            this.p5score.Tag = "q5";
             this.p5score.Text = "$0";
             this.p5score.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.p5score.Visible = false;
+            this.p5score.Click += new System.EventHandler(this.p6score_Click);
             // 
             // p6score
             // 
@@ -632,9 +642,11 @@
             this.p6score.Name = "p6score";
             this.p6score.Size = new System.Drawing.Size(146, 58);
             this.p6score.TabIndex = 46;
+            this.p6score.Tag = "q6";
             this.p6score.Text = "$0";
             this.p6score.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.p6score.Visible = false;
+            this.p6score.Click += new System.EventHandler(this.p6score_Click);
             // 
             // textBox1
             // 

@@ -34,9 +34,9 @@ namespace Jeopardy
             InitializeComponent();
             form1 = this;
             string[] values = new string[] { "200", "400", "600", "800", "1000" };
-            dailyDouble = "c" + random.Next(1, 7) + "v" + values[random.Next(0, 5)];
-            djdd1 = "c" + random.Next(1, 7) + "v" + values[random.Next(0, 5)];
-            djdd2 = "c" + random.Next(1, 7) + "v" + values[random.Next(0, 5)];
+            dailyDouble = "c" + random.Next(1, 7) + "v" + values[random.Next(2, 5)];
+            djdd1 = "c" + random.Next(1, 7) + "v" + values[random.Next(2, 5)];
+            djdd2 = "c" + random.Next(1, 7) + "v" + values[random.Next(2, 5)];
             ToggleBoard(false);
 
             doubles.Text = "Daily Doubles:\n" + dailyDouble + "\n" + djdd1 + " & " + djdd2;
@@ -112,16 +112,36 @@ namespace Jeopardy
 
             Clue[] cl = clues[categories[catID]].clues;
 
-            Clue c = cl[valueIndex];
+            bool cluePresent;
+            Clue c;
+
+            try
+            {
+                c = cl[valueIndex];
+                cluePresent = true;
+            }
+            catch
+            {
+                c = null;
+                cluePresent = false;   
+            }
+
             if ((doubleJeopardy == false && name == dailyDouble) || (doubleJeopardy == true && (name == djdd1 || name == djdd2)))
             {
                 clue.Text = "DAILY DOUBLE";
                 return;
             }
 
-            clue.Text = c.question;
-            label7.Text = c.answer;
-            currentValue = int.Parse(value);
+            if (cluePresent)
+            {
+                clue.Text = c.question;
+                label7.Text = c.answer;
+                currentValue = int.Parse(value);
+            }
+            else
+            {
+                clue.Text = "NO CLUE AVAILABLE";
+            }
         }
 
         public void HideBoard()
@@ -521,7 +541,7 @@ namespace Jeopardy
             string[] names = new string[] { textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text };
             
             clue.Visible = true;
-            clue.Text = "FINAL SCORES\n";
+            clue.Text = "FINAL SCORES\n\n";
             int t = 0;
             string winner = "";
             foreach (var player in scores.OrderByDescending(key => key.Value))
@@ -534,8 +554,6 @@ namespace Jeopardy
                 t++;
                 clue.Text += t + ". " + player.Key + " - $" + player.Value + "\n";
             }
-
-            clue.Text += "\n" + winner + " is our new champion!";
         }
 
         private void textBox6_Click(object sender, EventArgs e)
@@ -601,6 +619,11 @@ namespace Jeopardy
                 }
                 i++;
             }
+        }
+
+        private void p6score_Click(object sender, EventArgs e)
+        {
+            numericUpDown1.Value = int.Parse(((Label)sender).Tag.ToString()[1].ToString());
         }
     }
 }
