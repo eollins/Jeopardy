@@ -326,6 +326,17 @@ namespace Jeopardy
                 clues.Add(cat, cat2);
             }
 
+            HideBoard();
+            clue.Visible = true;
+            clue.Text = categories[0].title.ToUpper();
+
+            label1.Visible = false;
+            label2.Visible = false;
+            label3.Visible = false;
+            label4.Visible = false;
+            label5.Visible = false;
+            label6.Visible = false;
+
             foreach (var btnn in Controls.OfType<Button>().Where(x => x.Tag.ToString()[0] == 'g'))
             {
                 btnn.Tag = "board@" + btnn.Tag.ToString().Substring(btnn.Tag.ToString().IndexOf('@') + 1);
@@ -360,7 +371,7 @@ namespace Jeopardy
         }
 
         private void button4_Click(object sender, EventArgs e)
-        {
+        { 
             if (radioButton3.Checked)
             {
                 WebRequest clueRequest = WebRequest.Create("http://jservice.io/api/category?id=" + finalJep);
@@ -378,6 +389,45 @@ namespace Jeopardy
                 label5.Text = cat2.title.ToUpper();
                 label6.Text = cat2.title.ToUpper();
 
+                return;
+            }
+
+            if (clue.Text == label1.Text)
+            {
+                clue.Text = label2.Text;
+                return;
+            }
+            else if (clue.Text == label2.Text)
+            {
+                clue.Text = label3.Text;
+                return;
+            }
+            else if (clue.Text == label3.Text)
+            {
+                clue.Text = label4.Text;
+                return;
+            }
+            else if (clue.Text == label4.Text)
+            {
+                clue.Text = label5.Text;
+                return;
+            }
+            else if (clue.Text == label5.Text)
+            {
+                clue.Text = label6.Text;
+                return;
+            }
+            else if (clue.Text == label6.Text)
+            {
+                label1.Visible = true;
+                label2.Visible = true;
+                label3.Visible = true;
+                label4.Visible = true;
+                label5.Visible = true;
+                label6.Visible = true;
+
+                clue.Visible = false;
+                ShowBoard();
                 return;
             }
 
@@ -554,6 +604,13 @@ namespace Jeopardy
                 t++;
                 clue.Text += t + ". " + player.Key + " - $" + player.Value + "\n";
             }
+
+            label1.Visible = false;
+            label2.Visible = false;
+            label3.Visible = false;
+            label4.Visible = false;
+            label5.Visible = false;
+            label6.Visible = false;
         }
 
         private void textBox6_Click(object sender, EventArgs e)
@@ -593,31 +650,33 @@ namespace Jeopardy
             clues.Add(categories2[0], cat2);
             categories[cat] = categories2[0];
 
-            int i = 0;
-            foreach (Category c in categories)
+            switch (cat)
             {
-                switch (i)
-                {
-                    case 0:
-                        label1.Text = c.title.ToUpper().Replace("  ", " & ");
-                        break;
-                    case 1:
-                        label2.Text = c.title.ToUpper().Replace("  ", " & ");
-                        break;
-                    case 2:
-                        label3.Text = c.title.ToUpper().Replace("  ", " & ");
-                        break;
-                    case 3:
-                        label4.Text = c.title.ToUpper().Replace("  ", " & ");
-                        break;
-                    case 4:
-                        label5.Text = c.title.ToUpper().Replace("  ", " & ");
-                        break;
-                    case 5:
-                        label6.Text = c.title.ToUpper().Replace("  ", " & ");
-                        break;
-                }
-                i++;
+                case 0:
+                    label1.Text = cat2.title.ToUpper().Replace("  ", " & ");
+                    break;
+                case 1:
+                    label2.Text = cat2.title.ToUpper().Replace("  ", " & ");
+                    break;
+                case 2:
+                    label3.Text = cat2.title.ToUpper().Replace("  ", " & ");
+                    break;
+                case 3:
+                    label4.Text = cat2.title.ToUpper().Replace("  ", " & ");
+                    break;
+                case 4:
+                    label5.Text = cat2.title.ToUpper().Replace("  ", " & ");
+                    break;
+                case 5:
+                    label6.Text = cat2.title.ToUpper().Replace("  ", " & ");
+                    break;
+            }
+
+            string cID = "c" + lbl.Tag.ToString()[lbl.Tag.ToString().Length - 1].ToString();
+            foreach (var btnn in Controls.OfType<Button>().Where(x => x.Name.Substring(0, 2) == cID))
+            {
+                btnn.Tag = "board@" + btnn.Name.Substring(2);
+                ShowBoard();
             }
         }
 
