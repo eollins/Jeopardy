@@ -28,6 +28,7 @@ namespace Jeopardy
         bool doubleJeopardy = false;
         bool finalJeopardy = false;
         int finalJep = 0;
+        System.Media.SoundPlayer player = new System.Media.SoundPlayer();
 
         public Form1()
         {
@@ -129,13 +130,15 @@ namespace Jeopardy
             if ((doubleJeopardy == false && name == dailyDouble) || (doubleJeopardy == true && (name == djdd1 || name == djdd2)))
             {
                 clue.Text = "DAILY DOUBLE";
+                player.SoundLocation = "DD.wav";
+                player.Play();
                 return;
             }
 
             if (cluePresent)
             {
-                clue.Text = c.question;
-                label7.Text = c.answer;
+                clue.Text = c.question.Replace("&", "&&");
+                label7.Text = c.answer.Replace("&", "&&");
                 currentValue = int.Parse(value);
             }
             else
@@ -168,11 +171,13 @@ namespace Jeopardy
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            //player.SoundLocation = "Theme.wav";
+            //player.Play();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            player.Stop();
             ToggleBoard(true);
             foreach (var btnn in Controls.OfType<Button>().Where(x => x.Tag.ToString()[0] == 'g'))
             {
@@ -299,22 +304,22 @@ namespace Jeopardy
                 switch (i)
                 {
                     case 0:
-                        label1.Text = cat.title.ToUpper().Replace("  ", " & ");
+                        label1.Text = cat.title.ToUpper().Replace("&", "&&");
                         break;
                     case 1:
-                        label2.Text = cat.title.ToUpper().Replace("  ", " & ");
+                        label2.Text = cat.title.ToUpper().Replace("&", "&&");
                         break;
                     case 2:
-                        label3.Text = cat.title.ToUpper().Replace("  ", " & ");
+                        label3.Text = cat.title.ToUpper().Replace("&", "&&");
                         break;
                     case 3:
-                        label4.Text = cat.title.ToUpper().Replace("  ", " & ");
+                        label4.Text = cat.title.ToUpper().Replace("&", "&&");
                         break;
                     case 4:
-                        label5.Text = cat.title.ToUpper().Replace("  ", " & ");
+                        label5.Text = cat.title.ToUpper().Replace("&", "&&");
                         break;
                     case 5:
-                        label6.Text = cat.title.ToUpper().Replace("  ", " & ");
+                        label6.Text = cat.title.ToUpper().Replace("&", "&&");
                         break;
                 }
 
@@ -388,6 +393,9 @@ namespace Jeopardy
                 label4.Text = cat2.title.ToUpper();
                 label5.Text = cat2.title.ToUpper();
                 label6.Text = cat2.title.ToUpper();
+
+                player.SoundLocation = "Final.wav";
+                player.Play();
 
                 return;
             }
@@ -465,15 +473,11 @@ namespace Jeopardy
 
             Button btn = (Button)sender;
             string tag;
-            if ((string)btn.Tag == "sloptop")
+            if (numericUpDown2.Value > 0)
             {
                 currentValue = (int)numericUpDown2.Value;
-                tag = numericUpDown1.Value.ToString();
             }
-            else
-            {
-                tag = (string)btn.Tag;
-            }
+            tag = (string)btn.Tag;
 
             if (tag == "1")
             {
@@ -481,6 +485,13 @@ namespace Jeopardy
                     p1score.Text = "$" + (int.Parse(p1score.Text.Substring(1)) + currentValue).ToString();
                 else
                     p1score.Text = "$" + (int.Parse(p1score.Text.Substring(1)) - currentValue).ToString();
+
+                textBox1.BackColor = Color.MistyRose;
+                textBox2.BackColor = SystemColors.Window;
+                textBox3.BackColor = SystemColors.Window;
+                textBox4.BackColor = SystemColors.Window;
+                textBox5.BackColor = SystemColors.Window;
+                textBox6.BackColor = SystemColors.Window;
             }
             else if (tag == "2")
             {
@@ -488,6 +499,13 @@ namespace Jeopardy
                     p2score.Text = "$" + (int.Parse(p2score.Text.Substring(1)) + currentValue).ToString();
                 else
                     p2score.Text = "$" + (int.Parse(p2score.Text.Substring(1)) - currentValue).ToString();
+
+                textBox1.BackColor = SystemColors.Window;
+                textBox2.BackColor = Color.MistyRose;
+                textBox3.BackColor = SystemColors.Window;
+                textBox4.BackColor = SystemColors.Window;
+                textBox5.BackColor = SystemColors.Window;
+                textBox6.BackColor = SystemColors.Window;
             }
             else if (tag == "3")
             {
@@ -495,6 +513,13 @@ namespace Jeopardy
                     p3score.Text = "$" + (int.Parse(p3score.Text.Substring(1)) + currentValue).ToString();
                 else
                     p3score.Text = "$" + (int.Parse(p3score.Text.Substring(1)) - currentValue).ToString();
+
+                textBox1.BackColor = SystemColors.Window;
+                textBox2.BackColor = SystemColors.Window;
+                textBox3.BackColor = Color.MistyRose;
+                textBox4.BackColor = SystemColors.Window;
+                textBox5.BackColor = SystemColors.Window;
+                textBox6.BackColor = SystemColors.Window;
             }
             else if (tag == "4")
             {
@@ -502,6 +527,13 @@ namespace Jeopardy
                     p4score.Text = "$" + (int.Parse(p4score.Text.Substring(1)) + currentValue).ToString();
                 else
                     p4score.Text = "$" + (int.Parse(p4score.Text.Substring(1)) - currentValue).ToString();
+
+                textBox1.BackColor = SystemColors.Window;
+                textBox2.BackColor = SystemColors.Window;
+                textBox3.BackColor = SystemColors.Window;
+                textBox4.BackColor = Color.MistyRose;
+                textBox5.BackColor = SystemColors.Window;
+                textBox6.BackColor = SystemColors.Window;
             }
             else if (tag == "5")
             {
@@ -509,6 +541,13 @@ namespace Jeopardy
                     p5score.Text = "$" + (int.Parse(p5score.Text.Substring(1)) + currentValue).ToString();
                 else
                     p5score.Text = "$" + (int.Parse(p5score.Text.Substring(1)) - currentValue).ToString();
+
+                textBox1.BackColor = SystemColors.Window;
+                textBox2.BackColor = SystemColors.Window;
+                textBox3.BackColor = SystemColors.Window;
+                textBox4.BackColor = SystemColors.Window;
+                textBox5.BackColor = Color.MistyRose;
+                textBox6.BackColor = SystemColors.Window;
             }
             else if (tag == "6")
             {
@@ -516,6 +555,13 @@ namespace Jeopardy
                     p6score.Text = "$" + (int.Parse(p6score.Text.Substring(1)) + currentValue).ToString();
                 else
                     p6score.Text = "$" + (int.Parse(p6score.Text.Substring(1)) - currentValue).ToString();
+
+                textBox1.BackColor = SystemColors.Window;
+                textBox2.BackColor = SystemColors.Window;
+                textBox3.BackColor = SystemColors.Window;
+                textBox4.BackColor = SystemColors.Window;
+                textBox5.BackColor = SystemColors.Window;
+                textBox6.BackColor = Color.MistyRose;
             }
 
             if (btn.Text == "Award" && !finalJeopardy)
@@ -536,27 +582,6 @@ namespace Jeopardy
         private void button11_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            switch (btn.Tag)
-            {
-                case "1":
-                    numericUpDown1.Value = 1;
-                    break;
-                case "2":
-                    numericUpDown1.Value = 2;
-                    break;
-                case "3":
-                    numericUpDown1.Value = 3;
-                    break;
-                case "4":
-                    numericUpDown1.Value = 4;
-                    break;
-                case "5":
-                    numericUpDown1.Value = 5;
-                    break;
-                case "6":
-                    numericUpDown1.Value = 6;
-                    break;
-            }
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -615,8 +640,7 @@ namespace Jeopardy
 
         private void textBox6_Click(object sender, EventArgs e)
         {
-            TextBox box = (TextBox)sender;
-            numericUpDown1.Value = int.Parse(box.Tag.ToString());
+
         }
 
         private void label6_Click(object sender, EventArgs e)
@@ -648,7 +672,7 @@ namespace Jeopardy
             CategoryInfo cat2 = JsonConvert.DeserializeObject<CategoryInfo>(json2);
 
             clues.Add(categories2[0], cat2);
-            categories[cat] = categories2[0];
+             categories[cat] = categories2[0];
 
             switch (cat)
             {
@@ -682,7 +706,13 @@ namespace Jeopardy
 
         private void p6score_Click(object sender, EventArgs e)
         {
-            numericUpDown1.Value = int.Parse(((Label)sender).Tag.ToString()[1].ToString());
+            //numericUpDown1.Value = int.Parse(((Label)sender).Tag.ToString()[1].ToString());
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            player.SoundLocation = "Time.wav";
+            player.Play();
         }
     }
 }
