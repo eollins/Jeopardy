@@ -10,6 +10,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace Jeopardy
 {
@@ -45,6 +46,11 @@ namespace Jeopardy
 
         public class Category
         {
+            public Category(string Title)
+            {
+                title = Title;
+            }
+
             public string id { get; set; }
             public string title { get; set; }
             public string clues_count { get; set; }
@@ -52,6 +58,12 @@ namespace Jeopardy
 
         public class CategoryInfo
         {
+            public CategoryInfo(string Title, Clue[] Clues)
+            {
+                title = Title;
+                clues = Clues;
+            }
+
             public string id { get; set; }
             public string title { get; set; }
             public string clues_count { get; set; }
@@ -60,6 +72,13 @@ namespace Jeopardy
 
         public class Clue
         {
+            public Clue(string Answer, string Question, string Value)
+            {
+                answer = Answer;
+                question = Question;
+                value = Value;
+            }
+
             public string id { get; set; }
             public string answer { get; set; }
             public string question { get; set; }
@@ -116,15 +135,11 @@ namespace Jeopardy
             bool cluePresent;
             Clue c;
 
-            try
+            c = cl[valueIndex];
+            cluePresent = true;
+            if (c == null)
             {
-                c = cl[valueIndex];
-                cluePresent = true;
-            }
-            catch
-            {
-                c = null;
-                cluePresent = false;   
+                cluePresent = false;
             }
 
             if ((doubleJeopardy == false && name == dailyDouble) || (doubleJeopardy == true && (name == djdd1 || name == djdd2)))
@@ -175,8 +190,48 @@ namespace Jeopardy
             //player.Play();
         }
 
+        bool generate = true;
         private void button1_Click(object sender, EventArgs e)
         {
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show("Upload a custom game file?", "Game Source", buttons);
+            if (result == DialogResult.Yes)
+            {
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        XmlDocument doc = new XmlDocument();
+                        doc.Load(openFileDialog1.FileName);
+                        XmlNodeList nodes = doc.GetElementsByTagName("GameBoard")[0].ChildNodes;
+                        foreach (XmlElement el in nodes)
+                        {
+                            string categoryName = el.GetAttribute("name");
+                            Category cat = new Category(categoryName);
+                            categories.Add(cat);
+                            Clue[] clues2 = new Clue[5];
+                            for (int i = 0; i < el.ChildNodes.Count; i++)
+                            {
+                                XmlElement el2 = (XmlElement)el.ChildNodes[i];
+                                clues2[i] = new Clue(el2.GetAttribute("answer"), el2.InnerText, el2.GetAttribute("value"));
+                            }
+                            CategoryInfo info = new CategoryInfo(categoryName, clues2);
+                            clues.Add(cat, info);
+                        }
+                        generate = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Invalid file. Please try again.");
+                    button1_Click(button1, new EventArgs());
+                }
+            }
+
             player.Stop();
             ToggleBoard(true);
             foreach (var btnn in Controls.OfType<Button>().Where(x => x.Tag.ToString()[0] == 'g'))
@@ -268,68 +323,101 @@ namespace Jeopardy
 
         public void generateGame()
         {
-            if (radioButton3.Checked)
+            if (generate)
             {
-                int randomOffset2 = random.Next(0, 5000);
-                WebRequest request2 = WebRequest.Create("http://jservice.io/api/categories?count=1&offset=" + randomOffset2);
-                WebResponse response2 = request2.GetResponse();
-                StreamReader reader2 = new StreamReader(response2.GetResponseStream());
-                string json3 = reader2.ReadToEnd();
-
-                Category[] category = JsonConvert.DeserializeObject<Category[]>(json3);
-                HideBoard();
-                clue.Visible = true;
-                clue.Text = category[0].title.ToUpper();
-                finalJep = int.Parse(category[0].id);
-                finalJeopardy = true;
-
-                return;
-            }
-
-            clues.Clear();
-            categories.Clear();
-
-            int randomOffset = random.Next(0, 5000);
-            WebRequest request = WebRequest.Create("http://jservice.io/api/categories?count=6&offset=" + randomOffset);
-            WebResponse response = request.GetResponse();
-            StreamReader reader = new StreamReader(response.GetResponseStream());
-            string json = reader.ReadToEnd();
-
-            Category[] categories2 = JsonConvert.DeserializeObject<Category[]>(json);
-
-            for (int i = 0; i < 6; i++)
-            {
-                Category cat = categories2[i];
-                categories.Add(cat);
-                switch (i)
+                if (radioButton3.Checked)
                 {
-                    case 0:
-                        label1.Text = cat.title.ToUpper().Replace("&", "&&");
-                        break;
-                    case 1:
-                        label2.Text = cat.title.ToUpper().Replace("&", "&&");
-                        break;
-                    case 2:
-                        label3.Text = cat.title.ToUpper().Replace("&", "&&");
-                        break;
-                    case 3:
-                        label4.Text = cat.title.ToUpper().Replace("&", "&&");
-                        break;
-                    case 4:
-                        label5.Text = cat.title.ToUpper().Replace("&", "&&");
-                        break;
-                    case 5:
-                        label6.Text = cat.title.ToUpper().Replace("&", "&&");
-                        break;
+                    int randomOffset2 = random.Next(0, 5000);
+                    WebRequest request2 = WebRequest.Create("http://jservice.io/api/categories?count=1&offset=" + randomOffset2);
+                    WebResponse response2 = request2.GetResponse();
+                    StreamReader reader2 = new StreamReader(response2.GetResponseStream());
+                    string json3 = reader2.ReadToEnd();
+
+                    Category[] category = JsonConvert.DeserializeObject<Category[]>(json3);
+                    HideBoard();
+                    clue.Visible = true;
+                    clue.Text = category[0].title.ToUpper();
+                    finalJep = int.Parse(category[0].id);
+                    finalJeopardy = true;
+
+                    return;
                 }
 
-                WebRequest clueRequest = WebRequest.Create("http://jservice.io/api/category?id=" + cat.id);
-                WebResponse clueResponse = clueRequest.GetResponse();
-                StreamReader reader2 = new StreamReader(clueResponse.GetResponseStream());
-                string json2 = reader2.ReadToEnd();
-                CategoryInfo cat2 = JsonConvert.DeserializeObject<CategoryInfo>(json2);
-                clues.Add(cat, cat2);
+                clues.Clear();
+                categories.Clear();
+
+                int randomOffset = random.Next(0, 5000);
+                WebRequest request = WebRequest.Create("http://jservice.io/api/categories?count=6&offset=" + randomOffset);
+                WebResponse response = request.GetResponse();
+                StreamReader reader = new StreamReader(response.GetResponseStream());
+                string json = reader.ReadToEnd();
+
+                Category[] categories2 = JsonConvert.DeserializeObject<Category[]>(json);
+
+                for (int i = 0; i < 6; i++)
+                {
+                    Category cat = categories2[i];
+                    categories.Add(cat);
+                    switch (i)
+                    {
+                        case 0:
+                            label1.Text = cat.title.ToUpper().Replace("&", "&&");
+                            break;
+                        case 1:
+                            label2.Text = cat.title.ToUpper().Replace("&", "&&");
+                            break;
+                        case 2:
+                            label3.Text = cat.title.ToUpper().Replace("&", "&&");
+                            break;
+                        case 3:
+                            label4.Text = cat.title.ToUpper().Replace("&", "&&");
+                            break;
+                        case 4:
+                            label5.Text = cat.title.ToUpper().Replace("&", "&&");
+                            break;
+                        case 5:
+                            label6.Text = cat.title.ToUpper().Replace("&", "&&");
+                            break;
+                    }
+
+                    WebRequest clueRequest = WebRequest.Create("http://jservice.io/api/category?id=" + cat.id);
+                    WebResponse clueResponse = clueRequest.GetResponse();
+                    StreamReader reader2 = new StreamReader(clueResponse.GetResponseStream());
+                    string json2 = reader2.ReadToEnd();
+                    CategoryInfo cat2 = JsonConvert.DeserializeObject<CategoryInfo>(json2);
+                    clues.Add(cat, cat2);
+                }
             }
+            else
+            {
+                for (int i = 0; i < categories.Count; i++)
+                {
+                    Category cat = categories[i];
+                    switch (i)
+                    {
+                        case 0:
+                            label1.Text = cat.title.ToUpper().Replace("&", "&&");
+                            break;
+                        case 1:
+                            label2.Text = cat.title.ToUpper().Replace("&", "&&");
+                            break;
+                        case 2:
+                            label3.Text = cat.title.ToUpper().Replace("&", "&&");
+                            break;
+                        case 3:
+                            label4.Text = cat.title.ToUpper().Replace("&", "&&");
+                            break;
+                        case 4:
+                            label5.Text = cat.title.ToUpper().Replace("&", "&&");
+                            break;
+                        case 5:
+                            label6.Text = cat.title.ToUpper().Replace("&", "&&");
+                            break;
+                    }
+                }
+            }
+
+            generate = true;
 
             HideBoard();
             clue.Visible = true;
@@ -446,6 +534,11 @@ namespace Jeopardy
             Clue[] cl = clues[categories[catID]].clues;
             foreach (Clue c in cl)
             {
+                if (c == null)
+                {
+                    continue;
+                }
+
                 if (c.value == value)
                 {
                     if (c.question.Contains("  "))

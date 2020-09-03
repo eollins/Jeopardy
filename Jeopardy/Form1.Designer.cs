@@ -102,6 +102,7 @@
             this.button18 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -818,7 +819,7 @@
             // button4
             // 
             this.button4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button4.Location = new System.Drawing.Point(658, 656);
+            this.button4.Location = new System.Drawing.Point(655, 656);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(96, 43);
             this.button4.TabIndex = 65;
@@ -1036,6 +1037,11 @@
             this.label9.TabIndex = 82;
             this.label9.Text = "$";
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "Choose Game File";
+            this.openFileDialog1.Filter = "XML game files|*.xml";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1204,6 +1210,7 @@
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

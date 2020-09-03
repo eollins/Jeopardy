@@ -1,0 +1,9 @@
+C:\Users\ethan\Documents\Jeopardy\JeopardyGameMaker\bin\Debug\JeopardyGameMaker.exe.config
+C:\Users\ethan\Documents\Jeopardy\JeopardyGameMaker\bin\Debug\JeopardyGameMaker.exe
+C:\Users\ethan\Documents\Jeopardy\JeopardyGameMaker\bin\Debug\JeopardyGameMaker.pdb
+C:\Users\ethan\Documents\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.Form1.resources
+C:\Users\ethan\Documents\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.Properties.Resources.resources
+C:\Users\ethan\Documents\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.csproj.GenerateResource.Cache
+C:\Users\ethan\Documents\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.exe
+C:\Users\ethan\Documents\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.pdb
+C:\Users\ethan\Documents\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.csprojResolveAssemblyReference.cache
