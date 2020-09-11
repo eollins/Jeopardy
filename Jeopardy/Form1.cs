@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace Jeopardy
 {
@@ -29,6 +30,14 @@ namespace Jeopardy
         bool doubleJeopardy = false;
         bool finalJeopardy = false;
         int finalJep = 0;
+
+        int player1score = 0;
+        int player2score = 0;
+        int player3score = 0;
+        int player4score = 0;
+        int player5score = 0;
+        int player6score = 0;
+
         System.Media.SoundPlayer player = new System.Media.SoundPlayer();
 
         public Form1()
@@ -155,6 +164,10 @@ namespace Jeopardy
                 clue.Text = c.question.Replace("&", "&&");
                 label7.Text = c.answer.Replace("&", "&&");
                 currentValue = int.Parse(value);
+                if (doubleJeopardy)
+                {
+                    currentValue *= 2;
+                }
             }
             else
             {
@@ -194,6 +207,8 @@ namespace Jeopardy
         private void button1_Click(object sender, EventArgs e)
         {
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            categories.Clear();
+            clues.Clear();
             DialogResult result = MessageBox.Show("Upload a custom game file?", "Game Source", buttons);
             if (result == DialogResult.Yes)
             {
@@ -201,19 +216,26 @@ namespace Jeopardy
                 {
                     try
                     {
-                        XmlDocument doc = new XmlDocument();
-                        doc.Load(openFileDialog1.FileName);
-                        XmlNodeList nodes = doc.GetElementsByTagName("GameBoard")[0].ChildNodes;
-                        foreach (XmlElement el in nodes)
+                        XDocument doc = new XDocument();
+                        doc = XDocument.Load(openFileDialog1.FileName);
+                        var nodes = doc.Element("GameBoard").Descendants();
+                        for (int i = 0; i < nodes.Count(); i += 6)
                         {
-                            string categoryName = el.GetAttribute("name");
+                            XElement el = nodes.ElementAt(i);
+                            string categoryName = el.Attribute("name").Value;
                             Category cat = new Category(categoryName);
                             categories.Add(cat);
                             Clue[] clues2 = new Clue[5];
-                            for (int i = 0; i < el.ChildNodes.Count; i++)
+
+                            var nodelist = from ele in el.Descendants("Clue")
+                                           orderby int.Parse(ele.Attribute("value").Value)
+                                           select ele;
+
+                            int i2 = 0;
+                            foreach (XElement el2 in nodelist)
                             {
-                                XmlElement el2 = (XmlElement)el.ChildNodes[i];
-                                clues2[i] = new Clue(el2.GetAttribute("answer"), el2.InnerText, el2.GetAttribute("value"));
+                                clues2[i2] = new Clue(el2.Attribute("answer").Value, el2.Value, el2.Attribute("value").Value);
+                                i2++;
                             }
                             CategoryInfo info = new CategoryInfo(categoryName, clues2);
                             clues.Add(cat, info);
@@ -228,7 +250,6 @@ namespace Jeopardy
                 else
                 {
                     MessageBox.Show("Invalid file. Please try again.");
-                    button1_Click(button1, new EventArgs());
                 }
             }
 
@@ -325,6 +346,11 @@ namespace Jeopardy
         {
             if (generate)
             {
+                foreach (var btnn in Controls.OfType<Button>().Where(x => x.Tag.ToString()[0] == 'g'))
+                {
+                    btnn.Tag = "board@" + btnn.Tag.ToString().Substring(btnn.Tag.ToString().IndexOf('@') + 1);
+                }
+
                 if (radioButton3.Checked)
                 {
                     int randomOffset2 = random.Next(0, 5000);
@@ -386,6 +412,22 @@ namespace Jeopardy
                     string json2 = reader2.ReadToEnd();
                     CategoryInfo cat2 = JsonConvert.DeserializeObject<CategoryInfo>(json2);
                     clues.Add(cat, cat2);
+
+                    int val = 200;
+                    foreach (Clue cl in cat2.clues)
+                    {
+                        if (cl.question == "")
+                        {
+                            string btnName = "c" + i + "v" + val;
+
+                            foreach (var btnn in Controls.OfType<Button>().Where(x => x.Name == btnName))
+                            {
+                                btnn.Tag = "gaert@" + val;
+                                btnn.Hide();
+                            }
+                        }
+                        val += 200;
+                    }
                 }
             }
             else
@@ -414,6 +456,22 @@ namespace Jeopardy
                             label6.Text = cat.title.ToUpper().Replace("&", "&&");
                             break;
                     }
+
+                    int val = 200;
+                    foreach (Clue cl in clues[cat].clues)
+                    {
+                        if (cl == null)
+                        {
+                            string btnName = "c" + (i + 1) + "v" + val;
+
+                            foreach (var btnn in Controls.OfType<Button>().Where(x => x.Name == btnName))
+                            {
+                                btnn.Tag = "gaert@" + val;
+                                btnn.Hide();
+                            }
+                        }
+                        val += 200;
+                    }
                 }
             }
 
@@ -429,11 +487,6 @@ namespace Jeopardy
             label4.Visible = false;
             label5.Visible = false;
             label6.Visible = false;
-
-            foreach (var btnn in Controls.OfType<Button>().Where(x => x.Tag.ToString()[0] == 'g'))
-            {
-                btnn.Tag = "board@" + btnn.Tag.ToString().Substring(btnn.Tag.ToString().IndexOf('@') + 1);
-            }
 
             if (radioButton1.Checked)
             {
@@ -461,6 +514,7 @@ namespace Jeopardy
                     if (btnn.Tag.ToString() == "board@1000") { btnn.Text = "$2000"; }
                 }
             }
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -541,9 +595,9 @@ namespace Jeopardy
 
                 if (c.value == value)
                 {
-                    if (c.question.Contains("  "))
+                    if (c.question.Contains("&"))
                     {
-                        c.question = c.question.Replace("  ", " & ");
+                        c.question = c.question.Replace("&", "&&");
                     }
 
                     clue.Text = c.question;
@@ -559,102 +613,45 @@ namespace Jeopardy
             {
                 currentValue = (int)numericUpDown2.Value;
             }
-            else if (radioButton2.Checked)
-            {
-                currentValue *= 2;
-            }
 
             Button btn = (Button)sender;
             string tag;
-            if (numericUpDown2.Value > 0)
-            {
-                currentValue = (int)numericUpDown2.Value;
-            }
             tag = (string)btn.Tag;
+
+            if ((btn.Text == "Remove" && currentValue > 0) || (btn.Text == "Award" && currentValue < 0))
+            {
+                currentValue *= -1;
+            }
 
             if (tag == "1")
             {
-                if (btn.Text == "Award")
-                    p1score.Text = "$" + (int.Parse(p1score.Text.Substring(1)) + currentValue).ToString();
-                else
-                    p1score.Text = "$" + (int.Parse(p1score.Text.Substring(1)) - currentValue).ToString();
-
-                textBox1.BackColor = Color.MistyRose;
-                textBox2.BackColor = SystemColors.Window;
-                textBox3.BackColor = SystemColors.Window;
-                textBox4.BackColor = SystemColors.Window;
-                textBox5.BackColor = SystemColors.Window;
-                textBox6.BackColor = SystemColors.Window;
+                player1score += currentValue;
+                p1score.Text = "$" + player1score;
             }
             else if (tag == "2")
             {
-                if (btn.Text == "Award")
-                    p2score.Text = "$" + (int.Parse(p2score.Text.Substring(1)) + currentValue).ToString();
-                else
-                    p2score.Text = "$" + (int.Parse(p2score.Text.Substring(1)) - currentValue).ToString();
-
-                textBox1.BackColor = SystemColors.Window;
-                textBox2.BackColor = Color.MistyRose;
-                textBox3.BackColor = SystemColors.Window;
-                textBox4.BackColor = SystemColors.Window;
-                textBox5.BackColor = SystemColors.Window;
-                textBox6.BackColor = SystemColors.Window;
+                player2score += currentValue;
+                p2score.Text = "$" + player2score;
             }
             else if (tag == "3")
             {
-                if (btn.Text == "Award")
-                    p3score.Text = "$" + (int.Parse(p3score.Text.Substring(1)) + currentValue).ToString();
-                else
-                    p3score.Text = "$" + (int.Parse(p3score.Text.Substring(1)) - currentValue).ToString();
-
-                textBox1.BackColor = SystemColors.Window;
-                textBox2.BackColor = SystemColors.Window;
-                textBox3.BackColor = Color.MistyRose;
-                textBox4.BackColor = SystemColors.Window;
-                textBox5.BackColor = SystemColors.Window;
-                textBox6.BackColor = SystemColors.Window;
+                player3score += currentValue;
+                p3score.Text = "$" + player3score;
             }
             else if (tag == "4")
             {
-                if (btn.Text == "Award")
-                    p4score.Text = "$" + (int.Parse(p4score.Text.Substring(1)) + currentValue).ToString();
-                else
-                    p4score.Text = "$" + (int.Parse(p4score.Text.Substring(1)) - currentValue).ToString();
-
-                textBox1.BackColor = SystemColors.Window;
-                textBox2.BackColor = SystemColors.Window;
-                textBox3.BackColor = SystemColors.Window;
-                textBox4.BackColor = Color.MistyRose;
-                textBox5.BackColor = SystemColors.Window;
-                textBox6.BackColor = SystemColors.Window;
+                player4score += currentValue;
+                p4score.Text = "$" + player4score;
             }
             else if (tag == "5")
             {
-                if (btn.Text == "Award")
-                    p5score.Text = "$" + (int.Parse(p5score.Text.Substring(1)) + currentValue).ToString();
-                else
-                    p5score.Text = "$" + (int.Parse(p5score.Text.Substring(1)) - currentValue).ToString();
-
-                textBox1.BackColor = SystemColors.Window;
-                textBox2.BackColor = SystemColors.Window;
-                textBox3.BackColor = SystemColors.Window;
-                textBox4.BackColor = SystemColors.Window;
-                textBox5.BackColor = Color.MistyRose;
-                textBox6.BackColor = SystemColors.Window;
+                player5score += currentValue;
+                p5score.Text = "$" + player5score;
             }
             else if (tag == "6")
             {
-                if (btn.Text == "Award")
-                    p6score.Text = "$" + (int.Parse(p6score.Text.Substring(1)) + currentValue).ToString();
-                else
-                    p6score.Text = "$" + (int.Parse(p6score.Text.Substring(1)) - currentValue).ToString();
-
-                textBox1.BackColor = SystemColors.Window;
-                textBox2.BackColor = SystemColors.Window;
-                textBox3.BackColor = SystemColors.Window;
-                textBox4.BackColor = SystemColors.Window;
-                textBox5.BackColor = SystemColors.Window;
-                textBox6.BackColor = Color.MistyRose;
+                player6score += currentValue;
+                p6score.Text = "$" + player6score;
             }
 
             if (btn.Text == "Award" && !finalJeopardy)
