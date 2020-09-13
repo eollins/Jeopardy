@@ -65,7 +65,7 @@ namespace JeopardyGameMaker
         private void Form1_Load(object sender, EventArgs e)
         {
             doc.AppendChild(doc.CreateElement("GameBoard"));
-            XmlElement[] elements = new XmlElement[] { doc.CreateElement("Category1"), doc.CreateElement("Category2"), doc.CreateElement("Category3"), doc.CreateElement("Category4"), doc.CreateElement("Category5"), doc.CreateElement("Category6") };
+            XmlElement[] elements = new XmlElement[] { doc.CreateElement("Category"), doc.CreateElement("Category"), doc.CreateElement("Category"), doc.CreateElement("Category"), doc.CreateElement("Category"), doc.CreateElement("Category") };
             foreach (XmlElement el in elements)
             {
                 el.Attributes.Append(doc.CreateAttribute("name"));

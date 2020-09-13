@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.c1v200 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.c1v400 = new System.Windows.Forms.Button();
@@ -103,7 +104,13 @@
             this.button6 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.clock = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // c1v200
@@ -726,7 +733,7 @@
             this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button1.Location = new System.Drawing.Point(12, 655);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(206, 47);
+            this.button1.Size = new System.Drawing.Size(206, 37);
             this.button1.TabIndex = 54;
             this.button1.Tag = "j";
             this.button1.Text = "Generate Game";
@@ -739,7 +746,7 @@
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(224, 655);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(263, 47);
+            this.label7.Size = new System.Drawing.Size(263, 58);
             this.label7.TabIndex = 55;
             this.label7.Text = "ANSWER";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -752,7 +759,7 @@
             0,
             0,
             0});
-            this.numericUpDown2.Location = new System.Drawing.Point(539, 655);
+            this.numericUpDown2.Location = new System.Drawing.Point(535, 662);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -765,7 +772,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(510, 688);
+            this.label8.Location = new System.Drawing.Point(509, 694);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(128, 13);
             this.label8.TabIndex = 60;
@@ -775,7 +782,7 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(764, 653);
+            this.radioButton1.Location = new System.Drawing.Point(762, 655);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(71, 17);
             this.radioButton1.TabIndex = 61;
@@ -786,22 +793,20 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(764, 668);
+            this.radioButton2.Location = new System.Drawing.Point(762, 675);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(108, 17);
             this.radioButton2.TabIndex = 62;
-            this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Double Jeopardy!";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(764, 683);
+            this.radioButton3.Location = new System.Drawing.Point(762, 695);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(96, 17);
             this.radioButton3.TabIndex = 63;
-            this.radioButton3.TabStop = true;
             this.radioButton3.Text = "Final Jeopardy!";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
@@ -819,9 +824,9 @@
             // button4
             // 
             this.button4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button4.Location = new System.Drawing.Point(655, 656);
+            this.button4.Location = new System.Drawing.Point(652, 655);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(96, 43);
+            this.button4.Size = new System.Drawing.Size(96, 58);
             this.button4.TabIndex = 65;
             this.button4.Tag = "cont";
             this.button4.Text = "Reveal Question or Category";
@@ -831,18 +836,18 @@
             // doubles
             // 
             this.doubles.AutoSize = true;
-            this.doubles.Location = new System.Drawing.Point(888, 653);
+            this.doubles.Location = new System.Drawing.Point(885, 652);
             this.doubles.Name = "doubles";
-            this.doubles.Size = new System.Drawing.Size(75, 13);
+            this.doubles.Size = new System.Drawing.Size(82, 39);
             this.doubles.TabIndex = 66;
-            this.doubles.Text = "Daily Doubles:";
+            this.doubles.Text = "Daily Doubles:\r\nc1v200\r\nc2v400 c3v600";
             // 
             // button5
             // 
             this.button5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button5.Location = new System.Drawing.Point(1001, 652);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(61, 23);
+            this.button5.Size = new System.Drawing.Size(61, 33);
             this.button5.TabIndex = 67;
             this.button5.Tag = "c";
             this.button5.Text = "Clear";
@@ -1008,7 +1013,7 @@
             // button18
             // 
             this.button18.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button18.Location = new System.Drawing.Point(1001, 679);
+            this.button18.Location = new System.Drawing.Point(1001, 690);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(80, 23);
             this.button18.TabIndex = 80;
@@ -1022,7 +1027,7 @@
             this.button6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button6.Location = new System.Drawing.Point(1062, 652);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(19, 23);
+            this.button6.Size = new System.Drawing.Size(19, 33);
             this.button6.TabIndex = 81;
             this.button6.Tag = "c";
             this.button6.UseVisualStyleBackColor = true;
@@ -1031,7 +1036,7 @@
             // label9
             // 
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(516, 655);
+            this.label9.Location = new System.Drawing.Point(511, 662);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(25, 27);
             this.label9.TabIndex = 82;
@@ -1042,12 +1047,62 @@
             this.openFileDialog1.FileName = "Choose Game File";
             this.openFileDialog1.Filter = "XML game files|*.xml";
             // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Checked = true;
+            this.radioButton4.Location = new System.Drawing.Point(0, 8);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(103, 17);
+            this.radioButton4.TabIndex = 83;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "Automatic Game";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Location = new System.Drawing.Point(119, 8);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(91, 17);
+            this.radioButton5.TabIndex = 84;
+            this.radioButton5.Text = "Custom Game";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.radioButton5);
+            this.panel1.Controls.Add(this.radioButton4);
+            this.panel1.Location = new System.Drawing.Point(12, 690);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(206, 23);
+            this.panel1.TabIndex = 85;
+            // 
+            // button2
+            // 
+            this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button2.Location = new System.Drawing.Point(888, 695);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(79, 20);
+            this.button2.TabIndex = 86;
+            this.button2.Tag = "p";
+            this.button2.Text = "Pop Pop!";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // clock
+            // 
+            this.clock.Interval = 50;
+            this.clock.Tick += new System.EventHandler(this.clock_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Navy;
-            this.ClientSize = new System.Drawing.Size(1093, 714);
+            this.ClientSize = new System.Drawing.Size(1093, 725);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.numericUpDown2);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.button6);
@@ -1129,6 +1184,8 @@
             this.Text = "Jeopardy!";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1211,6 +1268,11 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Timer clock;
     }
 }
 

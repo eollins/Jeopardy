@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
@@ -38,19 +39,14 @@ namespace Jeopardy
         int player5score = 0;
         int player6score = 0;
 
+        bool magnitude = false;
+
         System.Media.SoundPlayer player = new System.Media.SoundPlayer();
 
         public Form1()
         {
             InitializeComponent();
             form1 = this;
-            string[] values = new string[] { "200", "400", "600", "800", "1000" };
-            dailyDouble = "c" + random.Next(1, 7) + "v" + values[random.Next(2, 5)];
-            djdd1 = "c" + random.Next(1, 7) + "v" + values[random.Next(2, 5)];
-            djdd2 = "c" + random.Next(1, 7) + "v" + values[random.Next(2, 5)];
-            ToggleBoard(false);
-
-            doubles.Text = "Daily Doubles:\n" + dailyDouble + "\n" + djdd1 + " & " + djdd2;
         }
 
         public class Category
@@ -98,6 +94,11 @@ namespace Jeopardy
             public string invalid_count { get; set; }
         }
         
+        public void OnTimerElapse(object sender, ElapsedEventArgs e)
+        {
+            
+        }
+
         public void ToggleBoard(bool enab)
         {
             foreach (var btnn in Controls.OfType<Button>().Where(x => x.Tag.ToString()[0] == 'b'))
@@ -199,18 +200,23 @@ namespace Jeopardy
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //player.SoundLocation = "Theme.wav";
-            //player.Play();
+            string[] values = new string[] { "200", "400", "600", "800", "1000" };
+            dailyDouble = "c" + random.Next(1, 7) + "v" + values[random.Next(2, 5)];
+            djdd1 = "c" + random.Next(1, 7) + "v" + values[random.Next(2, 5)];
+            djdd2 = "c" + random.Next(1, 7) + "v" + values[random.Next(2, 5)];
+            ToggleBoard(false);
+
+            doubles.Text = "Daily Doubles:\n" + dailyDouble + "\n" + djdd1 + " & " + djdd2;
+            Globals.dailyDoubles = doubles.Text;
         }
 
         bool generate = true;
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             categories.Clear();
             clues.Clear();
-            DialogResult result = MessageBox.Show("Upload a custom game file?", "Game Source", buttons);
-            if (result == DialogResult.Yes)
+            Globals.playerNames = new string[] { textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text };
+            if (radioButton5.Checked || (magnitude && Globals.gameType == 1))
             {
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
@@ -218,8 +224,8 @@ namespace Jeopardy
                     {
                         XDocument doc = new XDocument();
                         doc = XDocument.Load(openFileDialog1.FileName);
-                        var nodes = doc.Element("GameBoard").Descendants();
-                        for (int i = 0; i < nodes.Count(); i += 6)
+                        var nodes = doc.Element("GameBoard").Descendants().Where(t => t.Name == "Category");
+                        for (int i = 0; i < nodes.Count(); i++)
                         {
                             XElement el = nodes.ElementAt(i);
                             string categoryName = el.Attribute("name").Value;
@@ -536,9 +542,6 @@ namespace Jeopardy
                 label5.Text = cat2.title.ToUpper();
                 label6.Text = cat2.title.ToUpper();
 
-                player.SoundLocation = "Final.wav";
-                player.Play();
-
                 return;
             }
 
@@ -660,6 +663,8 @@ namespace Jeopardy
                 numericUpDown2.Value = 0;
                 ShowBoard();
             }
+
+            Globals.playerScores = new int[] { player1score, player2score, player3score, player4score, player5score, player6score };
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -802,7 +807,74 @@ namespace Jeopardy
         private void button6_Click(object sender, EventArgs e)
         {
             player.SoundLocation = "Time.wav";
+            if (radioButton3.Checked)
+            {
+                player.SoundLocation = "Final.wav";
+            }
             player.Play();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            new Controller().Show();
+            magnitude = true;
+            this.Size = new Size(this.Width, 607);
+            clock.Enabled = true;
+        }
+
+        private void clock_Tick(object sender, EventArgs e)
+        {
+            clock.Enabled = false;
+            Globals.currentValue = currentValue;
+            if (Globals.generate)
+            {
+                if (Globals.round == 0) { radioButton1.Checked = true; }
+                else if (Globals.round == 1) { radioButton2.Checked = true; }
+                else if (Globals.round == 2) { radioButton3.Checked = true; }
+                button1_Click(button1, new EventArgs());
+                Globals.generate = false;
+            }
+            if (Globals.reveal)
+            {
+                button4_Click(button4, new EventArgs());
+                Globals.reveal = false;
+            }
+            if (Globals.clear)
+            {
+                button5_Click(button5, new EventArgs());
+                Globals.clear = false;
+            }
+            Globals.answer = label7.Text;
+
+            p1score.Text = "$" + Globals.playerScores[0].ToString();
+            p2score.Text = "$" + Globals.playerScores[1].ToString();
+            p3score.Text = "$" + Globals.playerScores[2].ToString();
+            p4score.Text = "$" + Globals.playerScores[3].ToString();
+            p5score.Text = "$" + Globals.playerScores[4].ToString();
+            p6score.Text = "$" + Globals.playerScores[5].ToString();
+
+            if (Globals.sound)
+            {
+                if (radioButton3.Checked)
+                {
+                    player.SoundLocation = "Final.wav";
+                    player.Play();
+                }
+                else
+                {
+                    player.SoundLocation = "Time.wav";
+                    player.Play();
+                }
+                Globals.sound = false;
+            }
+
+            if (Globals.end)
+            {
+                button18_Click(button18, new EventArgs());
+                Globals.end = false;
+            }
+
+            clock.Enabled = true;
         }
     }
 }

@@ -8,3 +8,12 @@ C:\Users\ethan\Documents\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.
 C:\Users\ethan\Documents\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.pdb
 C:\Users\ethan\Documents\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.csprojAssemblyReference.cache
 C:\Users\ethan\Documents\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.csproj.CoreCompileInputs.cache
+I:\Jeopardy\JeopardyGameMaker\bin\Debug\JeopardyGameMaker.exe.config
+I:\Jeopardy\JeopardyGameMaker\bin\Debug\JeopardyGameMaker.exe
+I:\Jeopardy\JeopardyGameMaker\bin\Debug\JeopardyGameMaker.pdb
+I:\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.Form1.resources
+I:\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.Properties.Resources.resources
+I:\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.csproj.GenerateResource.Cache
+I:\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.exe
+I:\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.pdb
+I:\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.csprojResolveAssemblyReference.cache
