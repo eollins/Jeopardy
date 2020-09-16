@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
@@ -99,11 +100,28 @@ namespace Jeopardy
             
         }
 
+        int delay = 400;
         public void ToggleBoard(bool enab)
         {
-            foreach (var btnn in Controls.OfType<Button>().Where(x => x.Tag.ToString()[0] == 'b'))
+            if (!enab)
             {
-                btnn.Enabled = enab;
+                foreach (var btn in Controls.OfType<Button>().Where(x => x.Tag.ToString()[0] == 'b'))
+                {
+                    btn.Enabled = false;
+                }
+            }
+            else
+            {
+                player.SoundLocation = "Board.wav";
+                player.Play();
+                for (int i = 1; i < 7; i++)
+                {
+                    foreach (var btn in Controls.OfType<Button>().Where(x => x.AccessibleDescription == i.ToString()))
+                    {
+                        btn.Enabled = true;
+                    }
+                    Thread.Sleep(delay);
+                }
             }
         }
 
@@ -215,6 +233,7 @@ namespace Jeopardy
         {
             categories.Clear();
             clues.Clear();
+            button2.Enabled = false;
             Globals.playerNames = new string[] { textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text };
             if (radioButton5.Checked || (magnitude && Globals.gameType == 1))
             {
@@ -260,7 +279,6 @@ namespace Jeopardy
             }
 
             player.Stop();
-            ToggleBoard(true);
             foreach (var btnn in Controls.OfType<Button>().Where(x => x.Tag.ToString()[0] == 'g'))
             {
                 btnn.Tag = "board@" + btnn.Name.Substring(3);
@@ -344,6 +362,7 @@ namespace Jeopardy
                 textBox6.Enabled = false;
                 p6score.Visible = true;
             }
+            ToggleBoard(true);
 
             generateGame();
         }
@@ -466,7 +485,7 @@ namespace Jeopardy
                     int val = 200;
                     foreach (Clue cl in clues[cat].clues)
                     {
-                        if (cl == null)
+                        if (cl == null && cl.question == "")
                         {
                             string btnName = "c" + (i + 1) + "v" + val;
 
@@ -535,12 +554,12 @@ namespace Jeopardy
                 clue.Text = cat2.clues[0].question;
                 label7.Text = cat2.clues[0].answer;
 
-                label1.Text = cat2.title.ToUpper();
-                label2.Text = cat2.title.ToUpper();
-                label3.Text = cat2.title.ToUpper();
-                label4.Text = cat2.title.ToUpper();
-                label5.Text = cat2.title.ToUpper();
-                label6.Text = cat2.title.ToUpper();
+                label1.Text = cat2.title.ToUpper().Replace("&", "&&");
+                label2.Text = cat2.title.ToUpper().Replace("&", "&&");
+                label3.Text = cat2.title.ToUpper().Replace("&", "&&");
+                label4.Text = cat2.title.ToUpper().Replace("&", "&&");
+                label5.Text = cat2.title.ToUpper().Replace("&", "&&");
+                label6.Text = cat2.title.ToUpper().Replace("&", "&&");
 
                 return;
             }

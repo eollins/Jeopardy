@@ -115,6 +115,7 @@
             // 
             // c1v200
             // 
+            this.c1v200.AccessibleDescription = "3";
             this.c1v200.BackColor = System.Drawing.Color.MidnightBlue;
             this.c1v200.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c1v200.Location = new System.Drawing.Point(12, 75);
@@ -140,6 +141,7 @@
             // 
             // c1v400
             // 
+            this.c1v400.AccessibleDescription = "6";
             this.c1v400.BackColor = System.Drawing.Color.MidnightBlue;
             this.c1v400.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c1v400.Location = new System.Drawing.Point(12, 151);
@@ -153,6 +155,7 @@
             // 
             // c1v600
             // 
+            this.c1v600.AccessibleDescription = "1";
             this.c1v600.BackColor = System.Drawing.Color.MidnightBlue;
             this.c1v600.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c1v600.Location = new System.Drawing.Point(12, 227);
@@ -166,6 +169,7 @@
             // 
             // c1v800
             // 
+            this.c1v800.AccessibleDescription = "4";
             this.c1v800.BackColor = System.Drawing.Color.MidnightBlue;
             this.c1v800.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c1v800.Location = new System.Drawing.Point(12, 303);
@@ -179,6 +183,7 @@
             // 
             // c1v1000
             // 
+            this.c1v1000.AccessibleDescription = "2";
             this.c1v1000.BackColor = System.Drawing.Color.MidnightBlue;
             this.c1v1000.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c1v1000.Location = new System.Drawing.Point(12, 379);
@@ -192,6 +197,7 @@
             // 
             // c2v1000
             // 
+            this.c2v1000.AccessibleDescription = "6";
             this.c2v1000.BackColor = System.Drawing.Color.MidnightBlue;
             this.c2v1000.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c2v1000.Location = new System.Drawing.Point(193, 379);
@@ -205,6 +211,7 @@
             // 
             // c2v800
             // 
+            this.c2v800.AccessibleDescription = "2";
             this.c2v800.BackColor = System.Drawing.Color.MidnightBlue;
             this.c2v800.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c2v800.Location = new System.Drawing.Point(193, 303);
@@ -218,6 +225,7 @@
             // 
             // c2v600
             // 
+            this.c2v600.AccessibleDescription = "3";
             this.c2v600.BackColor = System.Drawing.Color.MidnightBlue;
             this.c2v600.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c2v600.Location = new System.Drawing.Point(193, 227);
@@ -231,6 +239,7 @@
             // 
             // c2v400
             // 
+            this.c2v400.AccessibleDescription = "4";
             this.c2v400.BackColor = System.Drawing.Color.MidnightBlue;
             this.c2v400.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c2v400.Location = new System.Drawing.Point(193, 151);
@@ -244,6 +253,7 @@
             // 
             // c2v200
             // 
+            this.c2v200.AccessibleDescription = "1";
             this.c2v200.BackColor = System.Drawing.Color.MidnightBlue;
             this.c2v200.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c2v200.Location = new System.Drawing.Point(193, 75);
@@ -257,6 +267,7 @@
             // 
             // c3v1000
             // 
+            this.c3v1000.AccessibleDescription = "4";
             this.c3v1000.BackColor = System.Drawing.Color.MidnightBlue;
             this.c3v1000.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c3v1000.Location = new System.Drawing.Point(374, 379);
@@ -270,6 +281,7 @@
             // 
             // c3v800
             // 
+            this.c3v800.AccessibleDescription = "1";
             this.c3v800.BackColor = System.Drawing.Color.MidnightBlue;
             this.c3v800.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c3v800.Location = new System.Drawing.Point(374, 303);
@@ -283,6 +295,7 @@
             // 
             // c3v600
             // 
+            this.c3v600.AccessibleDescription = "5";
             this.c3v600.BackColor = System.Drawing.Color.MidnightBlue;
             this.c3v600.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c3v600.Location = new System.Drawing.Point(374, 227);
@@ -296,6 +309,7 @@
             // 
             // c3v400
             // 
+            this.c3v400.AccessibleDescription = "3";
             this.c3v400.BackColor = System.Drawing.Color.MidnightBlue;
             this.c3v400.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c3v400.Location = new System.Drawing.Point(374, 151);
@@ -309,6 +323,7 @@
             // 
             // c3v200
             // 
+            this.c3v200.AccessibleDescription = "5";
             this.c3v200.BackColor = System.Drawing.Color.MidnightBlue;
             this.c3v200.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c3v200.Location = new System.Drawing.Point(374, 75);
@@ -322,6 +337,7 @@
             // 
             // c6v1000
             // 
+            this.c6v1000.AccessibleDescription = "1";
             this.c6v1000.BackColor = System.Drawing.Color.MidnightBlue;
             this.c6v1000.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c6v1000.Location = new System.Drawing.Point(915, 379);
@@ -335,6 +351,7 @@
             // 
             // c6v800
             // 
+            this.c6v800.AccessibleDescription = "5";
             this.c6v800.BackColor = System.Drawing.Color.MidnightBlue;
             this.c6v800.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c6v800.Location = new System.Drawing.Point(915, 303);
@@ -348,6 +365,7 @@
             // 
             // c6v600
             // 
+            this.c6v600.AccessibleDescription = "6";
             this.c6v600.BackColor = System.Drawing.Color.MidnightBlue;
             this.c6v600.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c6v600.Location = new System.Drawing.Point(915, 227);
@@ -361,6 +379,7 @@
             // 
             // c6v400
             // 
+            this.c6v400.AccessibleDescription = "2";
             this.c6v400.BackColor = System.Drawing.Color.MidnightBlue;
             this.c6v400.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c6v400.Location = new System.Drawing.Point(915, 151);
@@ -374,6 +393,7 @@
             // 
             // c6v200
             // 
+            this.c6v200.AccessibleDescription = "4";
             this.c6v200.BackColor = System.Drawing.Color.MidnightBlue;
             this.c6v200.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c6v200.Location = new System.Drawing.Point(915, 75);
@@ -387,6 +407,7 @@
             // 
             // c5v1000
             // 
+            this.c5v1000.AccessibleDescription = "5";
             this.c5v1000.BackColor = System.Drawing.Color.MidnightBlue;
             this.c5v1000.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c5v1000.Location = new System.Drawing.Point(734, 379);
@@ -400,6 +421,7 @@
             // 
             // c5v800
             // 
+            this.c5v800.AccessibleDescription = "3";
             this.c5v800.BackColor = System.Drawing.Color.MidnightBlue;
             this.c5v800.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c5v800.Location = new System.Drawing.Point(734, 303);
@@ -413,6 +435,7 @@
             // 
             // c5v600
             // 
+            this.c5v600.AccessibleDescription = "4";
             this.c5v600.BackColor = System.Drawing.Color.MidnightBlue;
             this.c5v600.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c5v600.Location = new System.Drawing.Point(734, 227);
@@ -426,6 +449,7 @@
             // 
             // c5v400
             // 
+            this.c5v400.AccessibleDescription = "1";
             this.c5v400.BackColor = System.Drawing.Color.MidnightBlue;
             this.c5v400.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c5v400.Location = new System.Drawing.Point(734, 151);
@@ -439,6 +463,7 @@
             // 
             // c5v200
             // 
+            this.c5v200.AccessibleDescription = "6";
             this.c5v200.BackColor = System.Drawing.Color.MidnightBlue;
             this.c5v200.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c5v200.Location = new System.Drawing.Point(734, 75);
@@ -452,6 +477,7 @@
             // 
             // c4v1000
             // 
+            this.c4v1000.AccessibleDescription = "3";
             this.c4v1000.BackColor = System.Drawing.Color.MidnightBlue;
             this.c4v1000.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c4v1000.Location = new System.Drawing.Point(553, 379);
@@ -465,6 +491,7 @@
             // 
             // c4v800
             // 
+            this.c4v800.AccessibleDescription = "6";
             this.c4v800.BackColor = System.Drawing.Color.MidnightBlue;
             this.c4v800.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c4v800.Location = new System.Drawing.Point(553, 303);
@@ -478,6 +505,7 @@
             // 
             // c4v600
             // 
+            this.c4v600.AccessibleDescription = "2";
             this.c4v600.BackColor = System.Drawing.Color.MidnightBlue;
             this.c4v600.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c4v600.Location = new System.Drawing.Point(553, 227);
@@ -491,6 +519,7 @@
             // 
             // c4v400
             // 
+            this.c4v400.AccessibleDescription = "5";
             this.c4v400.BackColor = System.Drawing.Color.MidnightBlue;
             this.c4v400.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c4v400.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -505,6 +534,7 @@
             // 
             // c4v200
             // 
+            this.c4v200.AccessibleDescription = "2";
             this.c4v200.BackColor = System.Drawing.Color.MidnightBlue;
             this.c4v200.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.c4v200.Location = new System.Drawing.Point(553, 75);
@@ -1015,7 +1045,7 @@
             this.button18.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button18.Location = new System.Drawing.Point(1001, 690);
             this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(80, 23);
+            this.button18.Size = new System.Drawing.Size(80, 25);
             this.button18.TabIndex = 80;
             this.button18.Tag = "c";
             this.button18.Text = "End";

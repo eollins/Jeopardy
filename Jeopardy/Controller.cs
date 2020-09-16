@@ -91,6 +91,11 @@ namespace Jeopardy
         private void award1_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
+            if (Globals.round < 2)
+            {
+                Globals.clear = true;
+            }
+
             if (numericUpDown2.Value == 0)
             {
                 Globals.playerScores[int.Parse(btn.Tag.ToString())] += Globals.currentValue;
@@ -100,7 +105,6 @@ namespace Jeopardy
                 Globals.playerScores[int.Parse(btn.Tag.ToString())] += (int)numericUpDown2.Value;
                 numericUpDown2.Value = 0;
             }
-            Globals.clear = true;
         }
 
         private void remove1_Click(object sender, EventArgs e)
