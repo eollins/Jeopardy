@@ -441,9 +441,9 @@ namespace Jeopardy
                     int val = 200;
                     foreach (Clue cl in cat2.clues)
                     {
-                        if (cl.question == "")
+                        if (cl == null || cl.question == "")
                         {
-                            string btnName = "c" + i + "v" + val;
+                            string btnName = "c" + (i + 1) + "v" + val;
 
                             foreach (var btnn in Controls.OfType<Button>().Where(x => x.Name == btnName))
                             {
@@ -485,7 +485,7 @@ namespace Jeopardy
                     int val = 200;
                     foreach (Clue cl in clues[cat].clues)
                     {
-                        if (cl == null && cl.question == "")
+                        if (cl == null || cl.question == "")
                         {
                             string btnName = "c" + (i + 1) + "v" + val;
 
