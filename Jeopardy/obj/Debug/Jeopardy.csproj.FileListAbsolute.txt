@@ -14,7 +14,6 @@ C:\Users\ethan\Documents\Jeopardy\Jeopardy\bin\Debug\Jeopardy.exe
 C:\Users\ethan\Documents\Jeopardy\Jeopardy\bin\Debug\Jeopardy.pdb
 C:\Users\ethan\Documents\Jeopardy\Jeopardy\bin\Debug\Newtonsoft.Json.dll
 C:\Users\ethan\Documents\Jeopardy\Jeopardy\bin\Debug\Newtonsoft.Json.xml
-C:\Users\ethan\Documents\Jeopardy\Jeopardy\obj\Debug\Jeopardy.Form1.resources
 C:\Users\ethan\Documents\Jeopardy\Jeopardy\obj\Debug\Jeopardy.Properties.Resources.resources
 C:\Users\ethan\Documents\Jeopardy\Jeopardy\obj\Debug\Jeopardy.csproj.GenerateResource.Cache
 C:\Users\ethan\Documents\Jeopardy\Jeopardy\obj\Debug\Jeopardy.exe
@@ -33,3 +32,4 @@ I:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.pdb
 I:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.Controller.resources
 C:\Users\ethan\Documents\Jeopardy\Jeopardy\obj\Debug\Jeopardy.csprojResolveAssemblyReference.cache
 C:\Users\ethan\Documents\Jeopardy\Jeopardy\obj\Debug\Jeopardy.Controller.resources
+C:\Users\ethan\Documents\Jeopardy\Jeopardy\obj\Debug\Jeopardy.GameBoard.resources
