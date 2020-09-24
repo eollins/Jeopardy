@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -32,6 +34,7 @@ namespace Jeopardy
         bool finalJeopardy = false;
         Category finalJep;
         CategoryInfo finalJepInfo;
+        bool tournamentEnabled = false;
 
         string tournamentConfigLocation;
         TournamentInfo tournamentInfo = new TournamentInfo();
@@ -85,6 +88,9 @@ namespace Jeopardy
             public string player1 { get; set; }
             public string player2 { get; set; }
             public string player3 { get; set; }
+            public string player1Next { get; set; }
+            public string player2Next { get; set; }
+            public string player3Next { get; set; }
         }
 
         public class CategoryInfo
@@ -802,20 +808,94 @@ namespace Jeopardy
                 scores.Add(player6name.Text, int.Parse(p6score.Text.Substring(1)));
             }
             string[] names = new string[] { player1name.Text, player2name.Text, player3name.Text, player4name.Text, player5name.Text, player6name.Text };
-            
-            clue.Visible = true;
-            clue.Text = "FINAL SCORES\n\n";
-            int t = 0;
-            string winner = "";
-            foreach (var player in scores.OrderByDescending(key => key.Value))
+
+            if (tournamentEnabled)
             {
-                if (t == 0)
+                string connectionString = "Server=" + tournamentInfo.url + ";Database=" + tournamentInfo.db + ";Uid=" + tournamentInfo.user + ";Pwd=" + tournamentInfo.pswd + ";";
+                MySql.Data.MySqlClient.MySqlConnection connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+                connection.Open();
+                MySqlCommand command = new MySqlCommand("select playerName, playerID from Players;");
+                command.Connection = connection;
+
+                Dictionary<string, int> players = new Dictionary<string, int>();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    winner = player.Key;
+                    players.Add(reader[0].ToString(), int.Parse(reader[1].ToString()));
                 }
 
-                t++;
-                clue.Text += t + ". " + player.Key + " - $" + player.Value + "\n";
+                var scoresSorted = scores.OrderByDescending(key => key.Value);
+                string firstPlaceName = scoresSorted.ElementAt(0).Key;
+                string secondPlaceName = scoresSorted.ElementAt(1).Key;
+                string thirdPlaceName = scoresSorted.ElementAt(2).Key;
+
+                int firstPlaceID = PlayerNameToID(firstPlaceName);
+                int secondPlaceID = PlayerNameToID(secondPlaceName);
+                int thirdPlaceID = PlayerNameToID(thirdPlaceName);
+
+                string first = tournamentInfo.rounds[roundBox.SelectedIndex].player1;
+                string second = tournamentInfo.rounds[roundBox.SelectedIndex].player2;
+                string third = tournamentInfo.rounds[roundBox.SelectedIndex].player3;
+
+                clue.Visible = true;
+                string query = "";
+                clue.Text = "";
+                if (first == "winner")
+                {
+                    clue.Text = firstPlaceName.ToUpper() + " WINS THE TOURNAMENT!";
+                    query += "update Brackets set winner = " + firstPlaceID + " where officialBracket = 1;";
+                    //player1name.BackColor = Color.LightGreen;
+                }
+                else
+                {
+                    query += "update Brackets set " + first + " = " + firstPlaceID + " where officialBracket = 1;";
+                    clue.Text += "\n" + firstPlaceName + " moves on to the " + tournamentInfo.rounds[roundBox.SelectedIndex].player1Next;
+                    //player1name.BackColor = Color.LightGreen;
+                }
+
+                if (second == "elim")
+                {
+                    query += "update Players set eliminated = 1 where PlayerID = " + secondPlaceID + ";";
+                    clue.Text += "\n" + secondPlaceName + " has been eliminated";
+                    //player2name.BackColor = Color.Pink;
+                }
+                else
+                {
+                    query += "update Brackets set " + second + " = " + secondPlaceID + " where officialBracket = 1;";
+                    clue.Text += "\n" + secondPlaceName + " moves on to the " + tournamentInfo.rounds[roundBox.SelectedIndex].player2Next;
+                    //player2name.BackColor = Color.LightYellow;
+                }
+
+                if (third == "elim")
+                {
+                    query += "update Players set eliminated = 1 where PlayerID = " + thirdPlaceID + ";";
+                    clue.Text += "\n" + thirdPlaceName + " has been eliminated\n";
+                    //player3name.BackColor = Color.Pink;
+                }
+                
+                foreach (string name in scores.Keys)
+                {
+                    query += "update Players set winnings = winnings + " + scores[name] + " where playerID = " + PlayerNameToID(name) + ";";
+                }
+
+                ExecuteQuery(query);
+            }
+            else
+            {
+                clue.Visible = true;
+                clue.Text += "\nFINAL SCORES\n\n";
+                int t = 0;
+                string winner = "";
+                foreach (var player in scores.OrderByDescending(key => key.Value))
+                {
+                    if (t == 0)
+                    {
+                        winner = player.Key;
+                    }
+
+                    t++;
+                    clue.Text += t + ". " + player.Key + " - $" + player.Value + "\n";
+                }
             }
 
             cat1label.Visible = false;
@@ -824,13 +904,41 @@ namespace Jeopardy
             cat4label.Visible = false;
             cat5label.Visible = false;
             cat6label.Visible = false;
-
-
         }
 
         private void textBox6_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private int PlayerNameToID(string playerName)
+        {
+            string connectionString = "Server=" + tournamentInfo.url + ";Database=" + tournamentInfo.db + ";Uid=" + tournamentInfo.user + ";Pwd=" + tournamentInfo.pswd + ";";
+            MySql.Data.MySqlClient.MySqlConnection connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+            connection.Open();
+            MySqlCommand command = new MySqlCommand("select PlayerID from Players where playerName = '" + playerName + "'");
+            command.Connection = connection;
+
+            Dictionary<string, int> players = new Dictionary<string, int>();
+            MySqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                return int.Parse(reader[0].ToString());
+            }
+
+            return 0;
+        }
+
+        private MySqlDataReader ExecuteQuery(string query)
+        {
+            string connectionString = "Server=" + tournamentInfo.url + ";Database=" + tournamentInfo.db + ";Uid=" + tournamentInfo.user + ";Pwd=" + tournamentInfo.pswd + ";";
+            MySql.Data.MySqlClient.MySqlConnection connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+            connection.Open();
+            MySqlCommand command = new MySqlCommand(query);
+            command.Connection = connection;
+
+            Dictionary<string, int> players = new Dictionary<string, int>();
+            return command.ExecuteReader();
         }
 
         private void categoryLabel_Click(object sender, EventArgs e)
@@ -1058,7 +1166,14 @@ namespace Jeopardy
                 {
                     roundBox.Items.Add(round.name);
                 }
+                roundBox.SelectedIndex = 0;
+                tournamentEnabled = true;
             }
+        }
+
+        private void roundBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

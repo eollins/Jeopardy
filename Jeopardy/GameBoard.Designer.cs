@@ -1258,14 +1258,11 @@
             // 
             this.roundBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.roundBox.FormattingEnabled = true;
-            this.roundBox.Items.AddRange(new object[] {
-            "Jeopardy!",
-            "Double Jeopardy!",
-            "Final Jeopardy!"});
             this.roundBox.Location = new System.Drawing.Point(298, 735);
             this.roundBox.Name = "roundBox";
             this.roundBox.Size = new System.Drawing.Size(121, 21);
             this.roundBox.TabIndex = 97;
+            this.roundBox.SelectedIndexChanged += new System.EventHandler(this.roundBox_SelectedIndexChanged);
             // 
             // openTournament
             // 
