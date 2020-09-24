@@ -103,12 +103,25 @@
             this.endBtn = new System.Windows.Forms.Button();
             this.soundBtn = new System.Windows.Forms.Button();
             this.dollarSign = new System.Windows.Forms.Label();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.openGameBoard = new System.Windows.Forms.OpenFileDialog();
             this.autoRadioBtn = new System.Windows.Forms.RadioButton();
             this.customRadioBtn = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.popOutBtn = new System.Windows.Forms.Button();
             this.clock = new System.Windows.Forms.Timer(this.components);
+            this.export = new System.Windows.Forms.Button();
+            this.saveGameBoard = new System.Windows.Forms.SaveFileDialog();
+            this.label1 = new System.Windows.Forms.Label();
+            this.chooseConfig = new System.Windows.Forms.Button();
+            this.configIndicator = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.chooseFile = new System.Windows.Forms.Button();
+            this.gameModeComboBox = new System.Windows.Forms.ComboBox();
+            this.jepIndicator = new System.Windows.Forms.Button();
+            this.djepIndicator = new System.Windows.Forms.Button();
+            this.finalIndicator = new System.Windows.Forms.Button();
+            this.roundBox = new System.Windows.Forms.ComboBox();
+            this.openTournament = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.customWager)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -774,9 +787,9 @@
             // 
             this.answerBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.answerBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.answerBox.Location = new System.Drawing.Point(224, 655);
+            this.answerBox.Location = new System.Drawing.Point(228, 655);
             this.answerBox.Name = "answerBox";
-            this.answerBox.Size = new System.Drawing.Size(263, 58);
+            this.answerBox.Size = new System.Drawing.Size(259, 58);
             this.answerBox.TabIndex = 55;
             this.answerBox.Text = "ANSWER";
             this.answerBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1072,10 +1085,10 @@
             this.dollarSign.TabIndex = 82;
             this.dollarSign.Text = "$";
             // 
-            // openFileDialog1
+            // openGameBoard
             // 
-            this.openFileDialog1.FileName = "Choose Game File";
-            this.openFileDialog1.Filter = "XML game files|*.xml";
+            this.openGameBoard.FileName = "Choose Game File";
+            this.openGameBoard.Filter = "XML game files|*.xml";
             // 
             // autoRadioBtn
             // 
@@ -1113,10 +1126,10 @@
             this.popOutBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.popOutBtn.Location = new System.Drawing.Point(888, 695);
             this.popOutBtn.Name = "popOutBtn";
-            this.popOutBtn.Size = new System.Drawing.Size(79, 20);
+            this.popOutBtn.Size = new System.Drawing.Size(26, 20);
             this.popOutBtn.TabIndex = 86;
             this.popOutBtn.Tag = "p";
-            this.popOutBtn.Text = "Pop Pop!";
+            this.popOutBtn.Text = "↑";
             this.popOutBtn.UseVisualStyleBackColor = true;
             this.popOutBtn.Click += new System.EventHandler(this.popOutBtn_Click);
             // 
@@ -1125,12 +1138,156 @@
             this.clock.Interval = 50;
             this.clock.Tick += new System.EventHandler(this.clock_Tick);
             // 
-            // Form1
+            // export
+            // 
+            this.export.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.export.Location = new System.Drawing.Point(918, 695);
+            this.export.Name = "export";
+            this.export.Size = new System.Drawing.Size(49, 20);
+            this.export.TabIndex = 87;
+            this.export.Tag = "e";
+            this.export.Text = "Export";
+            this.export.UseVisualStyleBackColor = true;
+            this.export.Click += new System.EventHandler(this.export_Click);
+            // 
+            // saveGameBoard
+            // 
+            this.saveGameBoard.Filter = "XML game files|*.xml";
+            this.saveGameBoard.Title = "Save XML File";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 740);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(105, 13);
+            this.label1.TabIndex = 88;
+            this.label1.Text = "Tournament Settings";
+            // 
+            // chooseConfig
+            // 
+            this.chooseConfig.ForeColor = System.Drawing.Color.Black;
+            this.chooseConfig.Location = new System.Drawing.Point(123, 735);
+            this.chooseConfig.Name = "chooseConfig";
+            this.chooseConfig.Size = new System.Drawing.Size(117, 23);
+            this.chooseConfig.TabIndex = 89;
+            this.chooseConfig.Tag = "c";
+            this.chooseConfig.Text = "Choose Config File";
+            this.chooseConfig.UseVisualStyleBackColor = true;
+            this.chooseConfig.Click += new System.EventHandler(this.chooseConfig_Click);
+            // 
+            // configIndicator
+            // 
+            this.configIndicator.BackColor = System.Drawing.Color.Red;
+            this.configIndicator.Enabled = false;
+            this.configIndicator.Location = new System.Drawing.Point(246, 735);
+            this.configIndicator.Name = "configIndicator";
+            this.configIndicator.Size = new System.Drawing.Size(22, 23);
+            this.configIndicator.TabIndex = 90;
+            this.configIndicator.Tag = "i";
+            this.configIndicator.UseVisualStyleBackColor = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(509, 740);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(86, 13);
+            this.label2.TabIndex = 91;
+            this.label2.Text = "Pre-Load Games";
+            // 
+            // chooseFile
+            // 
+            this.chooseFile.ForeColor = System.Drawing.Color.Black;
+            this.chooseFile.Location = new System.Drawing.Point(602, 735);
+            this.chooseFile.Name = "chooseFile";
+            this.chooseFile.Size = new System.Drawing.Size(117, 23);
+            this.chooseFile.TabIndex = 92;
+            this.chooseFile.Tag = "c";
+            this.chooseFile.Text = "Choose Game File";
+            this.chooseFile.UseVisualStyleBackColor = true;
+            this.chooseFile.Click += new System.EventHandler(this.chooseFile_Click);
+            // 
+            // gameModeComboBox
+            // 
+            this.gameModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.gameModeComboBox.FormattingEnabled = true;
+            this.gameModeComboBox.Items.AddRange(new object[] {
+            "Jeopardy!",
+            "Double Jeopardy!",
+            "Final Jeopardy!"});
+            this.gameModeComboBox.Location = new System.Drawing.Point(725, 736);
+            this.gameModeComboBox.Name = "gameModeComboBox";
+            this.gameModeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.gameModeComboBox.TabIndex = 93;
+            // 
+            // jepIndicator
+            // 
+            this.jepIndicator.BackColor = System.Drawing.Color.Red;
+            this.jepIndicator.Enabled = false;
+            this.jepIndicator.Location = new System.Drawing.Point(852, 735);
+            this.jepIndicator.Name = "jepIndicator";
+            this.jepIndicator.Size = new System.Drawing.Size(22, 23);
+            this.jepIndicator.TabIndex = 94;
+            this.jepIndicator.Tag = "i";
+            this.jepIndicator.UseVisualStyleBackColor = false;
+            // 
+            // djepIndicator
+            // 
+            this.djepIndicator.BackColor = System.Drawing.Color.Red;
+            this.djepIndicator.Enabled = false;
+            this.djepIndicator.Location = new System.Drawing.Point(880, 735);
+            this.djepIndicator.Name = "djepIndicator";
+            this.djepIndicator.Size = new System.Drawing.Size(22, 23);
+            this.djepIndicator.TabIndex = 95;
+            this.djepIndicator.Tag = "i";
+            this.djepIndicator.UseVisualStyleBackColor = false;
+            // 
+            // finalIndicator
+            // 
+            this.finalIndicator.BackColor = System.Drawing.Color.Red;
+            this.finalIndicator.Enabled = false;
+            this.finalIndicator.Location = new System.Drawing.Point(908, 735);
+            this.finalIndicator.Name = "finalIndicator";
+            this.finalIndicator.Size = new System.Drawing.Size(22, 23);
+            this.finalIndicator.TabIndex = 96;
+            this.finalIndicator.Tag = "i";
+            this.finalIndicator.UseVisualStyleBackColor = false;
+            // 
+            // roundBox
+            // 
+            this.roundBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.roundBox.FormattingEnabled = true;
+            this.roundBox.Items.AddRange(new object[] {
+            "Jeopardy!",
+            "Double Jeopardy!",
+            "Final Jeopardy!"});
+            this.roundBox.Location = new System.Drawing.Point(298, 735);
+            this.roundBox.Name = "roundBox";
+            this.roundBox.Size = new System.Drawing.Size(121, 21);
+            this.roundBox.TabIndex = 97;
+            // 
+            // openTournament
+            // 
+            this.openTournament.Filter = "JSON files|*.json";
+            // 
+            // GameBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Navy;
-            this.ClientSize = new System.Drawing.Size(1093, 725);
+            this.ClientSize = new System.Drawing.Size(1093, 762);
+            this.Controls.Add(this.roundBox);
+            this.Controls.Add(this.finalIndicator);
+            this.Controls.Add(this.djepIndicator);
+            this.Controls.Add(this.jepIndicator);
+            this.Controls.Add(this.gameModeComboBox);
+            this.Controls.Add(this.chooseFile);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.configIndicator);
+            this.Controls.Add(this.chooseConfig);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.export);
             this.Controls.Add(this.popOutBtn);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.customWager);
@@ -1210,7 +1367,7 @@
             this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "GameBoard";
             this.Text = "Jeopardy!";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.customWager)).EndInit();
@@ -1297,12 +1454,25 @@
         private System.Windows.Forms.Button endBtn;
         private System.Windows.Forms.Button soundBtn;
         private System.Windows.Forms.Label dollarSign;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openGameBoard;
         private System.Windows.Forms.RadioButton autoRadioBtn;
         private System.Windows.Forms.RadioButton customRadioBtn;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button popOutBtn;
         private System.Windows.Forms.Timer clock;
+        private System.Windows.Forms.Button export;
+        private System.Windows.Forms.SaveFileDialog saveGameBoard;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button chooseConfig;
+        private System.Windows.Forms.Button configIndicator;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button chooseFile;
+        private System.Windows.Forms.ComboBox gameModeComboBox;
+        private System.Windows.Forms.Button jepIndicator;
+        private System.Windows.Forms.Button djepIndicator;
+        private System.Windows.Forms.Button finalIndicator;
+        private System.Windows.Forms.ComboBox roundBox;
+        private System.Windows.Forms.OpenFileDialog openTournament;
     }
 }
 

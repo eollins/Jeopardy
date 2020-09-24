@@ -30,6 +30,8 @@ I:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.csproj.GenerateResource.Cache
 I:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.exe
 I:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.pdb
 I:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.Controller.resources
-C:\Users\ethan\Documents\Jeopardy\Jeopardy\obj\Debug\Jeopardy.csprojResolveAssemblyReference.cache
 C:\Users\ethan\Documents\Jeopardy\Jeopardy\obj\Debug\Jeopardy.Controller.resources
 C:\Users\ethan\Documents\Jeopardy\Jeopardy\obj\Debug\Jeopardy.GameBoard.resources
+C:\Users\ethan\Documents\Jeopardy\Jeopardy\obj\Debug\Jeopardy.csprojAssemblyReference.cache
+C:\Users\ethan\Documents\Jeopardy\Jeopardy\obj\Debug\Jeopardy.csproj.CoreCompileInputs.cache
+C:\Users\ethan\Documents\Jeopardy\Jeopardy\obj\Debug\Jeopardy.csproj.CopyComplete

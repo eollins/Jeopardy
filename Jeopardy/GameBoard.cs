@@ -33,12 +33,19 @@ namespace Jeopardy
         Category finalJep;
         CategoryInfo finalJepInfo;
 
+        string tournamentConfigLocation;
+        TournamentInfo tournamentInfo = new TournamentInfo();
+
         int player1score = 0;
         int player2score = 0;
         int player3score = 0;
         int player4score = 0;
         int player5score = 0;
         int player6score = 0;
+
+        string jeopardyPreload;
+        string doublePreload;
+        string finalPreload;
 
         bool magnitude = false;
 
@@ -60,6 +67,24 @@ namespace Jeopardy
             public string id { get; set; }
             public string title { get; set; }
             public string clues_count { get; set; }
+        }
+
+        public class TournamentInfo
+        {
+            public string url { get; set; }
+            public string user { get; set; }
+            public string pswd { get; set; }
+            public string db { get; set; }
+            public Round[] rounds { get; set; }
+            public string table { get; set; }
+        }
+
+        public class Round
+        {
+            public string name { get; set; }
+            public string player1 { get; set; }
+            public string player2 { get; set; }
+            public string player3 { get; set; }
         }
 
         public class CategoryInfo
@@ -153,12 +178,22 @@ namespace Jeopardy
                     break;
             }
 
-            Clue[] cl = clues[categories[catID]].clues;
+
+            
+            List<Clue> cl = clues[categories[catID]].clues.Where(x => x.value == value).ToList();
 
             bool cluePresent;
-            Clue c;
+            Clue c = null;
 
-            c = cl[valueIndex];
+            try
+            {
+                c = cl[random.Next(0, cl.Count)];
+            }
+            catch
+            {
+                cluePresent = false;
+            }
+
             cluePresent = true;
             if (c == null)
             {
@@ -206,11 +241,6 @@ namespace Jeopardy
             }
         }
 
-        public void updateName()
-        {
-            
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             string[] values = new string[] { "200", "400", "600", "800", "1000" };
@@ -221,6 +251,7 @@ namespace Jeopardy
 
             doubles.Text = "Daily Doubles:\n" + dailyDouble + "\n" + djdd1 + " & " + djdd2;
             Globals.dailyDoubles = doubles.Text;
+            gameModeComboBox.SelectedIndex = 0;
         }
 
         bool generate = true;
@@ -233,63 +264,81 @@ namespace Jeopardy
             if (customRadioBtn.Checked || (magnitude && Globals.gameType == 1))
             {
                 customRadioBtn.Checked = true;
-                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+
+                string fileUpload = "";
+                if (jeopardyRadioBtn.Checked && jeopardyPreload != "")
                 {
-                    try
-                    {
-                        XDocument doc = new XDocument();
-                        doc = XDocument.Load(openFileDialog1.FileName);
-                        var nodes = doc.Element("GameBoard").Descendants().Where(t => t.Name == "Category");
-
-
-                        if (finalJeopardyBtn.Checked)
-                        {
-                            var clueNode = nodes.ElementAt(0).Descendants("Clue").ElementAt(0);
-                            string categoryName = nodes.ElementAt(0).Attribute("name").Value;
-                            string answer = clueNode.Attribute("answer").Value;
-                            string question = clueNode.Value;
-                            string value = clueNode.Attribute("value").Value;
-                            finalJepInfo = new CategoryInfo(categoryName, new Clue[] { new Clue(answer, question, value) });
-
-                            HideBoard();
-                            clue.Text = categoryName;
-                            finalJeopardy = true;
-                            clue.Visible = true;
-                        }
-
-                        for (int i = 0; i < nodes.Count(); i++)
-                        {
-                            XElement el = nodes.ElementAt(i);
-                            string categoryName = el.Attribute("name").Value;
-                            Category cat = new Category(categoryName);
-                            categories.Add(cat);
-                            Clue[] clues2 = new Clue[5];
-
-                            var nodelist = from ele in el.Descendants("Clue")
-                                           orderby int.Parse(ele.Attribute("value").Value)
-                                           select ele;
-
-                            int i2 = 0;
-                            foreach (XElement el2 in nodelist)
-                            {
-                                clues2[i2] = new Clue(el2.Attribute("answer").Value, el2.Value, el2.Attribute("value").Value);
-                                i2++;
-                            }
-                            CategoryInfo info = new CategoryInfo(categoryName, clues2);
-                            clues.Add(cat, info);
-                        }
-
-                        generate = false;
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
+                    fileUpload = jeopardyPreload;
+                }
+                else if (doubleJeopardyBtn.Checked && doublePreload != null)
+                {
+                    fileUpload = doublePreload;
+                }
+                else if (finalJeopardyBtn.Checked && finalPreload != null)
+                {
+                    fileUpload = finalPreload;
                 }
                 else
                 {
-                    MessageBox.Show("Invalid file. Please try again.");
+                    if (openGameBoard.ShowDialog() == DialogResult.OK)
+                    {
+                        fileUpload = openGameBoard.FileName;
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
+                
+
+                XDocument doc = new XDocument();
+                doc = XDocument.Load(fileUpload);
+                var nodes = doc.Element("GameBoard").Descendants().Where(t => t.Name == "Category");
+
+
+                if (finalJeopardyBtn.Checked)
+                {
+                    var clueNode = nodes.ElementAt(0).Descendants("Clue").ElementAt(0);
+                    string categoryName = nodes.ElementAt(0).Attribute("name").Value;
+                    string answer = clueNode.Attribute("answer").Value;
+                    string question = clueNode.Value;
+                    string value = clueNode.Attribute("value").Value;
+                    finalJepInfo = new CategoryInfo(categoryName, new Clue[] { new Clue(answer, question, value) });
+
+                    HideBoard();
+                    clue.Text = categoryName;
+                    finalJeopardy = true;
+                    clue.Visible = true;
+                }
+
+                for (int i = 0; i < nodes.Count(); i++)
+                {
+                    XElement el = nodes.ElementAt(i);
+                    string categoryName = el.Attribute("name").Value;
+                    Category cat = new Category(categoryName);
+                    categories.Add(cat);
+
+                    var nodelist = from ele in el.Descendants("Clue")
+                                    orderby int.Parse(ele.Attribute("value").Value)
+                                    select ele;
+
+                    Clue[] clues2 = new Clue[nodelist.Count()];
+
+                    int i2 = 0;
+                    foreach (XElement el2 in nodelist)
+                    {
+                        clues2[i2] = new Clue(el2.Attribute("answer").Value, el2.Value, el2.Attribute("value").Value);
+                        i2++;
+                    }
+                    CategoryInfo info = new CategoryInfo(categoryName, clues2);
+                    clues.Add(cat, info);
+                }
+
+                generate = false;
+            }
+            else
+            {
+                MessageBox.Show("Invalid file. Please try again.");
             }
 
             player.Stop();
@@ -775,6 +824,8 @@ namespace Jeopardy
             cat4label.Visible = false;
             cat5label.Visible = false;
             cat6label.Visible = false;
+
+
         }
 
         private void textBox6_Click(object sender, EventArgs e)
@@ -919,6 +970,95 @@ namespace Jeopardy
             }
 
             clock.Enabled = true;
+        }
+
+        private void export_Click(object sender, EventArgs e)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.AppendChild(doc.CreateElement("GameBoard"));
+            XmlNode firstNode = doc.FirstChild;
+            foreach (Category ci in clues.Keys)
+            {
+                XmlElement node = doc.CreateElement("Category");
+                XmlAttribute attr = doc.CreateAttribute("name");
+                attr.Value = ci.title.ToUpper();
+                node.Attributes.Append(attr);
+
+                foreach (Clue cl in clues[ci].clues)
+                {
+                    XmlElement clue = doc.CreateElement("Clue");
+                    clue.InnerText = cl.question;
+                    XmlAttribute answer = doc.CreateAttribute("answer");
+                    answer.Value = cl.answer.Replace("\"", "");
+                    XmlAttribute value = doc.CreateAttribute("value");
+                    value.Value = cl.value;
+
+                    try
+                    {
+                        int value2 = int.Parse(cl.value);
+
+                        clue.Attributes.Append(answer);
+                        clue.Attributes.Append(value);
+                        node.AppendChild(clue);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Skipped empty-value clue.");
+                    }
+                }
+
+                firstNode.AppendChild(node);
+            }
+            
+            if (saveGameBoard.ShowDialog() == DialogResult.OK)
+            {
+                doc.Save(saveGameBoard.FileName);
+                MessageBox.Show("File successfully saved.");
+            }
+            else
+            {
+                MessageBox.Show("File was not saved.");
+            }
+        }
+
+        private void chooseFile_Click(object sender, EventArgs e)
+        {
+            if (openGameBoard.ShowDialog() == DialogResult.OK)
+            {
+                if (gameModeComboBox.SelectedIndex == 0)
+                {
+                    jeopardyPreload = openGameBoard.FileName;
+                    jepIndicator.BackColor = Color.Green;
+                }
+                else if (gameModeComboBox.SelectedIndex == 1)
+                {
+                    doublePreload = openGameBoard.FileName;
+                    djepIndicator.BackColor = Color.Green;
+                }
+                else if (gameModeComboBox.SelectedIndex == 2)
+                {
+                    finalPreload = openGameBoard.FileName;
+                    finalIndicator.BackColor = Color.Green;
+                }
+            }
+        }
+
+        private void chooseConfig_Click(object sender, EventArgs e)
+        {
+            if (openTournament.ShowDialog() == DialogResult.OK)
+            {
+                tournamentConfigLocation = openTournament.FileName;
+                configIndicator.BackColor = Color.Green;
+                StreamReader reader = new StreamReader(tournamentConfigLocation);
+                string json = reader.ReadToEnd();
+                tournamentInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<TournamentInfo>(json);
+
+                roundBox.Items.Clear();
+                foreach (Round round in tournamentInfo.rounds)
+                {
+                    roundBox.Items.Add(round.name);
+                }
+            }
         }
     }
 }
