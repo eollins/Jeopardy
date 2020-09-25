@@ -1190,7 +1190,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(509, 740);
+            this.label2.Location = new System.Drawing.Point(660, 740);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 13);
             this.label2.TabIndex = 91;
@@ -1199,7 +1199,7 @@
             // chooseFile
             // 
             this.chooseFile.ForeColor = System.Drawing.Color.Black;
-            this.chooseFile.Location = new System.Drawing.Point(602, 735);
+            this.chooseFile.Location = new System.Drawing.Point(753, 735);
             this.chooseFile.Name = "chooseFile";
             this.chooseFile.Size = new System.Drawing.Size(117, 23);
             this.chooseFile.TabIndex = 92;
@@ -1216,7 +1216,7 @@
             "Jeopardy!",
             "Double Jeopardy!",
             "Final Jeopardy!"});
-            this.gameModeComboBox.Location = new System.Drawing.Point(725, 736);
+            this.gameModeComboBox.Location = new System.Drawing.Point(876, 736);
             this.gameModeComboBox.Name = "gameModeComboBox";
             this.gameModeComboBox.Size = new System.Drawing.Size(121, 21);
             this.gameModeComboBox.TabIndex = 93;
@@ -1225,7 +1225,7 @@
             // 
             this.jepIndicator.BackColor = System.Drawing.Color.Red;
             this.jepIndicator.Enabled = false;
-            this.jepIndicator.Location = new System.Drawing.Point(852, 735);
+            this.jepIndicator.Location = new System.Drawing.Point(1003, 735);
             this.jepIndicator.Name = "jepIndicator";
             this.jepIndicator.Size = new System.Drawing.Size(22, 23);
             this.jepIndicator.TabIndex = 94;
@@ -1236,7 +1236,7 @@
             // 
             this.djepIndicator.BackColor = System.Drawing.Color.Red;
             this.djepIndicator.Enabled = false;
-            this.djepIndicator.Location = new System.Drawing.Point(880, 735);
+            this.djepIndicator.Location = new System.Drawing.Point(1031, 735);
             this.djepIndicator.Name = "djepIndicator";
             this.djepIndicator.Size = new System.Drawing.Size(22, 23);
             this.djepIndicator.TabIndex = 95;
@@ -1247,7 +1247,7 @@
             // 
             this.finalIndicator.BackColor = System.Drawing.Color.Red;
             this.finalIndicator.Enabled = false;
-            this.finalIndicator.Location = new System.Drawing.Point(908, 735);
+            this.finalIndicator.Location = new System.Drawing.Point(1059, 735);
             this.finalIndicator.Name = "finalIndicator";
             this.finalIndicator.Size = new System.Drawing.Size(22, 23);
             this.finalIndicator.TabIndex = 96;
@@ -1258,7 +1258,7 @@
             // 
             this.roundBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.roundBox.FormattingEnabled = true;
-            this.roundBox.Location = new System.Drawing.Point(298, 735);
+            this.roundBox.Location = new System.Drawing.Point(279, 736);
             this.roundBox.Name = "roundBox";
             this.roundBox.Size = new System.Drawing.Size(121, 21);
             this.roundBox.TabIndex = 97;

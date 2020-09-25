@@ -130,5 +130,10 @@ namespace Jeopardy
         {
             Globals.end = true;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Globals.export = true;
+        }
     }
 }

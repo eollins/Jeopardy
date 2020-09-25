@@ -38,6 +38,7 @@ namespace Jeopardy
 
         string tournamentConfigLocation;
         TournamentInfo tournamentInfo = new TournamentInfo();
+        Dictionary<string, int> NamesAndIDs = new Dictionary<string, int>();
 
         int player1score = 0;
         int player2score = 0;
@@ -45,6 +46,8 @@ namespace Jeopardy
         int player4score = 0;
         int player5score = 0;
         int player6score = 0;
+
+        int endStage = 0;
 
         string jeopardyPreload;
         string doublePreload;
@@ -85,12 +88,16 @@ namespace Jeopardy
         public class Round
         {
             public string name { get; set; }
-            public string player1 { get; set; }
-            public string player2 { get; set; }
-            public string player3 { get; set; }
-            public string player1Next { get; set; }
-            public string player2Next { get; set; }
-            public string player3Next { get; set; }
+            public PlayerConfig[] player1 { get; set; }
+            public PlayerConfig[] player2 { get; set; }
+            public PlayerConfig[] player3 { get; set; }
+        }
+
+        public class PlayerConfig
+        {
+            public string currentID { get; set; }
+            public string nextID { get; set; }
+            public string nextName { get; set; }
         }
 
         public class CategoryInfo
@@ -342,16 +349,54 @@ namespace Jeopardy
 
                 generate = false;
             }
-            else
-            {
-                MessageBox.Show("Invalid file. Please try again.");
-            }
 
             player.Stop();
             foreach (var btnn in Controls.OfType<Button>().Where(x => x.Tag.ToString()[0] == 'g'))
             {
                 btnn.Tag = "board@" + btnn.Name.Substring(3);
                 ShowBoard();
+            }
+
+            if (doubleJeopardyBtn.Checked)
+            {
+                int lowestScore = 99999;
+                int index = 0;
+                for (int i = 0; i < Globals.playerScores.Length; i++)
+                {
+                    if (Globals.playerScores[i] < lowestScore)
+                    {
+                        lowestScore = Globals.playerScores[i];
+                        index = i;
+                    }
+                }
+
+                player1name.BackColor = Color.White;
+                player2name.BackColor = Color.White;
+                player3name.BackColor = Color.White;
+                player4name.BackColor = Color.White;
+                player5name.BackColor = Color.White;
+                player6name.BackColor = Color.White;
+                switch (index)
+                {
+                    case 0:
+                        player1name.BackColor = Color.LightPink;
+                        break;
+                    case 1:
+                        player2name.BackColor = Color.LightPink;
+                        break;
+                    case 2:
+                        player3name.BackColor = Color.LightPink;
+                        break;
+                    case 3:
+                        player4name.BackColor = Color.LightPink;
+                        break;
+                    case 4:
+                        player5name.BackColor = Color.LightPink;
+                        break;
+                    case 5:
+                        player6name.BackColor = Color.LightPink;
+                        break;
+                }
             }
 
             if (player1name.Text == "Player One")
@@ -735,31 +780,73 @@ namespace Jeopardy
             {
                 player1score += currentValue;
                 p1score.Text = "$" + player1score;
+
+                player1name.BackColor = Color.LightPink;
+                player2name.BackColor = Color.White;
+                player3name.BackColor = Color.White;
+                player4name.BackColor = Color.White;
+                player5name.BackColor = Color.White;
+                player6name.BackColor = Color.White;
             }
             else if (tag == "2")
             {
                 player2score += currentValue;
                 p2score.Text = "$" + player2score;
+
+                player1name.BackColor = Color.White;
+                player2name.BackColor = Color.LightPink;
+                player3name.BackColor = Color.White;
+                player4name.BackColor = Color.White;
+                player5name.BackColor = Color.White;
+                player6name.BackColor = Color.White;
             }
             else if (tag == "3")
             {
                 player3score += currentValue;
                 p3score.Text = "$" + player3score;
+
+                player1name.BackColor = Color.White;
+                player2name.BackColor = Color.White;
+                player3name.BackColor = Color.LightPink;
+                player4name.BackColor = Color.White;
+                player5name.BackColor = Color.White;
+                player6name.BackColor = Color.White;
             }
             else if (tag == "4")
             {
                 player4score += currentValue;
                 p4score.Text = "$" + player4score;
+
+                player1name.BackColor = Color.White;
+                player2name.BackColor = Color.White;
+                player3name.BackColor = Color.White;
+                player4name.BackColor = Color.LightPink;
+                player5name.BackColor = Color.White;
+                player6name.BackColor = Color.White;
             }
             else if (tag == "5")
             {
                 player5score += currentValue;
                 p5score.Text = "$" + player5score;
+
+                player1name.BackColor = Color.White;
+                player2name.BackColor = Color.White;
+                player3name.BackColor = Color.White;
+                player4name.BackColor = Color.White;
+                player5name.BackColor = Color.LightPink;
+                player6name.BackColor = Color.White;
             }
             else if (tag == "6")
             {
                 player6score += currentValue;
                 p6score.Text = "$" + player6score;
+
+                player1name.BackColor = Color.White;
+                player2name.BackColor = Color.White;
+                player3name.BackColor = Color.White;
+                player4name.BackColor = Color.White;
+                player5name.BackColor = Color.White;
+                player6name.BackColor = Color.LightPink;
             }
 
             if (btn.Text == "Award" && !finalJeopardy)
@@ -808,82 +895,102 @@ namespace Jeopardy
                 scores.Add(player6name.Text, int.Parse(p6score.Text.Substring(1)));
             }
             string[] names = new string[] { player1name.Text, player2name.Text, player3name.Text, player4name.Text, player5name.Text, player6name.Text };
-
-            if (tournamentEnabled)
+            if (endStage == 0)
             {
-                string connectionString = "Server=" + tournamentInfo.url + ";Database=" + tournamentInfo.db + ";Uid=" + tournamentInfo.user + ";Pwd=" + tournamentInfo.pswd + ";";
-                MySql.Data.MySqlClient.MySqlConnection connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
-                connection.Open();
-                MySqlCommand command = new MySqlCommand("select playerName, playerID from Players;");
-                command.Connection = connection;
-
-                Dictionary<string, int> players = new Dictionary<string, int>();
-                MySqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
+                if (tournamentEnabled)
                 {
-                    players.Add(reader[0].ToString(), int.Parse(reader[1].ToString()));
-                }
+                    string connectionString = "Server=" + tournamentInfo.url + ";Database=" + tournamentInfo.db + ";Uid=" + tournamentInfo.user + ";Pwd=" + tournamentInfo.pswd + ";";
+                    MySql.Data.MySqlClient.MySqlConnection connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+                    connection.Open();
+                    MySqlCommand command = new MySqlCommand("select playerName, playerID from Players;");
+                    command.Connection = connection;
 
-                var scoresSorted = scores.OrderByDescending(key => key.Value);
-                string firstPlaceName = scoresSorted.ElementAt(0).Key;
-                string secondPlaceName = scoresSorted.ElementAt(1).Key;
-                string thirdPlaceName = scoresSorted.ElementAt(2).Key;
+                    Dictionary<string, int> players = new Dictionary<string, int>();
+                    MySqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        players.Add(reader[0].ToString(), int.Parse(reader[1].ToString()));
+                    }
 
-                int firstPlaceID = PlayerNameToID(firstPlaceName);
-                int secondPlaceID = PlayerNameToID(secondPlaceName);
-                int thirdPlaceID = PlayerNameToID(thirdPlaceName);
+                    var scoresSorted = scores.OrderByDescending(key => key.Value);
+                    string firstPlaceName = scoresSorted.ElementAt(0).Key;
+                    string secondPlaceName = scoresSorted.ElementAt(1).Key;
+                    string thirdPlaceName = scoresSorted.ElementAt(2).Key;
 
-                string first = tournamentInfo.rounds[roundBox.SelectedIndex].player1;
-                string second = tournamentInfo.rounds[roundBox.SelectedIndex].player2;
-                string third = tournamentInfo.rounds[roundBox.SelectedIndex].player3;
+                    int firstPlaceID = NamesAndIDs[firstPlaceName];
+                    int secondPlaceID = NamesAndIDs[secondPlaceName];
+                    int thirdPlaceID = NamesAndIDs[thirdPlaceName];
 
-                clue.Visible = true;
-                string query = "";
-                clue.Text = "";
-                if (first == "winner")
-                {
-                    clue.Text = firstPlaceName.ToUpper() + " WINS THE TOURNAMENT!";
-                    query += "update Brackets set winner = " + firstPlaceID + " where officialBracket = 1;";
-                    //player1name.BackColor = Color.LightGreen;
+                    string first = tournamentInfo.rounds[roundBox.SelectedIndex].player1[0].nextID;
+                    string second = tournamentInfo.rounds[roundBox.SelectedIndex].player2[0].nextID;
+                    string third = tournamentInfo.rounds[roundBox.SelectedIndex].player3[0].nextID;
+
+                    clue.Visible = true;
+                    string query = "";
+                    clue.Text = "";
+                    if (first == "winner")
+                    {
+                        clue.Text = firstPlaceName.ToUpper() + " WINS THE TOURNAMENT!";
+                        query += "update Brackets set winner = " + firstPlaceID + " where officialBracket = 1;";
+                        //player1name.BackColor = Color.LightGreen;
+                    }
+                    else
+                    {
+                        query += "update Brackets set " + first + " = " + firstPlaceID + " where officialBracket = 1;";
+                        clue.Text += "\n" + firstPlaceName + " moves on to the " + tournamentInfo.rounds[roundBox.SelectedIndex].player1[0].nextName;
+                        //player1name.BackColor = Color.LightGreen;
+                    }
+
+                    if (second == "elim")
+                    {
+                        query += "update Players set eliminated = 1 where PlayerID = " + secondPlaceID + ";";
+                        clue.Text += "\n" + secondPlaceName + " has been eliminated";
+                        //player2name.BackColor = Color.Pink;
+                    }
+                    else
+                    {
+                        query += "update Brackets set " + second + " = " + secondPlaceID + " where officialBracket = 1;";
+                        clue.Text += "\n" + secondPlaceName + " moves on to the " + tournamentInfo.rounds[roundBox.SelectedIndex].player2[0].nextName;
+                        //player2name.BackColor = Color.LightYellow;
+                    }
+
+                    if (third == "elim")
+                    {
+                        query += "update Players set eliminated = 1 where PlayerID = " + thirdPlaceID + ";";
+                        clue.Text += "\n" + thirdPlaceName + " has been eliminated\n";
+                        //player3name.BackColor = Color.Pink;
+                    }
+
+                    foreach (string name in scores.Keys)
+                    {
+                        query += "update Players set winnings = winnings + " + scores[name] + " where playerID = " + PlayerNameToID(name) + ";";
+                    }
+
+                    ExecuteQuery(query);
+                    endStage++;
                 }
                 else
                 {
-                    query += "update Brackets set " + first + " = " + firstPlaceID + " where officialBracket = 1;";
-                    clue.Text += "\n" + firstPlaceName + " moves on to the " + tournamentInfo.rounds[roundBox.SelectedIndex].player1Next;
-                    //player1name.BackColor = Color.LightGreen;
-                }
+                    clue.Visible = true;
+                    clue.Text = "\nFINAL SCORES\n\n";
+                    int t = 0;
+                    string winner = "";
+                    foreach (var player in scores.OrderByDescending(key => key.Value))
+                    {
+                        if (t == 0)
+                        {
+                            winner = player.Key;
+                        }
 
-                if (second == "elim")
-                {
-                    query += "update Players set eliminated = 1 where PlayerID = " + secondPlaceID + ";";
-                    clue.Text += "\n" + secondPlaceName + " has been eliminated";
-                    //player2name.BackColor = Color.Pink;
+                        t++;
+                        clue.Text += t + ". " + player.Key + " - $" + player.Value + "\n";
+                    }
                 }
-                else
-                {
-                    query += "update Brackets set " + second + " = " + secondPlaceID + " where officialBracket = 1;";
-                    clue.Text += "\n" + secondPlaceName + " moves on to the " + tournamentInfo.rounds[roundBox.SelectedIndex].player2Next;
-                    //player2name.BackColor = Color.LightYellow;
-                }
-
-                if (third == "elim")
-                {
-                    query += "update Players set eliminated = 1 where PlayerID = " + thirdPlaceID + ";";
-                    clue.Text += "\n" + thirdPlaceName + " has been eliminated\n";
-                    //player3name.BackColor = Color.Pink;
-                }
-                
-                foreach (string name in scores.Keys)
-                {
-                    query += "update Players set winnings = winnings + " + scores[name] + " where playerID = " + PlayerNameToID(name) + ";";
-                }
-
-                ExecuteQuery(query);
             }
             else
             {
                 clue.Visible = true;
-                clue.Text += "\nFINAL SCORES\n\n";
+                clue.Text = "\nFINAL SCORES\n\n";
                 int t = 0;
                 string winner = "";
                 foreach (var player in scores.OrderByDescending(key => key.Value))
@@ -1076,6 +1183,11 @@ namespace Jeopardy
                 endBtn_Click(endBtn, new EventArgs());
                 Globals.end = false;
             }
+            if (Globals.export)
+            {
+                export_Click(export, new EventArgs());
+                Globals.export = false;
+            }
 
             clock.Enabled = true;
         }
@@ -1168,12 +1280,65 @@ namespace Jeopardy
                 }
                 roundBox.SelectedIndex = 0;
                 tournamentEnabled = true;
+
+                player4name.Hide();
+                p4score.Hide();
+                player5name.Hide();
+                p5score.Hide();
+                player6name.Hide();
+                p6score.Hide();
             }
         }
 
         private void roundBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            if (roundBox.SelectedIndex < 0)
+            {
+                return;
+            }
+
+            player1name.Clear();
+            player2name.Clear();
+            player3name.Clear();
+            NamesAndIDs.Clear();
+
+            Round r = null;
+            foreach (Round round in tournamentInfo.rounds)
+            {
+                if (round.name == roundBox.SelectedItem.ToString())
+                {
+                    r = round;
+                    break;
+                }
+            }
+
+            string firstID = r.player1[0].currentID;
+            string secondID = r.player2[0].currentID;
+            string thirdID = r.player3[0].currentID;
+
+            string query = "select playerName, playerID from Players join Brackets where " + firstID + " = playerID";
+            MySqlDataReader reader = ExecuteQuery(query);
+            while (reader.Read())
+            {
+                player1name.Text = reader[0].ToString();
+                NamesAndIDs.Add(reader[0].ToString(), int.Parse(reader[1].ToString()));
+            }
+
+            query = "select playerName, playerID from Players join Brackets where " + secondID + " = playerID";
+            reader = ExecuteQuery(query);
+            while (reader.Read())
+            {
+                player2name.Text = reader[0].ToString();
+                NamesAndIDs.Add(reader[0].ToString(), int.Parse(reader[1].ToString()));
+            }
+
+            query = "select playerName, playerID from Players join Brackets where " + thirdID + " = playerID";
+            reader = ExecuteQuery(query);
+            while (reader.Read())
+            {
+                player3name.Text = reader[0].ToString();
+                NamesAndIDs.Add(reader[0].ToString(), int.Parse(reader[1].ToString()));
+            }
         }
     }
 }

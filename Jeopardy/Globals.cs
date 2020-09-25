@@ -22,5 +22,6 @@ namespace Jeopardy
         public static bool sound = false;
         public static bool reveal = false;
         public static bool clear = false;
+        public static bool export = false;
     }
 }
