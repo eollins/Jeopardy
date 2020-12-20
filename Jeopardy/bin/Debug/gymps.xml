@@ -1,0 +1,43 @@
+<GameBoard>
+  <Category name="THEIR GREATEST HITS">
+    <Clue answer="Queen" value="200">"Bicycle Race" &amp; "Another One Bites The Dust"</Clue>
+    <Clue answer="Guns N\' Roses" value="400">"Paradise City" &amp; "November Rain"</Clue>
+    <Clue answer="Earth, Wind &amp; Fire" value="600">"September" &amp; "Shining Star"</Clue>
+    <Clue answer="Blink-182" value="800">"What's My Age Again?" &amp; "All The Small Things"</Clue>
+    <Clue answer="the Foo Fighters" value="1000">"Everlong" &amp; "Learn To Fly"</Clue>
+  </Category>
+  <Category name="CLASSIC MONOPOLY TOKENS">
+    <Clue answer="a thimble" value="200">You wear one of these to protect your fingers when sewing</Clue>
+    <Clue answer="a tophat" value="400">The one Lincoln wore to Ford's Theatre is in the Smithsonian</Clue>
+    <Clue answer="the shoe" value="600">Awaiting the inevitable is like "waiting for the other" this "to drop"</Clue>
+    <Clue answer="a racecar" value="1000">On May 30, 2010 Dario Franchitti claimed a big victory in one</Clue>
+  </Category>
+  <Category name="1811">
+    <Clue answer="George III" value="200">Insane &amp; no longer fit to rule, this British king was replaced by his son, the prince regent</Clue>
+    <Clue answer="Jane Austen" value="400">Her "Sense and Sensibility" was published anonymously "in three volumes", "by a lady"</Clue>
+    <Clue answer="Krupp" value="600">This family-run company, founded in Germany to manufacture steel, eventually did a booming business</Clue>
+    <Clue answer="Muhammad Ali" value="800">In an 1811 massacre, this pasha of Egypt (not the boxer) knocked out the Mamluks for good</Clue>
+    <Clue answer="Cumberland Road" value="1000">Construction began on the USA's first federal highway, known as this road after the town in which it originated</Clue>
+  </Category>
+  <Category name="THE '90S">
+    <Clue answer="the Globe Theatre" value="200">In 1598 or 1599 the Burbage brothers dismantled this London theatre &amp; reassembled it in Bankside</Clue>
+    <Clue answer="Columbus sailed the ocean blue" value="400">In a jingle, this line follows "in fourteen hundred and ninety-two"</Clue>
+    <Clue answer="an electric chair" value="600">On August 6, 1890 William Kemmler became the first criminal forced to sit in one of these--&amp; he only did it once</Clue>
+    <Clue answer="Calcutta" value="800">This large Indian city on the Hooghly River was founded in 1690 by Job Charnak of the East India Company</Clue>
+    <Clue answer="Trinity College" value="1000">In 1793 this Irish college allowed Catholics to study for degrees for the first time</Clue>
+  </Category>
+  <Category name="&quot;KICK&quot;ING">
+    <Clue answer="a kickstand" value="200">It holds up your Harley when it's not moving</Clue>
+    <Clue answer="a kickback" value="400">A bribe paid to influence a transaction</Clue>
+    <Clue answer="a sidekick" value="600">A second banana</Clue>
+    <Clue answer="a kickoff" value="800">A beginning for the Raiders, or a finale for the Rockettes</Clue>
+    <Clue answer="Kickapoo" value="1000">Algonquian tribe of southern Wisconsin</Clue>
+  </Category>
+  <Category name="ASSETS">
+    <Clue answer="capital gains" value="200">These "gains" are the taxable profits from the sale of assets like stocks &amp; bonds</Clue>
+    <Clue answer="11" value="400">This chapter of the bankruptcy code allows a company to keep its assets while reorganizing</Clue>
+    <Clue answer="depreciation" value="600">12-letter term for the lowering in value of an asset over time</Clue>
+    <Clue answer="an option" value="800">If you exercise one of these synonyms for "choice", you agree to buy or sell an asset at a given price</Clue>
+    <Clue answer="hidden" value="1000">Assets that are understated on a business balance sheet are termed this, like a secret passageway</Clue>
+  </Category>
+</GameBoard>

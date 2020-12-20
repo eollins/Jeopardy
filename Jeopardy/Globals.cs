@@ -23,5 +23,6 @@ namespace Jeopardy
         public static bool reveal = false;
         public static bool clear = false;
         public static bool export = false;
+        public static int[] flash = null;
     }
 }

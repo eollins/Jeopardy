@@ -534,6 +534,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Controller";
             this.Text = "Controller";
+            this.Load += new System.EventHandler(this.Controller_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

@@ -122,6 +122,7 @@
             this.finalIndicator = new System.Windows.Forms.Button();
             this.roundBox = new System.Windows.Forms.ComboBox();
             this.openTournament = new System.Windows.Forms.OpenFileDialog();
+            this.addPlayer = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.customWager)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -720,6 +721,7 @@
             this.player2name.Tag = "2";
             this.player2name.Text = "Player Two";
             this.player2name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.player2name.Visible = false;
             this.player2name.Click += new System.EventHandler(this.textBox6_Click);
             // 
             // player3name
@@ -732,6 +734,7 @@
             this.player3name.Tag = "3";
             this.player3name.Text = "Player Three";
             this.player3name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.player3name.Visible = false;
             this.player3name.Click += new System.EventHandler(this.textBox6_Click);
             // 
             // player4name
@@ -744,6 +747,7 @@
             this.player4name.Tag = "4";
             this.player4name.Text = "Player Four";
             this.player4name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.player4name.Visible = false;
             this.player4name.Click += new System.EventHandler(this.textBox6_Click);
             // 
             // player5name
@@ -756,6 +760,7 @@
             this.player5name.Tag = "5";
             this.player5name.Text = "Player Five";
             this.player5name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.player5name.Visible = false;
             this.player5name.Click += new System.EventHandler(this.textBox6_Click);
             // 
             // player6name
@@ -768,6 +773,7 @@
             this.player6name.Tag = "6";
             this.player6name.Text = "Player Six";
             this.player6name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.player6name.Visible = false;
             this.player6name.Click += new System.EventHandler(this.textBox6_Click);
             // 
             // generateBtn
@@ -934,6 +940,7 @@
             this.remove2.Tag = "2";
             this.remove2.Text = "Remove";
             this.remove2.UseVisualStyleBackColor = true;
+            this.remove2.Visible = false;
             this.remove2.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
             // award2
@@ -947,6 +954,7 @@
             this.award2.Tag = "2";
             this.award2.Text = "Award";
             this.award2.UseVisualStyleBackColor = true;
+            this.award2.Visible = false;
             this.award2.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
             // remove3
@@ -960,6 +968,7 @@
             this.remove3.Tag = "3";
             this.remove3.Text = "Remove";
             this.remove3.UseVisualStyleBackColor = true;
+            this.remove3.Visible = false;
             this.remove3.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
             // award3
@@ -973,6 +982,7 @@
             this.award3.Tag = "3";
             this.award3.Text = "Award";
             this.award3.UseVisualStyleBackColor = true;
+            this.award3.Visible = false;
             this.award3.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
             // remove4
@@ -986,6 +996,7 @@
             this.remove4.Tag = "4";
             this.remove4.Text = "Remove";
             this.remove4.UseVisualStyleBackColor = true;
+            this.remove4.Visible = false;
             this.remove4.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
             // award4
@@ -999,6 +1010,7 @@
             this.award4.Tag = "4";
             this.award4.Text = "Award";
             this.award4.UseVisualStyleBackColor = true;
+            this.award4.Visible = false;
             this.award4.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
             // remove5
@@ -1012,6 +1024,7 @@
             this.remove5.Tag = "5";
             this.remove5.Text = "Remove";
             this.remove5.UseVisualStyleBackColor = true;
+            this.remove5.Visible = false;
             this.remove5.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
             // award5
@@ -1025,6 +1038,7 @@
             this.award5.Tag = "5";
             this.award5.Text = "Award";
             this.award5.UseVisualStyleBackColor = true;
+            this.award5.Visible = false;
             this.award5.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
             // remove6
@@ -1038,6 +1052,7 @@
             this.remove6.Tag = "6";
             this.remove6.Text = "Remove";
             this.remove6.UseVisualStyleBackColor = true;
+            this.remove6.Visible = false;
             this.remove6.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
             // award6
@@ -1051,6 +1066,7 @@
             this.award6.Tag = "6";
             this.award6.Text = "Award";
             this.award6.UseVisualStyleBackColor = true;
+            this.award6.Visible = false;
             this.award6.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
             // endBtn
@@ -1268,12 +1284,27 @@
             // 
             this.openTournament.Filter = "JSON files|*.json";
             // 
+            // addPlayer
+            // 
+            this.addPlayer.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.addPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addPlayer.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.addPlayer.Location = new System.Drawing.Point(193, 528);
+            this.addPlayer.Name = "addPlayer";
+            this.addPlayer.Size = new System.Drawing.Size(166, 29);
+            this.addPlayer.TabIndex = 98;
+            this.addPlayer.Tag = "add";
+            this.addPlayer.Text = "+";
+            this.addPlayer.UseVisualStyleBackColor = true;
+            this.addPlayer.Click += new System.EventHandler(this.addPlayer_Click);
+            // 
             // GameBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Navy;
             this.ClientSize = new System.Drawing.Size(1093, 762);
+            this.Controls.Add(this.addPlayer);
             this.Controls.Add(this.roundBox);
             this.Controls.Add(this.finalIndicator);
             this.Controls.Add(this.djepIndicator);
@@ -1470,6 +1501,7 @@
         private System.Windows.Forms.Button finalIndicator;
         private System.Windows.Forms.ComboBox roundBox;
         private System.Windows.Forms.OpenFileDialog openTournament;
+        private System.Windows.Forms.Button addPlayer;
     }
 }
 

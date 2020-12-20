@@ -35,52 +35,7 @@ namespace Jeopardy
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            label1.Text = Globals.playerNames[0];
-            label2.Text = Globals.playerNames[1];
-            label3.Text = Globals.playerNames[2];
-            label4.Text = Globals.playerNames[3];
-            label5.Text = Globals.playerNames[4];
-            label6.Text = Globals.playerNames[5];
-
-            doubles.Text = Globals.dailyDoubles;
-            label7.Text = Globals.answer;
-
-            if (Globals.playerNames[0] == "Player One")
-            {
-                award1.Hide();
-                remove1.Hide();
-                label1.Hide();
-            }
-            if (Globals.playerNames[1] == "Player Two")
-            {
-                award2.Hide();
-                remove2.Hide();
-                label2.Hide();
-            }
-            if (Globals.playerNames[2] == "Player Three")
-            {
-                award3.Hide();
-                remove3.Hide();
-                label3.Hide();
-            }
-            if (Globals.playerNames[3] == "Player Four")
-            {
-                award4.Hide();
-                remove4.Hide();
-                label4.Hide();
-            }
-            if (Globals.playerNames[4] == "Player Five")
-            {
-                award5.Hide();
-                remove5.Hide();
-                label5.Hide();
-            }
-            if (Globals.playerNames[5] == "Player Six")
-            {
-                award6.Hide();
-                remove6.Hide();
-                label6.Hide();
-            }
+            Controller_Load(this, new EventArgs());
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -105,6 +60,8 @@ namespace Jeopardy
                 Globals.playerScores[int.Parse(btn.Tag.ToString())] += (int)numericUpDown2.Value;
                 numericUpDown2.Value = 0;
             }
+
+            Globals.flash = new int[] { (int.Parse(btn.Tag.ToString())), 1 };
         }
 
         private void remove1_Click(object sender, EventArgs e)
@@ -119,6 +76,8 @@ namespace Jeopardy
                 Globals.playerScores[int.Parse(btn.Tag.ToString())] -= (int)numericUpDown2.Value;
                 numericUpDown2.Value = 0;
             }
+
+            Globals.flash = new int[] { (int.Parse(btn.Tag.ToString())), 0 };
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -134,6 +93,97 @@ namespace Jeopardy
         private void button1_Click(object sender, EventArgs e)
         {
             Globals.export = true;
+        }
+
+        private void Controller_Load(object sender, EventArgs e)
+        {
+            label1.Text = Globals.playerNames[0];
+            label2.Text = Globals.playerNames[1];
+            label3.Text = Globals.playerNames[2];
+            label4.Text = Globals.playerNames[3];
+            label5.Text = Globals.playerNames[4];
+            label6.Text = Globals.playerNames[5];
+
+            doubles.Text = Globals.dailyDoubles;
+            label7.Text = Globals.answer;
+
+            if (Globals.playerNames[0] == "")
+            {
+                award1.Hide();
+                remove1.Hide();
+                label1.Hide();
+            }
+            else
+            {
+                award1.Show();
+                remove1.Show();
+                label1.Show();
+            }
+
+            if (Globals.playerNames[1] == "")
+            {
+                award2.Hide();
+                remove2.Hide();
+                label2.Hide();
+            }
+            else
+            {
+                award2.Show();
+                remove2.Show();
+                label2.Show();
+            }
+
+            if (Globals.playerNames[2] == "")
+            {
+                award3.Hide();
+                remove3.Hide();
+                label3.Hide();
+            }
+            else
+            {
+                award3.Show();
+                remove3.Show();
+                label3.Show();
+            }
+
+            if (Globals.playerNames[3] == "")
+            {
+                award4.Hide();
+                remove4.Hide();
+                label4.Hide();
+            }
+            else
+            {
+                award4.Show();
+                remove4.Show();
+                label4.Show();
+
+            }
+            if (Globals.playerNames[4] == "")
+            {
+                award5.Hide();
+                remove5.Hide();
+                label5.Hide();
+            }
+            else
+            {
+                award5.Show();
+                remove5.Show();
+                label5.Show();
+            }
+
+            if (Globals.playerNames[5] == "")
+            {
+                award6.Hide();
+                remove6.Hide();
+                label6.Hide();
+            }
+            else
+            {
+                award6.Show();
+                remove6.Show();
+                label6.Show();
+            }
         }
     }
 }
