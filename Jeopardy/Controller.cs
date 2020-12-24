@@ -35,7 +35,14 @@ namespace Jeopardy
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Controller_Load(this, new EventArgs());
+            if (Globals.unlockState)
+            {
+                button2.Text = "Lock";
+            }
+            else
+            {
+                button2.Text = "Unlock";
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -183,6 +190,19 @@ namespace Jeopardy
                 award6.Show();
                 remove6.Show();
                 label6.Show();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Globals.unlockButton = true;
+            if (button2.Text == "Unlock")
+            {
+                button2.Text = "Lock";
+            }
+            else
+            {
+                button2.Text = "Unlock";
             }
         }
     }

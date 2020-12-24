@@ -24,5 +24,7 @@ namespace Jeopardy
         public static bool clear = false;
         public static bool export = false;
         public static int[] flash = null;
+        public static bool unlockButton = false;
+        public static bool unlockState = false;
     }
 }
