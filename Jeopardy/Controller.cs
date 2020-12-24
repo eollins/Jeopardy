@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -43,6 +45,36 @@ namespace Jeopardy
             {
                 button2.Text = "Unlock";
             }
+        }
+
+        private string GameFunction(string function, string var1, string var2)
+        {
+            Uri uri = new Uri(@"http://hamijeopardy.com/gameFunctions.php");
+            WebRequest request = WebRequest.Create(uri);
+            request.Method = "POST";
+
+            string form = "function=" + function;
+            if (var1 != null)
+            {
+                form += "&variable1=" + var1;
+            }
+            if (var2 != null)
+            {
+                form += "&variable2=" + var2;
+            }
+            byte[] data = Encoding.ASCII.GetBytes(form);
+
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = data.Length;
+
+            Stream requestStream = request.GetRequestStream();
+            requestStream.Write(data, 0, data.Length);
+            requestStream.Close();
+
+            WebResponse resp = request.GetResponse();
+            StreamReader reader = new StreamReader(resp.GetResponseStream());
+
+            return reader.ReadToEnd();
         }
 
         private void button5_Click(object sender, EventArgs e)

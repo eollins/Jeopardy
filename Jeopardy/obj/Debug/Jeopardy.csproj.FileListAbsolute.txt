@@ -89,3 +89,4 @@ D:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.Properties.Resources.resources
 D:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.csproj.GenerateResource.Cache
 D:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.exe
 D:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.pdb
+D:\Jeopardy\Jeopardy\bin\Debug\Key.txt

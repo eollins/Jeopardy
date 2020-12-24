@@ -127,7 +127,10 @@
             this.award5 = new System.Windows.Forms.Button();
             this.remove6 = new System.Windows.Forms.Button();
             this.award6 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.revealResponse = new System.Windows.Forms.Button();
+            this.clueImage = new System.Windows.Forms.Label();
+            this.pictureBox = new System.Windows.Forms.WebBrowser();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.customWager)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -715,7 +718,7 @@
             this.player1name.Tag = "1";
             this.player1name.Text = "Reigning Champ";
             this.player1name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.player1name.Visible = false; 
+            this.player1name.Visible = false;
             // 
             // player2name
             // 
@@ -891,7 +894,7 @@
             // doubles
             // 
             this.doubles.AutoSize = true;
-            this.doubles.Location = new System.Drawing.Point(874, 667);
+            this.doubles.Location = new System.Drawing.Point(871, 649);
             this.doubles.Name = "doubles";
             this.doubles.Size = new System.Drawing.Size(82, 39);
             this.doubles.TabIndex = 66;
@@ -983,7 +986,7 @@
             // popOutBtn
             // 
             this.popOutBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.popOutBtn.Location = new System.Drawing.Point(877, 710);
+            this.popOutBtn.Location = new System.Drawing.Point(874, 692);
             this.popOutBtn.Name = "popOutBtn";
             this.popOutBtn.Size = new System.Drawing.Size(26, 20);
             this.popOutBtn.TabIndex = 86;
@@ -1000,7 +1003,7 @@
             // export
             // 
             this.export.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.export.Location = new System.Drawing.Point(907, 710);
+            this.export.Location = new System.Drawing.Point(904, 692);
             this.export.Name = "export";
             this.export.Size = new System.Drawing.Size(49, 20);
             this.export.TabIndex = 87;
@@ -1033,7 +1036,6 @@
             this.chooseConfig.Tag = "c";
             this.chooseConfig.Text = "Choose Config File";
             this.chooseConfig.UseVisualStyleBackColor = true;
-            this.chooseConfig.Click += new System.EventHandler(this.chooseConfig_Click);
             // 
             // configIndicator
             // 
@@ -1339,22 +1341,59 @@
             this.award6.Visible = false;
             this.award6.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
-            // textBox1
+            // revealResponse
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(12, 761);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(1067, 99);
-            this.textBox1.TabIndex = 120;
+            this.revealResponse.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.revealResponse.Location = new System.Drawing.Point(535, 715);
+            this.revealResponse.Name = "revealResponse";
+            this.revealResponse.Size = new System.Drawing.Size(160, 31);
+            this.revealResponse.TabIndex = 120;
+            this.revealResponse.Tag = "n";
+            this.revealResponse.Text = "Reveal Response";
+            this.revealResponse.UseVisualStyleBackColor = true;
+            this.revealResponse.Visible = false;
+            this.revealResponse.Click += new System.EventHandler(this.revealResponse_Click);
+            // 
+            // clueImage
+            // 
+            this.clueImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clueImage.Location = new System.Drawing.Point(12, 25);
+            this.clueImage.Name = "clueImage";
+            this.clueImage.Size = new System.Drawing.Size(528, 531);
+            this.clueImage.TabIndex = 121;
+            this.clueImage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.clueImage.Visible = false;
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.Location = new System.Drawing.Point(553, 75);
+            this.pictureBox.MinimumSize = new System.Drawing.Size(20, 20);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(528, 374);
+            this.pictureBox.TabIndex = 123;
+            this.pictureBox.Visible = false;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.MidnightBlue;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(874, 715);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(79, 31);
+            this.button1.TabIndex = 124;
+            this.button1.Tag = "h";
+            this.button1.Text = "Image";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // GameBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Navy;
-            this.ClientSize = new System.Drawing.Size(1093, 872);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(1093, 754);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.revealResponse);
             this.Controls.Add(this.remove6);
             this.Controls.Add(this.award6);
             this.Controls.Add(this.remove5);
@@ -1445,6 +1484,8 @@
             this.Controls.Add(this.cat1label);
             this.Controls.Add(this.c1v200);
             this.Controls.Add(this.clue);
+            this.Controls.Add(this.clueImage);
+            this.Controls.Add(this.pictureBox);
             this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -1560,7 +1601,10 @@
         private System.Windows.Forms.Button award5;
         private System.Windows.Forms.Button remove6;
         private System.Windows.Forms.Button award6;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button revealResponse;
+        private System.Windows.Forms.Label clueImage;
+        private System.Windows.Forms.WebBrowser pictureBox;
+        private System.Windows.Forms.Button button1;
     }
 }
 

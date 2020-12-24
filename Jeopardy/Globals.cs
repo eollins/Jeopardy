@@ -26,5 +26,6 @@ namespace Jeopardy
         public static int[] flash = null;
         public static bool unlockButton = false;
         public static bool unlockState = false;
+        public static int gameCode = 0;
     }
 }

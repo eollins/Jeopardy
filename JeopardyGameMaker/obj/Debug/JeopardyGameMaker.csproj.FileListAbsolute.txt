@@ -17,3 +17,12 @@ I:\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.csproj.GenerateResourc
 I:\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.exe
 I:\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.pdb
 I:\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.csprojResolveAssemblyReference.cache
+D:\Jeopardy\JeopardyGameMaker\bin\Debug\JeopardyGameMaker.exe.config
+D:\Jeopardy\JeopardyGameMaker\bin\Debug\JeopardyGameMaker.exe
+D:\Jeopardy\JeopardyGameMaker\bin\Debug\JeopardyGameMaker.pdb
+D:\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.csprojResolveAssemblyReference.cache
+D:\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.Form1.resources
+D:\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.Properties.Resources.resources
+D:\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.csproj.GenerateResource.Cache
+D:\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.exe
+D:\Jeopardy\JeopardyGameMaker\obj\Debug\JeopardyGameMaker.pdb
