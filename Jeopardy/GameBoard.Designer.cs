@@ -998,7 +998,6 @@
             // clock
             // 
             this.clock.Interval = 50;
-            this.clock.Tick += new System.EventHandler(this.clock_Tick);
             // 
             // export
             // 

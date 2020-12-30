@@ -14,227 +14,99 @@ namespace Jeopardy
 {
     public partial class Controller : Form
     {
+        public static string Answer = "ANSWER";
+        public static bool Lock = false;
+        public static string DailyDoubles = "";
         public Controller()
         {
             InitializeComponent();
         }
 
+        GameBoard board = null;
+        public Controller(Form board)
+        {
+            InitializeComponent();
+            this.board = board as GameBoard;
+        }
+
         private void generate_Click(object sender, EventArgs e)
         {
-            if (auto.Checked) { Globals.gameType = 0; }
-            else if (custom.Checked) { Globals.gameType = 1; }
-            if (radioButton1.Checked) { Globals.round = 0; }
-            else if (radioButton2.Checked) { Globals.round = 1; }
-            else if (radioButton3.Checked) { Globals.round = 2; }
-            Globals.generate = true;
-            timer1.Enabled = true;
+            if (auto.Checked)
+                board.AdjustSettings(0, 0);
+            else if (custom.Checked)
+                board.AdjustSettings(0, 1);
+
+            board.generateBtn_Click(generate, new EventArgs());
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void revealQuestion_Click(object sender, EventArgs e)
         {
-            Globals.reveal = true;
+            board.reveal_Click(revealQuestion, new EventArgs());
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
-            if (Globals.unlockState)
-            {
-                button2.Text = "Lock";
-            }
-            else
-            {
-                button2.Text = "Unlock";
-            }
+            board.AdjustSettings(2, (int)numericUpDown2.Value);
         }
 
-        private string GameFunction(string function, string var1, string var2)
+        private void response_Click(object sender, EventArgs e)
         {
-            Uri uri = new Uri(@"http://hamijeopardy.com/gameFunctions.php");
-            WebRequest request = WebRequest.Create(uri);
-            request.Method = "POST";
-
-            string form = "function=" + function;
-            if (var1 != null)
-            {
-                form += "&variable1=" + var1;
-            }
-            if (var2 != null)
-            {
-                form += "&variable2=" + var2;
-            }
-            byte[] data = Encoding.ASCII.GetBytes(form);
-
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = data.Length;
-
-            Stream requestStream = request.GetRequestStream();
-            requestStream.Write(data, 0, data.Length);
-            requestStream.Close();
-
-            WebResponse resp = request.GetResponse();
-            StreamReader reader = new StreamReader(resp.GetResponseStream());
-
-            return reader.ReadToEnd();
+            board.revealResponse_Click(response, new EventArgs());
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void clear_Click(object sender, EventArgs e)
         {
-            Globals.clear = true;
+            board.clear_Click(clear, new EventArgs());
         }
 
-        private void award1_Click(object sender, EventArgs e)
+        private void image_Click(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            if (Globals.round < 2)
-            {
-                Globals.clear = true;
-            }
-
-            if (numericUpDown2.Value == 0)
-            {
-                Globals.playerScores[int.Parse(btn.Tag.ToString())] += Globals.currentValue;
-            }
-            else
-            {
-                Globals.playerScores[int.Parse(btn.Tag.ToString())] += (int)numericUpDown2.Value;
-                numericUpDown2.Value = 0;
-            }
-
-            Globals.flash = new int[] { (int.Parse(btn.Tag.ToString())), 1 };
-        }
-
-        private void remove1_Click(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            if (numericUpDown2.Value == 0)
-            {
-                Globals.playerScores[int.Parse(btn.Tag.ToString())] -= Globals.currentValue;
-            }
-            else
-            {
-                Globals.playerScores[int.Parse(btn.Tag.ToString())] -= (int)numericUpDown2.Value;
-                numericUpDown2.Value = 0;
-            }
-
-            Globals.flash = new int[] { (int.Parse(btn.Tag.ToString())), 0 };
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            Globals.sound = true;
+            board.button1_Click(image, new EventArgs());
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
-            Globals.end = true;
+            board.endBtn_Click(button18, new EventArgs());
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void sound_Click(object sender, EventArgs e)
         {
-            Globals.export = true;
+            board.soundBtn_Click(sound, new EventArgs());
         }
 
-        private void Controller_Load(object sender, EventArgs e)
+        private void export_Click(object sender, EventArgs e)
         {
-            label1.Text = Globals.playerNames[0];
-            label2.Text = Globals.playerNames[1];
-            label3.Text = Globals.playerNames[2];
-            label4.Text = Globals.playerNames[3];
-            label5.Text = Globals.playerNames[4];
-            label6.Text = Globals.playerNames[5];
-
-            doubles.Text = Globals.dailyDoubles;
-            label7.Text = Globals.answer;
-
-            if (Globals.playerNames[0] == "")
-            {
-                award1.Hide();
-                remove1.Hide();
-                label1.Hide();
-            }
-            else
-            {
-                award1.Show();
-                remove1.Show();
-                label1.Show();
-            }
-
-            if (Globals.playerNames[1] == "")
-            {
-                award2.Hide();
-                remove2.Hide();
-                label2.Hide();
-            }
-            else
-            {
-                award2.Show();
-                remove2.Show();
-                label2.Show();
-            }
-
-            if (Globals.playerNames[2] == "")
-            {
-                award3.Hide();
-                remove3.Hide();
-                label3.Hide();
-            }
-            else
-            {
-                award3.Show();
-                remove3.Show();
-                label3.Show();
-            }
-
-            if (Globals.playerNames[3] == "")
-            {
-                award4.Hide();
-                remove4.Hide();
-                label4.Hide();
-            }
-            else
-            {
-                award4.Show();
-                remove4.Show();
-                label4.Show();
-
-            }
-            if (Globals.playerNames[4] == "")
-            {
-                award5.Hide();
-                remove5.Hide();
-                label5.Hide();
-            }
-            else
-            {
-                award5.Show();
-                remove5.Show();
-                label5.Show();
-            }
-
-            if (Globals.playerNames[5] == "")
-            {
-                award6.Hide();
-                remove6.Hide();
-                label6.Hide();
-            }
-            else
-            {
-                award6.Show();
-                remove6.Show();
-                label6.Show();
-            }
+            board.export_Click(export, new EventArgs());
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Globals.unlockButton = true;
-            if (button2.Text == "Unlock")
+            board.unlock_Click(button2, new EventArgs());
+            if (Lock)
             {
-                button2.Text = "Lock";
+                button2.Text = "Unlock";
             }
             else
             {
+                button2.Text = "Lock";
+            }
+        }
+
+        private void award1_Click(object sender, EventArgs e)
+        {
+            board.awardAndRemove_Click((Button)sender, new EventArgs());
+        }
+
+        private void answerTimer_Tick(object sender, EventArgs e)
+        {
+            answerBox.Text = Answer;
+            if (Lock)
+            {
                 button2.Text = "Unlock";
+            }
+            else
+            {
+                button2.Text = "Lock";
             }
         }
     }

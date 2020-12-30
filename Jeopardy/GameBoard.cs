@@ -46,6 +46,11 @@ namespace Jeopardy
         string tournamentConfigLocation;
         TournamentInfo tournamentInfo = new TournamentInfo();
 
+        public void Test()
+        {
+            MessageBox.Show("Test");
+        }
+
         public class Player
         {
             public string Name { get; set; }
@@ -240,7 +245,7 @@ namespace Jeopardy
             {
                 clue.Text = c.question.Replace("&", "&&");
                 answerBox.Text = c.answer.Replace("&", "&&");
-                Globals.answer = c.answer.Replace("&", "&&");
+                Controller.Answer = c.answer.Replace("&", "&&");
                 currentValue = int.Parse(value);
                 currentClue = c;
                 if (doubleJeopardy)
@@ -285,7 +290,7 @@ namespace Jeopardy
             HideBoard();
 
             doubles.Text = "Daily Doubles:\n" + dailyDouble + "\n" + djdd1 + " & " + djdd2;
-            Globals.dailyDoubles = doubles.Text;
+            Controller.DailyDoubles = doubles.Text;
             gameModeComboBox.SelectedIndex = 0;
 
             string code = GameFunction("beginGame", null, null);
@@ -293,7 +298,7 @@ namespace Jeopardy
             gameCode.Text = code;
             gameCodeNum = code;
 
-            System.Timers.Timer t = new System.Timers.Timer(1000);
+            System.Timers.Timer t = new System.Timers.Timer(400);
             t.Elapsed += new ElapsedEventHandler(playerTimerHandler);
             t.Start();
 
@@ -301,7 +306,6 @@ namespace Jeopardy
             buzzTimer.Elapsed += new ElapsedEventHandler(CheckForBuzzes);
 
             updateNames.Enabled = true;
-            Globals.gameCode = int.Parse(gameCodeNum);
         }
 
         private bool PlayerPresent(int ID)
@@ -317,6 +321,7 @@ namespace Jeopardy
             return false;
         }
 
+        bool hidePlates = false;
         private async void playerTimerHandler(object sender, ElapsedEventArgs e)
         {
             string data = await GameFunctionAsync("getPlayers", gameCodeNum, null);
@@ -330,6 +335,15 @@ namespace Jeopardy
                 if (!PlayerPresent(int.Parse(comp[1])))
                 {
                     gamePlayers.Add(new Player(comp[0], int.Parse(comp[1])));
+                }
+            }
+
+            for (int i = 0; i < gamePlayers.Count; i++)
+            {
+                if (!data.Contains(gamePlayers[i].ID.ToString()))
+                {
+                    gamePlayers.RemoveAt(i);
+                    hidePlates = true;
                 }
             }
 
@@ -406,7 +420,32 @@ namespace Jeopardy
         }
 
         bool generate = true;
-        private void generateBtn_Click(object sender, EventArgs e)
+
+        public void AdjustSettings(int type, int value)
+        {
+            switch (type)
+            {
+                case 0: //game type
+                    if (value == 0)
+                        autoRadioBtn.Checked = true;
+                    else if (value == 1)
+                        customRadioBtn.Checked = true;
+                    break;
+                case 1: //round
+                    if (value == 0)
+                        jeopardyRadioBtn.Checked = true;
+                    else if (value == 1)
+                        doubleJeopardyBtn.Checked = true;
+                    else if (value == 2)
+                        finalJeopardyBtn.Checked = true;
+                    break;
+                case 2: //wager
+                    customWager.Value = value;
+                    break;
+            }
+        }
+
+        public void generateBtn_Click(object sender, EventArgs e)
         {
             ShowBoard();
             gameCode.Visible = false;
@@ -414,14 +453,8 @@ namespace Jeopardy
 
             categories.Clear();
             clues.Clear();
-            Globals.playerNames = new string[] { player1name.Text, player2name.Text, player3name.Text, player4name.Text, player5name.Text, player6name.Text };
 
-            for (int i = numberOfPlayers; i < 6; i++)
-            {
-                Globals.playerNames[i] = "";
-            }
-
-            if (customRadioBtn.Checked || (magnitude && Globals.gameType == 1))
+            if (customRadioBtn.Checked)
             {
                 customRadioBtn.Checked = true;
 
@@ -475,25 +508,32 @@ namespace Jeopardy
 
                 for (int i = 0; i < nodes.Count(); i++)
                 {
-                    XElement el = nodes.ElementAt(i);
-                    string categoryName = el.Attribute("name").Value;
-                    Category cat = new Category(categoryName);
-                    categories.Add(cat);
-
-                    var nodelist = from ele in el.Descendants("Clue")
-                                    orderby int.Parse(ele.Attribute("value").Value)
-                                    select ele;
-
-                    Clue[] clues2 = new Clue[nodelist.Count()];
-
-                    int i2 = 0;
-                    foreach (XElement el2 in nodelist)
+                    try
                     {
-                        clues2[i2] = new Clue(el2.Attribute("answer").Value, el2.Value, el2.Attribute("value").Value);
-                        i2++;
+                        XElement el = nodes.ElementAt(i);
+                        string categoryName = el.Attribute("name").Value;
+                        Category cat = new Category(categoryName);
+                        categories.Add(cat);
+
+                        var nodelist = from ele in el.Descendants("Clue")
+                                       orderby int.Parse(ele.Attribute("value").Value)
+                                       select ele;
+
+                        Clue[] clues2 = new Clue[nodelist.Count()];
+
+                        int i2 = 0;
+                        foreach (XElement el2 in nodelist)
+                        {
+                            clues2[i2] = new Clue(el2.Attribute("answer").Value, el2.Value, el2.Attribute("value").Value);
+                            i2++;
+                        }
+                        CategoryInfo info = new CategoryInfo(categoryName, clues2);
+                        clues.Add(cat, info);
                     }
-                    CategoryInfo info = new CategoryInfo(categoryName, clues2);
-                    clues.Add(cat, info);
+                    catch
+                    {
+                        MessageBox.Show("Invalid file!");
+                    }
                 }
 
                 generate = false;
@@ -542,11 +582,11 @@ namespace Jeopardy
             {
                 int lowestScore = 99999;
                 int index = 0;
-                for (int i = 0; i < Globals.playerScores.Length; i++)
+                for (int i = 0; i < gamePlayers.Count; i++)
                 {
-                    if (Globals.playerScores[i] < lowestScore)
+                    if (gamePlayers[i].Score < lowestScore)
                     {
-                        lowestScore = Globals.playerScores[i];
+                        lowestScore = gamePlayers[i].Score;
                         index = i;
                     }
                 }
@@ -766,7 +806,7 @@ namespace Jeopardy
 
         }
 
-        private void reveal_Click(object sender, EventArgs e)
+        public void reveal_Click(object sender, EventArgs e)
         { 
             if (finalJeopardyBtn.Checked)
             {
@@ -868,7 +908,7 @@ namespace Jeopardy
             }
         }
 
-        private void awardAndRemove_Click(object sender, EventArgs e)
+        public void awardAndRemove_Click(object sender, EventArgs e)
         {
             if (customWager.Value > 0)
             {
@@ -882,11 +922,11 @@ namespace Jeopardy
             if ((btn.Text == "Remove" && currentValue > 0) || (btn.Text == "Award" && currentValue < 0))
             {
                 currentValue *= -1;
-                Globals.unlockState = true;
 
                 if (!dailyDoubleState && !finalJeopardy)
                 {
                     unlock_Click(unlock, new EventArgs());
+                    Controller.Lock = false;
                 }
 
                 dailyDoubleState = false;
@@ -1006,7 +1046,7 @@ namespace Jeopardy
             //Globals.playerScores = new int[] { player1score, player2score, player3score, player4score, player5score, player6score };
         }
 
-        private void clear_Click(object sender, EventArgs e)
+        public void clear_Click(object sender, EventArgs e)
         {
             clue.Visible = false;
             customWager.Value = 0;
@@ -1017,6 +1057,7 @@ namespace Jeopardy
             if (unlock.Text == "Lock")
             {
                 unlock_Click(unlock, new EventArgs());
+                Controller.Lock = false;
             }
 
             for (int i = 1; i < 7; i++)
@@ -1025,7 +1066,7 @@ namespace Jeopardy
             }
         }
 
-        private void endBtn_Click(object sender, EventArgs e)
+        public void endBtn_Click(object sender, EventArgs e)
         {
             HideBoard();
             Dictionary<string, int> scores = new Dictionary<string, int>();
@@ -1305,7 +1346,7 @@ namespace Jeopardy
         }
 
         bool finalBegan = false;
-        private void soundBtn_Click(object sender, EventArgs e)
+        public void soundBtn_Click(object sender, EventArgs e)
         {
             player.SoundLocation = "Time.wav";
             if (finalJeopardyBtn.Checked)
@@ -1324,138 +1365,15 @@ namespace Jeopardy
             player.Play();
         }
 
-        private void popOutBtn_Click(object sender, EventArgs e)
+        public void popOutBtn_Click(object sender, EventArgs e)
         {
-            new Controller().Show();
+            new Controller(this).Show();
             magnitude = true;
             this.Size = new Size(this.Width, 607);
             clock.Enabled = true;
         }
 
-        private void clock_Tick(object sender, EventArgs e)
-        {
-            clock.Enabled = false;
-            Globals.currentValue = currentValue;
-            if (Globals.generate)
-            {
-                if (Globals.round == 0) { jeopardyRadioBtn.Checked = true; }
-                else if (Globals.round == 1) { doubleJeopardyBtn.Checked = true; }
-                else if (Globals.round == 2) { finalJeopardyBtn.Checked = true; }
-                generateBtn_Click(generateBtn, new EventArgs());
-                Globals.generate = false;
-            }
-            if (Globals.reveal)
-            {
-                reveal_Click(revealButton, new EventArgs());
-                Globals.reveal = false;
-            }
-            if (Globals.clear)
-            {
-                clear_Click(clearBtn, new EventArgs());
-                Globals.clear = false;
-            }
-            Globals.answer = answerBox.Text;
-
-            p1score.Text = "$" + Globals.playerScores[0].ToString();
-            p2score.Text = "$" + Globals.playerScores[1].ToString();
-            p3score.Text = "$" + Globals.playerScores[2].ToString();
-            p4score.Text = "$" + Globals.playerScores[3].ToString();
-            p5score.Text = "$" + Globals.playerScores[4].ToString();
-            p6score.Text = "$" + Globals.playerScores[5].ToString();
-
-            if (Globals.sound)
-            {
-                if (finalJeopardyBtn.Checked)
-                {
-                    player.SoundLocation = "Final.wav";
-                    player.Play();
-                }
-                else
-                {
-                    player.SoundLocation = "Time.wav";
-                    player.Play();
-                }
-                Globals.sound = false;
-            }
-
-            if (Globals.end)
-            {
-                endBtn_Click(endBtn, new EventArgs());
-                Globals.end = false;
-            }
-            if (Globals.export)
-            {
-                export_Click(export, new EventArgs());
-                Globals.export = false;
-            }
-            if (Globals.flash != null)
-            {
-                if (Globals.flash[0] == 0)
-                {
-                    new Task(() => Flash(1, Globals.flash[1])).Start();
-                    if (Globals.flash[1] == 1)
-                    {
-                        ResetLabelColors();
-                        player1name.BackColor = Color.LightPink;
-                    }
-                }
-                else if (Globals.flash[0] == 1)
-                {
-                    new Task(() => Flash(2, Globals.flash[1])).Start();
-                    if (Globals.flash[1] == 1)
-                    {
-                        ResetLabelColors();
-                        player2name.BackColor = Color.LightPink;
-                    }
-                }
-                else if(Globals.flash[0] == 2)
-                {
-                    new Task(() => Flash(3, Globals.flash[1])).Start();
-                    if (Globals.flash[1] == 1)
-                    {
-                        ResetLabelColors();
-                        player3name.BackColor = Color.LightPink;
-                    }
-                }
-                else if(Globals.flash[0] == 3)
-                {
-                    new Task(() => Flash(4, Globals.flash[1])).Start();
-                    if (Globals.flash[1] == 1)
-                    {
-                        ResetLabelColors();
-                        player4name.BackColor = Color.LightPink;
-                    }
-                }
-                else if(Globals.flash[0] == 4)
-                {
-                    new Task(() => Flash(5, Globals.flash[1])).Start();
-                    if (Globals.flash[1] == 1)
-                    {
-                        ResetLabelColors();
-                        player5name.BackColor = Color.LightPink;
-                    }
-                }
-                else if(Globals.flash[0] == 5)
-                {
-                    new Task(() => Flash(6, Globals.flash[1])).Start();
-                    if (Globals.flash[1] == 1)
-                    {
-                        ResetLabelColors();
-                        player6name.BackColor = Color.LightPink;
-                    }
-                }
-                Globals.flash = null;
-            }
-            if (Globals.unlockButton)
-            {
-                unlock_Click(unlock, new EventArgs());
-                Globals.unlockButton = false;
-            }
-
-            clock.Enabled = true;
-        }
-
-        private void export_Click(object sender, EventArgs e)
+        public void export_Click(object sender, EventArgs e)
         {
             XmlDocument doc = new XmlDocument();
             doc.AppendChild(doc.CreateElement("GameBoard"));
@@ -1504,7 +1422,7 @@ namespace Jeopardy
             }
         }
 
-        private void chooseFile_Click(object sender, EventArgs e)
+        public void chooseFile_Click(object sender, EventArgs e)
         {
             if (openGameBoard.ShowDialog() == DialogResult.OK)
             {
@@ -1666,11 +1584,35 @@ namespace Jeopardy
             string data = GameFunction("endGame", gameCodeNum, null);
         }
 
+        int lastAmount = 0;
         private void updateNames_Tick(object sender, EventArgs e)
         {
+            if (hidePlates)
+            {
+                ToggleNamePlate(1, false);
+                ToggleNamePlate(2, false);
+                ToggleNamePlate(3, false);
+                ToggleNamePlate(4, false);
+                ToggleNamePlate(5, false);
+                ToggleNamePlate(6, false);
+                hidePlates = false;
+            }
+
             int i = 0;
             foreach (Player player in gamePlayers)
             {
+                if (gamePlayers.Count < lastAmount)
+                {
+                    ToggleNamePlate(1, false);
+                    ToggleNamePlate(2, false);
+                    ToggleNamePlate(3, false);
+                    ToggleNamePlate(4, false);
+                    ToggleNamePlate(5, false);
+                    ToggleNamePlate(6, false);
+                }
+
+                lastAmount = gamePlayers.Count;
+
                 string[] comp = new string[] { player.Name, player.ID.ToString() };
 
                 if (i == 0)
@@ -1738,7 +1680,7 @@ namespace Jeopardy
             }
         }
 
-        private void unlock_Click(object sender, EventArgs e)
+        public void unlock_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
             if (btn.Text == "Unlock")
@@ -1746,14 +1688,14 @@ namespace Jeopardy
                 buzzTimer.Enabled = true;
                 string data = GameFunction("setGameLock", gameCodeNum, "0");
                 btn.Text = "Lock";
-                Globals.unlockState = true;
+                Controller.Lock = false;
             }
             else if (btn.Text == "Lock")
             {
                 buzzTimer.Enabled = false;
                 string data = GameFunction("setGameLock", gameCodeNum, "1");
                 btn.Text = "Unlock";
-                Globals.unlockState = false;
+                Controller.Lock = true;
             }
         }
 
@@ -1762,6 +1704,7 @@ namespace Jeopardy
             if (buzzed)
             {
                 unlock_Click(unlock, new EventArgs());
+                Controller.Lock = true;
                 synchBuzzTimer.Enabled = false;
                 int i = 1;
                 foreach (Player player in gamePlayers)
@@ -1793,7 +1736,7 @@ namespace Jeopardy
             }
         }
 
-        private void award_Click(object sender, EventArgs e)
+        public void award_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
             awardAndRemove_Click(btn, new EventArgs());
@@ -1842,6 +1785,7 @@ namespace Jeopardy
             {
                 form += "&variable2=" + var2;
             }
+            form += "&key=" + ConfigurationManager.AppSettings["GameAPIKey"];
             byte[] data = Encoding.ASCII.GetBytes(form);
 
             request.ContentType = "application/x-www-form-urlencoded";
@@ -1872,6 +1816,7 @@ namespace Jeopardy
             {
                 form += "&variable2=" + var2;
             }
+            form += "&key=" + ConfigurationManager.AppSettings["GameAPIKey"];
             byte[] data = Encoding.ASCII.GetBytes(form);
 
             request.ContentType = "application/x-www-form-urlencoded";
@@ -1892,7 +1837,7 @@ namespace Jeopardy
 
         }
 
-        private void revealResponse_Click(object sender, EventArgs e)
+        public void revealResponse_Click(object sender, EventArgs e)
         {
             HideBoard();
             clue.Visible = true;
@@ -1939,24 +1884,29 @@ namespace Jeopardy
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void button1_Click(object sender, EventArgs e)
         {
-            StreamReader reader = new StreamReader("Key.txt");
-            string key = reader.ReadToEnd();
-            Uri uri = new Uri("https://www.googleapis.com/customsearch/v1?key=" + ConfigurationManager.AppSettings["APIKey"] + "&cx=" + ConfigurationManager.AppSettings["EngineID"] + "&searchType=image&q=" + currentClue.answer);
-            WebRequest request = WebRequest.Create(uri);
-            WebResponse resp = request.GetResponse();
-            reader = new StreamReader(resp.GetResponseStream());
-            string data = reader.ReadToEnd();
+            try
+            {
+                Uri uri = new Uri("https://www.googleapis.com/customsearch/v1?key=" + ConfigurationManager.AppSettings["APIKey"] + "&cx=" + ConfigurationManager.AppSettings["EngineID"] + "&searchType=image&q=" + currentClue.answer);
+                WebRequest request = WebRequest.Create(uri);
+                WebResponse resp = request.GetResponse();
+                StreamReader reader = new StreamReader(resp.GetResponseStream());
+                string data = reader.ReadToEnd();
 
-            clue.Visible = false;
-            clueImage.Visible = true;
+                clue.Visible = false;
+                clueImage.Visible = true;
 
-            var result = JsonConvert.DeserializeObject<JToken>(data);
-            string link = result.Last.First.First["link"].ToString();
-            clueImage.Text = currentClue.question;
-            pictureBox.Url = new Uri(link);
-            pictureBox.Visible = true;
+                var result = JsonConvert.DeserializeObject<JToken>(data);
+                string link = result.Last.First.First["link"].ToString();
+                clueImage.Text = currentClue.question;
+                pictureBox.Url = new Uri(link);
+                pictureBox.Visible = true;
+            }
+            catch
+            {
+                MessageBox.Show("Error retrieving image.");
+            }
         }
     }
 }

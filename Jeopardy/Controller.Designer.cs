@@ -34,15 +34,15 @@
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
+            this.sound = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.clear = new System.Windows.Forms.Button();
             this.doubles = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.label7 = new System.Windows.Forms.Label();
+            this.revealQuestion = new System.Windows.Forms.Button();
+            this.finalJeopardy = new System.Windows.Forms.RadioButton();
+            this.doubleJeopardy = new System.Windows.Forms.RadioButton();
+            this.jeopardy = new System.Windows.Forms.RadioButton();
+            this.answerBox = new System.Windows.Forms.Label();
             this.auto = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.custom = new System.Windows.Forms.RadioButton();
@@ -64,9 +64,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.answerTimer = new System.Windows.Forms.Timer(this.components);
+            this.export = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.image = new System.Windows.Forms.Button();
+            this.response = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -123,6 +125,7 @@
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(89, 26);
             this.numericUpDown2.TabIndex = 87;
+            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
             // 
             // label9
             // 
@@ -134,16 +137,17 @@
             this.label9.TabIndex = 97;
             this.label9.Text = "$";
             // 
-            // button6
+            // sound
             // 
-            this.button6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button6.Location = new System.Drawing.Point(600, 96);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(27, 29);
-            this.button6.TabIndex = 96;
-            this.button6.Tag = "c";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.sound.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.sound.Location = new System.Drawing.Point(633, 67);
+            this.sound.Name = "sound";
+            this.sound.Size = new System.Drawing.Size(72, 23);
+            this.sound.TabIndex = 96;
+            this.sound.Tag = "c";
+            this.sound.Text = "Sound";
+            this.sound.UseVisualStyleBackColor = true;
+            this.sound.Click += new System.EventHandler(this.sound_Click);
             // 
             // button18
             // 
@@ -157,17 +161,18 @@
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
-            // button5
+            // clear
             // 
-            this.button5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button5.Location = new System.Drawing.Point(410, 97);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(61, 29);
-            this.button5.TabIndex = 94;
-            this.button5.Tag = "c";
-            this.button5.Text = "Clear";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.clear.BackColor = System.Drawing.SystemColors.Control;
+            this.clear.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.clear.Location = new System.Drawing.Point(473, 85);
+            this.clear.Name = "clear";
+            this.clear.Size = new System.Drawing.Size(61, 39);
+            this.clear.TabIndex = 94;
+            this.clear.Tag = "c";
+            this.clear.Text = "Clear";
+            this.clear.UseVisualStyleBackColor = false;
+            this.clear.Click += new System.EventHandler(this.clear_Click);
             // 
             // doubles
             // 
@@ -179,64 +184,64 @@
             this.doubles.TabIndex = 93;
             this.doubles.Text = "Daily Doubles:\r\nc1v200\r\nc2v400 c3v600";
             // 
-            // button4
+            // revealQuestion
             // 
-            this.button4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button4.Location = new System.Drawing.Point(12, 96);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(152, 27);
-            this.button4.TabIndex = 92;
-            this.button4.Tag = "cont";
-            this.button4.Text = "Reveal Question or Category";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.revealQuestion.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.revealQuestion.Location = new System.Drawing.Point(12, 96);
+            this.revealQuestion.Name = "revealQuestion";
+            this.revealQuestion.Size = new System.Drawing.Size(152, 27);
+            this.revealQuestion.TabIndex = 92;
+            this.revealQuestion.Tag = "cont";
+            this.revealQuestion.Text = "Reveal Question or Category";
+            this.revealQuestion.UseVisualStyleBackColor = true;
+            this.revealQuestion.Click += new System.EventHandler(this.revealQuestion_Click);
             // 
-            // radioButton3
+            // finalJeopardy
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.ForeColor = System.Drawing.SystemColors.Control;
-            this.radioButton3.Location = new System.Drawing.Point(443, 62);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(96, 17);
-            this.radioButton3.TabIndex = 91;
-            this.radioButton3.Text = "Final Jeopardy!";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.finalJeopardy.AutoSize = true;
+            this.finalJeopardy.ForeColor = System.Drawing.SystemColors.Control;
+            this.finalJeopardy.Location = new System.Drawing.Point(443, 62);
+            this.finalJeopardy.Name = "finalJeopardy";
+            this.finalJeopardy.Size = new System.Drawing.Size(96, 17);
+            this.finalJeopardy.TabIndex = 91;
+            this.finalJeopardy.Text = "Final Jeopardy!";
+            this.finalJeopardy.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // doubleJeopardy
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.ForeColor = System.Drawing.SystemColors.Control;
-            this.radioButton2.Location = new System.Drawing.Point(329, 62);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(108, 17);
-            this.radioButton2.TabIndex = 90;
-            this.radioButton2.Text = "Double Jeopardy!";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.doubleJeopardy.AutoSize = true;
+            this.doubleJeopardy.ForeColor = System.Drawing.SystemColors.Control;
+            this.doubleJeopardy.Location = new System.Drawing.Point(329, 62);
+            this.doubleJeopardy.Name = "doubleJeopardy";
+            this.doubleJeopardy.Size = new System.Drawing.Size(108, 17);
+            this.doubleJeopardy.TabIndex = 90;
+            this.doubleJeopardy.Text = "Double Jeopardy!";
+            this.doubleJeopardy.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // jeopardy
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.ForeColor = System.Drawing.SystemColors.Control;
-            this.radioButton1.Location = new System.Drawing.Point(244, 62);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(71, 17);
-            this.radioButton1.TabIndex = 89;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Jeopardy!";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.jeopardy.AutoSize = true;
+            this.jeopardy.Checked = true;
+            this.jeopardy.ForeColor = System.Drawing.SystemColors.Control;
+            this.jeopardy.Location = new System.Drawing.Point(244, 62);
+            this.jeopardy.Name = "jeopardy";
+            this.jeopardy.Size = new System.Drawing.Size(71, 17);
+            this.jeopardy.TabIndex = 89;
+            this.jeopardy.TabStop = true;
+            this.jeopardy.Text = "Jeopardy!";
+            this.jeopardy.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // answerBox
             // 
-            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.Control;
-            this.label7.Location = new System.Drawing.Point(224, 12);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(326, 49);
-            this.label7.TabIndex = 86;
-            this.label7.Text = "ANSWER";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.answerBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.answerBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.answerBox.ForeColor = System.Drawing.SystemColors.Control;
+            this.answerBox.Location = new System.Drawing.Point(224, 12);
+            this.answerBox.Name = "answerBox";
+            this.answerBox.Size = new System.Drawing.Size(326, 49);
+            this.answerBox.TabIndex = 86;
+            this.answerBox.Text = "ANSWER";
+            this.answerBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // auto
             // 
@@ -278,7 +283,7 @@
             this.award1.Name = "award1";
             this.award1.Size = new System.Drawing.Size(96, 27);
             this.award1.TabIndex = 101;
-            this.award1.Tag = "0";
+            this.award1.Tag = "1";
             this.award1.Text = "Award";
             this.award1.UseVisualStyleBackColor = true;
             this.award1.Click += new System.EventHandler(this.award1_Click);
@@ -290,10 +295,10 @@
             this.remove1.Name = "remove1";
             this.remove1.Size = new System.Drawing.Size(96, 27);
             this.remove1.TabIndex = 102;
-            this.remove1.Tag = "0";
+            this.remove1.Tag = "1";
             this.remove1.Text = "Remove";
             this.remove1.UseVisualStyleBackColor = true;
-            this.remove1.Click += new System.EventHandler(this.remove1_Click);
+            this.remove1.Click += new System.EventHandler(this.award1_Click);
             // 
             // remove2
             // 
@@ -302,10 +307,10 @@
             this.remove2.Name = "remove2";
             this.remove2.Size = new System.Drawing.Size(96, 27);
             this.remove2.TabIndex = 104;
-            this.remove2.Tag = "1";
+            this.remove2.Tag = "2";
             this.remove2.Text = "Remove";
             this.remove2.UseVisualStyleBackColor = true;
-            this.remove2.Click += new System.EventHandler(this.remove1_Click);
+            this.remove2.Click += new System.EventHandler(this.award1_Click);
             // 
             // award2
             // 
@@ -314,7 +319,7 @@
             this.award2.Name = "award2";
             this.award2.Size = new System.Drawing.Size(96, 27);
             this.award2.TabIndex = 103;
-            this.award2.Tag = "1";
+            this.award2.Tag = "2";
             this.award2.Text = "Award";
             this.award2.UseVisualStyleBackColor = true;
             this.award2.Click += new System.EventHandler(this.award1_Click);
@@ -326,10 +331,10 @@
             this.remove4.Name = "remove4";
             this.remove4.Size = new System.Drawing.Size(96, 27);
             this.remove4.TabIndex = 108;
-            this.remove4.Tag = "3";
+            this.remove4.Tag = "4";
             this.remove4.Text = "Remove";
             this.remove4.UseVisualStyleBackColor = true;
-            this.remove4.Click += new System.EventHandler(this.remove1_Click);
+            this.remove4.Click += new System.EventHandler(this.award1_Click);
             // 
             // award4
             // 
@@ -338,7 +343,7 @@
             this.award4.Name = "award4";
             this.award4.Size = new System.Drawing.Size(96, 27);
             this.award4.TabIndex = 107;
-            this.award4.Tag = "3";
+            this.award4.Tag = "4";
             this.award4.Text = "Award";
             this.award4.UseVisualStyleBackColor = true;
             this.award4.Click += new System.EventHandler(this.award1_Click);
@@ -350,10 +355,10 @@
             this.remove3.Name = "remove3";
             this.remove3.Size = new System.Drawing.Size(96, 27);
             this.remove3.TabIndex = 106;
-            this.remove3.Tag = "2";
+            this.remove3.Tag = "3";
             this.remove3.Text = "Remove";
             this.remove3.UseVisualStyleBackColor = true;
-            this.remove3.Click += new System.EventHandler(this.remove1_Click);
+            this.remove3.Click += new System.EventHandler(this.award1_Click);
             // 
             // award3
             // 
@@ -362,7 +367,7 @@
             this.award3.Name = "award3";
             this.award3.Size = new System.Drawing.Size(96, 27);
             this.award3.TabIndex = 105;
-            this.award3.Tag = "2";
+            this.award3.Tag = "3";
             this.award3.Text = "Award";
             this.award3.UseVisualStyleBackColor = true;
             this.award3.Click += new System.EventHandler(this.award1_Click);
@@ -374,10 +379,10 @@
             this.remove6.Name = "remove6";
             this.remove6.Size = new System.Drawing.Size(96, 27);
             this.remove6.TabIndex = 112;
-            this.remove6.Tag = "5";
+            this.remove6.Tag = "6";
             this.remove6.Text = "Remove";
             this.remove6.UseVisualStyleBackColor = true;
-            this.remove6.Click += new System.EventHandler(this.remove1_Click);
+            this.remove6.Click += new System.EventHandler(this.award1_Click);
             // 
             // award6
             // 
@@ -386,7 +391,7 @@
             this.award6.Name = "award6";
             this.award6.Size = new System.Drawing.Size(96, 27);
             this.award6.TabIndex = 111;
-            this.award6.Tag = "5";
+            this.award6.Tag = "6";
             this.award6.Text = "Award";
             this.award6.UseVisualStyleBackColor = true;
             this.award6.Click += new System.EventHandler(this.award1_Click);
@@ -398,10 +403,10 @@
             this.remove5.Name = "remove5";
             this.remove5.Size = new System.Drawing.Size(96, 27);
             this.remove5.TabIndex = 110;
-            this.remove5.Tag = "4";
+            this.remove5.Tag = "5";
             this.remove5.Text = "Remove";
             this.remove5.UseVisualStyleBackColor = true;
-            this.remove5.Click += new System.EventHandler(this.remove1_Click);
+            this.remove5.Click += new System.EventHandler(this.award1_Click);
             // 
             // award5
             // 
@@ -410,7 +415,7 @@
             this.award5.Name = "award5";
             this.award5.Size = new System.Drawing.Size(96, 27);
             this.award5.TabIndex = 109;
-            this.award5.Tag = "4";
+            this.award5.Tag = "5";
             this.award5.Text = "Award";
             this.award5.UseVisualStyleBackColor = true;
             this.award5.Click += new System.EventHandler(this.award1_Click);
@@ -475,23 +480,23 @@
             this.label6.Text = "Player Six";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // timer1
+            // answerTimer
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 250;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.answerTimer.Enabled = true;
+            this.answerTimer.Interval = 250;
+            this.answerTimer.Tick += new System.EventHandler(this.answerTimer_Tick);
             // 
-            // button1
+            // export
             // 
-            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button1.Location = new System.Drawing.Point(538, 96);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(56, 29);
-            this.button1.TabIndex = 119;
-            this.button1.Tag = "c";
-            this.button1.Text = "Export";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.export.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.export.Location = new System.Drawing.Point(556, 67);
+            this.export.Name = "export";
+            this.export.Size = new System.Drawing.Size(71, 23);
+            this.export.TabIndex = 119;
+            this.export.Tag = "c";
+            this.export.Text = "Export";
+            this.export.UseVisualStyleBackColor = true;
+            this.export.Click += new System.EventHandler(this.export_Click);
             // 
             // button2
             // 
@@ -505,14 +510,41 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // image
+            // 
+            this.image.BackColor = System.Drawing.SystemColors.Control;
+            this.image.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.image.Location = new System.Drawing.Point(556, 94);
+            this.image.Name = "image";
+            this.image.Size = new System.Drawing.Size(71, 33);
+            this.image.TabIndex = 121;
+            this.image.Tag = "c";
+            this.image.Text = "Image";
+            this.image.UseVisualStyleBackColor = false;
+            this.image.Click += new System.EventHandler(this.image_Click);
+            // 
+            // response
+            // 
+            this.response.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.response.Location = new System.Drawing.Point(387, 85);
+            this.response.Name = "response";
+            this.response.Size = new System.Drawing.Size(80, 39);
+            this.response.TabIndex = 122;
+            this.response.Tag = "cont";
+            this.response.Text = "Reveal Response";
+            this.response.UseVisualStyleBackColor = true;
+            this.response.Click += new System.EventHandler(this.response_Click);
+            // 
             // Controller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkBlue;
             this.ClientSize = new System.Drawing.Size(717, 217);
+            this.Controls.Add(this.response);
+            this.Controls.Add(this.image);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.export);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -537,19 +569,18 @@
             this.Controls.Add(this.radioButton4);
             this.Controls.Add(this.numericUpDown2);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.button6);
+            this.Controls.Add(this.sound);
             this.Controls.Add(this.button18);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.clear);
             this.Controls.Add(this.doubles);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.radioButton3);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.revealQuestion);
+            this.Controls.Add(this.finalJeopardy);
+            this.Controls.Add(this.doubleJeopardy);
+            this.Controls.Add(this.jeopardy);
+            this.Controls.Add(this.answerBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Controller";
             this.Text = "Controller";
-            this.Load += new System.EventHandler(this.Controller_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -565,15 +596,15 @@
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button sound;
         private System.Windows.Forms.Button button18;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button clear;
         private System.Windows.Forms.Label doubles;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button revealQuestion;
+        private System.Windows.Forms.RadioButton finalJeopardy;
+        private System.Windows.Forms.RadioButton doubleJeopardy;
+        private System.Windows.Forms.RadioButton jeopardy;
+        private System.Windows.Forms.Label answerBox;
         private System.Windows.Forms.RadioButton auto;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton custom;
@@ -595,8 +626,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Timer answerTimer;
+        private System.Windows.Forms.Button export;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button image;
+        private System.Windows.Forms.Button response;
     }
 }
