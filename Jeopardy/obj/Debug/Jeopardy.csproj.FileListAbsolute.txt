@@ -100,7 +100,6 @@ G:\Jeopardy\Jeopardy\bin\Debug\K4os.Compression.LZ4.dll
 G:\Jeopardy\Jeopardy\bin\Debug\K4os.Compression.LZ4.Streams.dll
 G:\Jeopardy\Jeopardy\bin\Debug\K4os.Hash.xxHash.dll
 G:\Jeopardy\Jeopardy\bin\Debug\MySql.Data.dll
-G:\Jeopardy\Jeopardy\bin\Debug\MySql.Web.dll
 G:\Jeopardy\Jeopardy\bin\Debug\Newtonsoft.Json.dll
 G:\Jeopardy\Jeopardy\bin\Debug\Renci.SshNet.dll
 G:\Jeopardy\Jeopardy\bin\Debug\System.Buffers.dll
@@ -113,18 +112,15 @@ G:\Jeopardy\Jeopardy\bin\Debug\K4os.Compression.LZ4.xml
 G:\Jeopardy\Jeopardy\bin\Debug\K4os.Compression.LZ4.Streams.xml
 G:\Jeopardy\Jeopardy\bin\Debug\K4os.Hash.xxHash.xml
 G:\Jeopardy\Jeopardy\bin\Debug\MySql.Data.xml
-G:\Jeopardy\Jeopardy\bin\Debug\MySql.Web.xml
 G:\Jeopardy\Jeopardy\bin\Debug\Newtonsoft.Json.xml
 G:\Jeopardy\Jeopardy\bin\Debug\Renci.SshNet.xml
 G:\Jeopardy\Jeopardy\bin\Debug\System.Buffers.xml
 G:\Jeopardy\Jeopardy\bin\Debug\System.Memory.xml
 G:\Jeopardy\Jeopardy\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-G:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.csprojAssemblyReference.cache
 G:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.Controller.resources
 G:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.GameBoard.resources
 G:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.Properties.Resources.resources
 G:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.csproj.GenerateResource.cache
-G:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.csproj.CoreCompileInputs.cache
-G:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.csproj.CopyComplete
 G:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.exe
 G:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.pdb
+G:\Jeopardy\Jeopardy\obj\Debug\Jeopardy.csprojResolveAssemblyReference.cache
