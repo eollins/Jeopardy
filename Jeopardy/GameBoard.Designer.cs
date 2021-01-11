@@ -145,6 +145,7 @@
             this.c1v200.Name = "c1v200";
             this.c1v200.Size = new System.Drawing.Size(166, 70);
             this.c1v200.TabIndex = 0;
+            this.c1v200.TabStop = false;
             this.c1v200.Tag = "board@200";
             this.c1v200.Text = "$200";
             this.c1v200.UseVisualStyleBackColor = false;
@@ -171,6 +172,7 @@
             this.c1v400.Name = "c1v400";
             this.c1v400.Size = new System.Drawing.Size(166, 70);
             this.c1v400.TabIndex = 2;
+            this.c1v400.TabStop = false;
             this.c1v400.Tag = "board@400";
             this.c1v400.Text = "$400";
             this.c1v400.UseVisualStyleBackColor = false;
@@ -185,6 +187,7 @@
             this.c1v600.Name = "c1v600";
             this.c1v600.Size = new System.Drawing.Size(166, 70);
             this.c1v600.TabIndex = 3;
+            this.c1v600.TabStop = false;
             this.c1v600.Tag = "board@600";
             this.c1v600.Text = "$600";
             this.c1v600.UseVisualStyleBackColor = false;
@@ -199,6 +202,7 @@
             this.c1v800.Name = "c1v800";
             this.c1v800.Size = new System.Drawing.Size(166, 70);
             this.c1v800.TabIndex = 4;
+            this.c1v800.TabStop = false;
             this.c1v800.Tag = "board@800";
             this.c1v800.Text = "$800";
             this.c1v800.UseVisualStyleBackColor = false;
@@ -213,6 +217,7 @@
             this.c1v1000.Name = "c1v1000";
             this.c1v1000.Size = new System.Drawing.Size(166, 70);
             this.c1v1000.TabIndex = 5;
+            this.c1v1000.TabStop = false;
             this.c1v1000.Tag = "board@1000";
             this.c1v1000.Text = "$1000";
             this.c1v1000.UseVisualStyleBackColor = false;
@@ -227,6 +232,7 @@
             this.c2v1000.Name = "c2v1000";
             this.c2v1000.Size = new System.Drawing.Size(166, 70);
             this.c2v1000.TabIndex = 10;
+            this.c2v1000.TabStop = false;
             this.c2v1000.Tag = "board@1000";
             this.c2v1000.Text = "$1000";
             this.c2v1000.UseVisualStyleBackColor = false;
@@ -241,6 +247,7 @@
             this.c2v800.Name = "c2v800";
             this.c2v800.Size = new System.Drawing.Size(166, 70);
             this.c2v800.TabIndex = 9;
+            this.c2v800.TabStop = false;
             this.c2v800.Tag = "board@800";
             this.c2v800.Text = "$800";
             this.c2v800.UseVisualStyleBackColor = false;
@@ -255,6 +262,7 @@
             this.c2v600.Name = "c2v600";
             this.c2v600.Size = new System.Drawing.Size(166, 70);
             this.c2v600.TabIndex = 8;
+            this.c2v600.TabStop = false;
             this.c2v600.Tag = "board@600";
             this.c2v600.Text = "$600";
             this.c2v600.UseVisualStyleBackColor = false;
@@ -269,6 +277,7 @@
             this.c2v400.Name = "c2v400";
             this.c2v400.Size = new System.Drawing.Size(166, 70);
             this.c2v400.TabIndex = 7;
+            this.c2v400.TabStop = false;
             this.c2v400.Tag = "board@400";
             this.c2v400.Text = "$400";
             this.c2v400.UseVisualStyleBackColor = false;
@@ -283,6 +292,7 @@
             this.c2v200.Name = "c2v200";
             this.c2v200.Size = new System.Drawing.Size(166, 70);
             this.c2v200.TabIndex = 6;
+            this.c2v200.TabStop = false;
             this.c2v200.Tag = "board@200";
             this.c2v200.Text = "$200";
             this.c2v200.UseVisualStyleBackColor = false;
@@ -297,6 +307,7 @@
             this.c3v1000.Name = "c3v1000";
             this.c3v1000.Size = new System.Drawing.Size(166, 70);
             this.c3v1000.TabIndex = 15;
+            this.c3v1000.TabStop = false;
             this.c3v1000.Tag = "board@1000";
             this.c3v1000.Text = "$1000";
             this.c3v1000.UseVisualStyleBackColor = false;
@@ -311,6 +322,7 @@
             this.c3v800.Name = "c3v800";
             this.c3v800.Size = new System.Drawing.Size(166, 70);
             this.c3v800.TabIndex = 14;
+            this.c3v800.TabStop = false;
             this.c3v800.Tag = "board@800";
             this.c3v800.Text = "$800";
             this.c3v800.UseVisualStyleBackColor = false;
@@ -325,6 +337,7 @@
             this.c3v600.Name = "c3v600";
             this.c3v600.Size = new System.Drawing.Size(166, 70);
             this.c3v600.TabIndex = 13;
+            this.c3v600.TabStop = false;
             this.c3v600.Tag = "board@600";
             this.c3v600.Text = "$600";
             this.c3v600.UseVisualStyleBackColor = false;
@@ -339,6 +352,7 @@
             this.c3v400.Name = "c3v400";
             this.c3v400.Size = new System.Drawing.Size(166, 70);
             this.c3v400.TabIndex = 12;
+            this.c3v400.TabStop = false;
             this.c3v400.Tag = "board@400";
             this.c3v400.Text = "$400";
             this.c3v400.UseVisualStyleBackColor = false;
@@ -353,6 +367,7 @@
             this.c3v200.Name = "c3v200";
             this.c3v200.Size = new System.Drawing.Size(166, 70);
             this.c3v200.TabIndex = 11;
+            this.c3v200.TabStop = false;
             this.c3v200.Tag = "board@200";
             this.c3v200.Text = "$200";
             this.c3v200.UseVisualStyleBackColor = false;
@@ -367,6 +382,7 @@
             this.c6v1000.Name = "c6v1000";
             this.c6v1000.Size = new System.Drawing.Size(166, 70);
             this.c6v1000.TabIndex = 30;
+            this.c6v1000.TabStop = false;
             this.c6v1000.Tag = "board@1000";
             this.c6v1000.Text = "$1000";
             this.c6v1000.UseVisualStyleBackColor = false;
@@ -381,6 +397,7 @@
             this.c6v800.Name = "c6v800";
             this.c6v800.Size = new System.Drawing.Size(166, 70);
             this.c6v800.TabIndex = 29;
+            this.c6v800.TabStop = false;
             this.c6v800.Tag = "board@800";
             this.c6v800.Text = "$800";
             this.c6v800.UseVisualStyleBackColor = false;
@@ -395,6 +412,7 @@
             this.c6v600.Name = "c6v600";
             this.c6v600.Size = new System.Drawing.Size(166, 70);
             this.c6v600.TabIndex = 28;
+            this.c6v600.TabStop = false;
             this.c6v600.Tag = "board@600";
             this.c6v600.Text = "$600";
             this.c6v600.UseVisualStyleBackColor = false;
@@ -409,6 +427,7 @@
             this.c6v400.Name = "c6v400";
             this.c6v400.Size = new System.Drawing.Size(166, 70);
             this.c6v400.TabIndex = 27;
+            this.c6v400.TabStop = false;
             this.c6v400.Tag = "board@400";
             this.c6v400.Text = "$400";
             this.c6v400.UseVisualStyleBackColor = false;
@@ -423,6 +442,7 @@
             this.c6v200.Name = "c6v200";
             this.c6v200.Size = new System.Drawing.Size(166, 70);
             this.c6v200.TabIndex = 26;
+            this.c6v200.TabStop = false;
             this.c6v200.Tag = "board@200";
             this.c6v200.Text = "$200";
             this.c6v200.UseVisualStyleBackColor = false;
@@ -437,6 +457,7 @@
             this.c5v1000.Name = "c5v1000";
             this.c5v1000.Size = new System.Drawing.Size(166, 70);
             this.c5v1000.TabIndex = 25;
+            this.c5v1000.TabStop = false;
             this.c5v1000.Tag = "board@1000";
             this.c5v1000.Text = "$1000";
             this.c5v1000.UseVisualStyleBackColor = false;
@@ -451,6 +472,7 @@
             this.c5v800.Name = "c5v800";
             this.c5v800.Size = new System.Drawing.Size(166, 70);
             this.c5v800.TabIndex = 24;
+            this.c5v800.TabStop = false;
             this.c5v800.Tag = "board@800";
             this.c5v800.Text = "$800";
             this.c5v800.UseVisualStyleBackColor = false;
@@ -465,6 +487,7 @@
             this.c5v600.Name = "c5v600";
             this.c5v600.Size = new System.Drawing.Size(166, 70);
             this.c5v600.TabIndex = 23;
+            this.c5v600.TabStop = false;
             this.c5v600.Tag = "board@600";
             this.c5v600.Text = "$600";
             this.c5v600.UseVisualStyleBackColor = false;
@@ -479,6 +502,7 @@
             this.c5v400.Name = "c5v400";
             this.c5v400.Size = new System.Drawing.Size(166, 70);
             this.c5v400.TabIndex = 22;
+            this.c5v400.TabStop = false;
             this.c5v400.Tag = "board@400";
             this.c5v400.Text = "$400";
             this.c5v400.UseVisualStyleBackColor = false;
@@ -493,6 +517,7 @@
             this.c5v200.Name = "c5v200";
             this.c5v200.Size = new System.Drawing.Size(166, 70);
             this.c5v200.TabIndex = 21;
+            this.c5v200.TabStop = false;
             this.c5v200.Tag = "board@200";
             this.c5v200.Text = "$200";
             this.c5v200.UseVisualStyleBackColor = false;
@@ -507,6 +532,7 @@
             this.c4v1000.Name = "c4v1000";
             this.c4v1000.Size = new System.Drawing.Size(166, 70);
             this.c4v1000.TabIndex = 20;
+            this.c4v1000.TabStop = false;
             this.c4v1000.Tag = "board@1000";
             this.c4v1000.Text = "$1000";
             this.c4v1000.UseVisualStyleBackColor = false;
@@ -521,6 +547,7 @@
             this.c4v800.Name = "c4v800";
             this.c4v800.Size = new System.Drawing.Size(166, 70);
             this.c4v800.TabIndex = 19;
+            this.c4v800.TabStop = false;
             this.c4v800.Tag = "board@800";
             this.c4v800.Text = "$800";
             this.c4v800.UseVisualStyleBackColor = false;
@@ -535,6 +562,7 @@
             this.c4v600.Name = "c4v600";
             this.c4v600.Size = new System.Drawing.Size(166, 70);
             this.c4v600.TabIndex = 18;
+            this.c4v600.TabStop = false;
             this.c4v600.Tag = "board@600";
             this.c4v600.Text = "$600";
             this.c4v600.UseVisualStyleBackColor = false;
@@ -550,6 +578,7 @@
             this.c4v400.Name = "c4v400";
             this.c4v400.Size = new System.Drawing.Size(166, 70);
             this.c4v400.TabIndex = 17;
+            this.c4v400.TabStop = false;
             this.c4v400.Tag = "board@400";
             this.c4v400.Text = "$400";
             this.c4v400.UseVisualStyleBackColor = false;
@@ -564,6 +593,7 @@
             this.c4v200.Name = "c4v200";
             this.c4v200.Size = new System.Drawing.Size(166, 70);
             this.c4v200.TabIndex = 16;
+            this.c4v200.TabStop = false;
             this.c4v200.Tag = "board@200";
             this.c4v200.Text = "$200";
             this.c4v200.UseVisualStyleBackColor = false;
@@ -794,6 +824,7 @@
             this.generateBtn.Name = "generateBtn";
             this.generateBtn.Size = new System.Drawing.Size(206, 60);
             this.generateBtn.TabIndex = 54;
+            this.generateBtn.TabStop = false;
             this.generateBtn.Tag = "j";
             this.generateBtn.Text = "Generate Game";
             this.generateBtn.UseVisualStyleBackColor = true;
@@ -909,6 +940,7 @@
             this.clearBtn.Name = "clearBtn";
             this.clearBtn.Size = new System.Drawing.Size(122, 31);
             this.clearBtn.TabIndex = 67;
+            this.clearBtn.TabStop = false;
             this.clearBtn.Tag = "c";
             this.clearBtn.Text = "Clear";
             this.clearBtn.UseVisualStyleBackColor = true;
@@ -922,6 +954,7 @@
             this.endBtn.Name = "endBtn";
             this.endBtn.Size = new System.Drawing.Size(78, 54);
             this.endBtn.TabIndex = 80;
+            this.endBtn.TabStop = false;
             this.endBtn.Tag = "c";
             this.endBtn.Text = "End";
             this.endBtn.UseVisualStyleBackColor = true;
@@ -934,6 +967,7 @@
             this.soundBtn.Name = "soundBtn";
             this.soundBtn.Size = new System.Drawing.Size(78, 33);
             this.soundBtn.TabIndex = 81;
+            this.soundBtn.TabStop = false;
             this.soundBtn.Tag = "c";
             this.soundBtn.Text = "Play Sound";
             this.soundBtn.UseVisualStyleBackColor = true;
@@ -991,6 +1025,7 @@
             this.popOutBtn.Name = "popOutBtn";
             this.popOutBtn.Size = new System.Drawing.Size(26, 20);
             this.popOutBtn.TabIndex = 86;
+            this.popOutBtn.TabStop = false;
             this.popOutBtn.Tag = "p";
             this.popOutBtn.Text = "↑";
             this.popOutBtn.UseVisualStyleBackColor = true;
@@ -1007,6 +1042,7 @@
             this.export.Name = "export";
             this.export.Size = new System.Drawing.Size(49, 20);
             this.export.TabIndex = 87;
+            this.export.TabStop = false;
             this.export.Tag = "e";
             this.export.Text = "Export";
             this.export.UseVisualStyleBackColor = true;
@@ -1132,7 +1168,7 @@
             // gameCode
             // 
             this.gameCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameCode.Location = new System.Drawing.Point(12, 197);
+            this.gameCode.Location = new System.Drawing.Point(12, 203);
             this.gameCode.Name = "gameCode";
             this.gameCode.Size = new System.Drawing.Size(1069, 128);
             this.gameCode.TabIndex = 105;
@@ -1142,7 +1178,7 @@
             // website
             // 
             this.website.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.website.Location = new System.Drawing.Point(12, 305);
+            this.website.Location = new System.Drawing.Point(12, 311);
             this.website.Name = "website";
             this.website.Size = new System.Drawing.Size(1069, 70);
             this.website.TabIndex = 106;
@@ -1162,6 +1198,7 @@
             this.remove1.Name = "remove1";
             this.remove1.Size = new System.Drawing.Size(78, 30);
             this.remove1.TabIndex = 108;
+            this.remove1.TabStop = false;
             this.remove1.Tag = "1";
             this.remove1.Text = "Remove";
             this.remove1.UseVisualStyleBackColor = true;
@@ -1176,6 +1213,7 @@
             this.award1.Name = "award1";
             this.award1.Size = new System.Drawing.Size(82, 30);
             this.award1.TabIndex = 107;
+            this.award1.TabStop = false;
             this.award1.Tag = "1";
             this.award1.Text = "Award";
             this.award1.UseVisualStyleBackColor = true;
@@ -1190,6 +1228,7 @@
             this.unlock.Name = "unlock";
             this.unlock.Size = new System.Drawing.Size(131, 31);
             this.unlock.TabIndex = 109;
+            this.unlock.TabStop = false;
             this.unlock.Tag = "2";
             this.unlock.Text = "Unlock";
             this.unlock.UseVisualStyleBackColor = true;
@@ -1209,6 +1248,7 @@
             this.remove2.Name = "remove2";
             this.remove2.Size = new System.Drawing.Size(78, 30);
             this.remove2.TabIndex = 111;
+            this.remove2.TabStop = false;
             this.remove2.Tag = "2";
             this.remove2.Text = "Remove";
             this.remove2.UseVisualStyleBackColor = true;
@@ -1223,6 +1263,7 @@
             this.award2.Name = "award2";
             this.award2.Size = new System.Drawing.Size(82, 30);
             this.award2.TabIndex = 110;
+            this.award2.TabStop = false;
             this.award2.Tag = "2";
             this.award2.Text = "Award";
             this.award2.UseVisualStyleBackColor = true;
@@ -1237,6 +1278,7 @@
             this.remove3.Name = "remove3";
             this.remove3.Size = new System.Drawing.Size(78, 30);
             this.remove3.TabIndex = 113;
+            this.remove3.TabStop = false;
             this.remove3.Tag = "3";
             this.remove3.Text = "Remove";
             this.remove3.UseVisualStyleBackColor = true;
@@ -1251,6 +1293,7 @@
             this.award3.Name = "award3";
             this.award3.Size = new System.Drawing.Size(82, 30);
             this.award3.TabIndex = 112;
+            this.award3.TabStop = false;
             this.award3.Tag = "3";
             this.award3.Text = "Award";
             this.award3.UseVisualStyleBackColor = true;
@@ -1265,6 +1308,7 @@
             this.remove4.Name = "remove4";
             this.remove4.Size = new System.Drawing.Size(78, 30);
             this.remove4.TabIndex = 115;
+            this.remove4.TabStop = false;
             this.remove4.Tag = "4";
             this.remove4.Text = "Remove";
             this.remove4.UseVisualStyleBackColor = true;
@@ -1279,6 +1323,7 @@
             this.award4.Name = "award4";
             this.award4.Size = new System.Drawing.Size(82, 30);
             this.award4.TabIndex = 114;
+            this.award4.TabStop = false;
             this.award4.Tag = "4";
             this.award4.Text = "Award";
             this.award4.UseVisualStyleBackColor = true;
@@ -1293,6 +1338,7 @@
             this.remove5.Name = "remove5";
             this.remove5.Size = new System.Drawing.Size(78, 30);
             this.remove5.TabIndex = 117;
+            this.remove5.TabStop = false;
             this.remove5.Tag = "5";
             this.remove5.Text = "Remove";
             this.remove5.UseVisualStyleBackColor = true;
@@ -1307,6 +1353,7 @@
             this.award5.Name = "award5";
             this.award5.Size = new System.Drawing.Size(82, 30);
             this.award5.TabIndex = 116;
+            this.award5.TabStop = false;
             this.award5.Tag = "5";
             this.award5.Text = "Award";
             this.award5.UseVisualStyleBackColor = true;
@@ -1321,6 +1368,7 @@
             this.remove6.Name = "remove6";
             this.remove6.Size = new System.Drawing.Size(78, 30);
             this.remove6.TabIndex = 119;
+            this.remove6.TabStop = false;
             this.remove6.Tag = "6";
             this.remove6.Text = "Remove";
             this.remove6.UseVisualStyleBackColor = true;
@@ -1335,6 +1383,7 @@
             this.award6.Name = "award6";
             this.award6.Size = new System.Drawing.Size(82, 30);
             this.award6.TabIndex = 118;
+            this.award6.TabStop = false;
             this.award6.Tag = "6";
             this.award6.Text = "Award";
             this.award6.UseVisualStyleBackColor = true;
@@ -1348,6 +1397,7 @@
             this.revealResponse.Name = "revealResponse";
             this.revealResponse.Size = new System.Drawing.Size(160, 31);
             this.revealResponse.TabIndex = 120;
+            this.revealResponse.TabStop = false;
             this.revealResponse.Tag = "n";
             this.revealResponse.Text = "Reveal Response";
             this.revealResponse.UseVisualStyleBackColor = true;
@@ -1381,6 +1431,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(79, 31);
             this.button1.TabIndex = 124;
+            this.button1.TabStop = false;
             this.button1.Tag = "h";
             this.button1.Text = "Image";
             this.button1.UseVisualStyleBackColor = false;
@@ -1498,11 +1549,13 @@
             this.Controls.Add(this.pictureBox);
             this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "GameBoard";
             this.Text = "Jeopardy!";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameBoard_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameBoard_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.customWager)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
