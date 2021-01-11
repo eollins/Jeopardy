@@ -131,6 +131,7 @@
             this.clueImage = new System.Windows.Forms.Label();
             this.pictureBox = new System.Windows.Forms.WebBrowser();
             this.button1 = new System.Windows.Forms.Button();
+            this.codeLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.customWager)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -1385,12 +1386,22 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // codeLabel
+            // 
+            this.codeLabel.Location = new System.Drawing.Point(374, -1);
+            this.codeLabel.Name = "codeLabel";
+            this.codeLabel.Size = new System.Drawing.Size(345, 26);
+            this.codeLabel.TabIndex = 125;
+            this.codeLabel.Text = "Game Code: 000000";
+            this.codeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // GameBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Navy;
             this.ClientSize = new System.Drawing.Size(1093, 754);
+            this.Controls.Add(this.codeLabel);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.revealResponse);
             this.Controls.Add(this.remove6);
@@ -1604,6 +1615,7 @@
         private System.Windows.Forms.Label clueImage;
         private System.Windows.Forms.WebBrowser pictureBox;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label codeLabel;
     }
 }
 

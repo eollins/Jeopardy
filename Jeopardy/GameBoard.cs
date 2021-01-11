@@ -42,6 +42,7 @@ namespace Jeopardy
         string gameCodeNum = "";
         int highlightedPlayer = 0;
         Clue currentClue;
+        Button unlockBtnRef;
 
         string tournamentConfigLocation;
         TournamentInfo tournamentInfo = new TournamentInfo();
@@ -189,7 +190,7 @@ namespace Jeopardy
             HideBoard();
             btn.Tag = "gaert@" + value;
             prevBuzzed.Clear();
-            
+
             clue.Visible = true;
 
             int valueIndex = 0;
@@ -211,7 +212,7 @@ namespace Jeopardy
                     valueIndex = 4;
                     break;
             }
-            
+
             List<Clue> cl = clues[categories[catID]].clues.Where(x => x.value == value).ToList();
 
             bool cluePresent;
@@ -232,6 +233,7 @@ namespace Jeopardy
                 cluePresent = false;
             }
 
+            currentClue = c;
             if ((doubleJeopardy == false && name == dailyDouble) || (doubleJeopardy == true && (name == djdd1 || name == djdd2)))
             {
                 clue.Text = "DAILY DOUBLE";
@@ -247,10 +249,14 @@ namespace Jeopardy
                 answerBox.Text = c.answer.Replace("&", "&&");
                 Controller.Answer = c.answer.Replace("&", "&&");
                 currentValue = int.Parse(value);
-                currentClue = c;
                 if (doubleJeopardy)
                 {
                     currentValue *= 2;
+                }
+
+                if (clue.Text.ToLower().Contains("seen here"))
+                {
+                    button1_Click(button1, new EventArgs());
                 }
             }
             else
@@ -285,7 +291,12 @@ namespace Jeopardy
             string[] values = new string[] { "200", "400", "600", "800", "1000" };
             dailyDouble = "c" + random.Next(1, 7) + "v" + values[random.Next(2, 5)];
             djdd1 = "c" + random.Next(1, 7) + "v" + values[random.Next(2, 5)];
-            djdd2 = "c" + random.Next(1, 7) + "v" + values[random.Next(2, 5)];
+
+            do
+            {
+                djdd2 = "c" + random.Next(1, 7) + "v" + values[random.Next(2, 5)];
+            } while (djdd2 == djdd1);
+
             ToggleBoard(false);
             HideBoard();
 
@@ -297,13 +308,18 @@ namespace Jeopardy
 
             gameCode.Text = code;
             gameCodeNum = code;
+            codeLabel.Text = "Game Code: " + code;
 
             System.Timers.Timer t = new System.Timers.Timer(400);
             t.Elapsed += new ElapsedEventHandler(playerTimerHandler);
             t.Start();
 
+            BuzzerList list = new BuzzerList(this);
+            list.Show();
+
             buzzTimer = new System.Timers.Timer(400);
             buzzTimer.Elapsed += new ElapsedEventHandler(CheckForBuzzes);
+            unlockBtnRef = unlock;
 
             updateNames.Enabled = true;
         }
@@ -378,16 +394,13 @@ namespace Jeopardy
             public string playerID { get; set; }
         }
 
+        public static BuzzList buzzes;
         private async void CheckForBuzzes(object sender, ElapsedEventArgs e)
         {
             string data = await GameFunctionAsync("buzzerInfo", gameCodeNum, null);
             BuzzList b = JsonConvert.DeserializeObject<BuzzList>(data);
             List<Buzz> sorted = b.buzzes.OrderBy(o => o.timestamp).ToList();
-
-            foreach (Buzz bz in sorted)
-            {
-                Debug.WriteLine(bz.playerID + " " + bz.timestamp);
-            }
+            buzzes = b;
 
             if (sorted.Count > 0)
             {
@@ -482,7 +495,7 @@ namespace Jeopardy
                         return;
                     }
                 }
-                
+
 
                 XDocument doc = new XDocument();
                 doc = XDocument.Load(fileUpload);
@@ -807,7 +820,7 @@ namespace Jeopardy
         }
 
         public void reveal_Click(object sender, EventArgs e)
-        { 
+        {
             if (finalJeopardyBtn.Checked)
             {
                 CategoryInfo cat2 = null;
@@ -925,7 +938,7 @@ namespace Jeopardy
 
                 if (!dailyDoubleState && !finalJeopardy)
                 {
-                    unlock_Click(unlock, new EventArgs());
+                    unlock_Click(unlockBtnRef, new EventArgs());
                     Controller.Lock = false;
                 }
 
@@ -1053,10 +1066,11 @@ namespace Jeopardy
             ShowBoard();
 
             string data = GameFunction("setGameLock", gameCodeNum, "2");
+            buzzes = new BuzzList();
 
             if (unlock.Text == "Lock")
             {
-                unlock_Click(unlock, new EventArgs());
+                unlock_Click(unlockBtnRef, new EventArgs());
                 Controller.Lock = false;
             }
 
@@ -1202,7 +1216,7 @@ namespace Jeopardy
             CategoryInfo cat2 = JsonConvert.DeserializeObject<CategoryInfo>(json2);
 
             clues.Add(categories2[0], cat2);
-             categories[cat] = categories2[0];
+            categories[cat] = categories2[0];
 
             switch (cat)
             {
@@ -1365,12 +1379,16 @@ namespace Jeopardy
             player.Play();
         }
 
+        Controller activeController;
         public void popOutBtn_Click(object sender, EventArgs e)
         {
-            new Controller(this).Show();
+            Controller controller = new Controller(this);
+            controller.Show();
             magnitude = true;
             this.Size = new Size(this.Width, 607);
+            //unlockBtnRef = controller.unlock;
             clock.Enabled = true;
+            activeController = controller;
         }
 
         public void export_Click(object sender, EventArgs e)
@@ -1410,7 +1428,7 @@ namespace Jeopardy
 
                 firstNode.AppendChild(node);
             }
-            
+
             if (saveGameBoard.ShowDialog() == DialogResult.OK)
             {
                 doc.Save(saveGameBoard.FileName);
@@ -1446,7 +1464,7 @@ namespace Jeopardy
 
         private void roundBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void ResetLabelColors()
@@ -1566,7 +1584,7 @@ namespace Jeopardy
 
         private string ShiftQuery()
         {
-            return 
+            return
             @"set @topSeed = 0; 
             select firstPlace into @topSeed from Games join Players on firstPlace = playerID where roundNumber = 1 order by winnings desc limit 1;
             update Games set firstSeed = @topSeed where final = 1;
@@ -1619,6 +1637,7 @@ namespace Jeopardy
                 {
                     player1name.Text = comp[0];
                     ToggleNamePlate(1, true);
+                    p1score.Text = "$" + player.Score;
 
                     if (player.Wager != null && finalJeopardy)
                     {
@@ -1629,6 +1648,7 @@ namespace Jeopardy
                 {
                     player2name.Text = comp[0];
                     ToggleNamePlate(2, true);
+                    p2score.Text = "$" + player.Score;
 
                     if (player.Wager != null && finalJeopardy)
                     {
@@ -1639,6 +1659,7 @@ namespace Jeopardy
                 {
                     player3name.Text = comp[0];
                     ToggleNamePlate(3, true);
+                    p3score.Text = "$" + player.Score;
 
                     if (player.Wager != null && finalJeopardy)
                     {
@@ -1649,6 +1670,7 @@ namespace Jeopardy
                 {
                     player4name.Text = comp[0];
                     ToggleNamePlate(4, true);
+                    p4score.Text = "$" + player.Score;
 
                     if (player.Wager != null && finalJeopardy)
                     {
@@ -1659,6 +1681,7 @@ namespace Jeopardy
                 {
                     player5name.Text = comp[0];
                     ToggleNamePlate(5, true);
+                    p5score.Text = "$" + player.Score;
 
                     if (player.Wager != null && finalJeopardy)
                     {
@@ -1669,6 +1692,7 @@ namespace Jeopardy
                 {
                     player6name.Text = comp[0];
                     ToggleNamePlate(6, true);
+                    p6score.Text = "$" + player.Score;
 
                     if (player.Wager != null && finalJeopardy)
                     {
@@ -1703,7 +1727,7 @@ namespace Jeopardy
         {
             if (buzzed)
             {
-                unlock_Click(unlock, new EventArgs());
+                unlock_Click(unlockBtnRef, new EventArgs());
                 Controller.Lock = true;
                 synchBuzzTimer.Enabled = false;
                 int i = 1;
@@ -1788,17 +1812,26 @@ namespace Jeopardy
             form += "&key=" + ConfigurationManager.AppSettings["GameAPIKey"];
             byte[] data = Encoding.ASCII.GetBytes(form);
 
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = data.Length;
+            try
+            {
+                request.ContentType = "application/x-www-form-urlencoded";
+                request.ContentLength = data.Length;
 
-            Stream requestStream = request.GetRequestStream();
-            requestStream.Write(data, 0, data.Length);
-            requestStream.Close();
+                Stream requestStream = request.GetRequestStream();
+                requestStream.Write(data, 0, data.Length);
+                requestStream.Close();
 
-            WebResponse resp = request.GetResponse();
-            StreamReader reader = new StreamReader(resp.GetResponseStream());
+                WebResponse resp = request.GetResponse();
+                StreamReader reader = new StreamReader(resp.GetResponseStream());
 
-            return reader.ReadToEnd();
+                return reader.ReadToEnd();
+            }
+            catch
+            {
+                MessageBox.Show("Network error.");
+            }
+
+            return null;
         }
 
         private async Task<string> GameFunctionAsync(string function, string var1, string var2)
@@ -1819,22 +1852,26 @@ namespace Jeopardy
             form += "&key=" + ConfigurationManager.AppSettings["GameAPIKey"];
             byte[] data = Encoding.ASCII.GetBytes(form);
 
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = data.Length;
+            try
+            {
+                request.ContentType = "application/x-www-form-urlencoded";
+                request.ContentLength = data.Length;
 
-            Stream requestStream = request.GetRequestStream();
-            requestStream.Write(data, 0, data.Length);
-            requestStream.Close();
+                Stream requestStream = request.GetRequestStream();
+                requestStream.Write(data, 0, data.Length);
+                requestStream.Close();
 
-            WebResponse resp = await request.GetResponseAsync();
-            StreamReader reader = new StreamReader(resp.GetResponseStream());
+                WebResponse resp = await request.GetResponseAsync();
+                StreamReader reader = new StreamReader(resp.GetResponseStream());
 
-            return await reader.ReadToEndAsync();
-        }
+                return await reader.ReadToEndAsync();
+            }
+            catch
+            {
+                MessageBox.Show("Network error.");
+            }
 
-        private void revealFinal(object sender, EventArgs e)
-        {
-
+            return null;
         }
 
         public void revealResponse_Click(object sender, EventArgs e)
@@ -1906,6 +1943,46 @@ namespace Jeopardy
             catch
             {
                 MessageBox.Show("Error retrieving image.");
+            }
+        }
+
+        private void clock_Tick(object sender, EventArgs e)
+        {
+            Controller.Answer = answerBox.Text;
+            Controller.DailyDoubles = doubles.Text;
+            Controller.PlayerCount = gamePlayers.Count;
+
+            if (unlock.Text == "Unlock")
+            {
+                Controller.Lock = true;
+            }
+            else if (unlock.Text == "Lock")
+            {
+                Controller.Lock = false;
+            }
+        }
+
+        public string IDtoName(int playerID)
+        {
+            foreach (Player player in gamePlayers)
+            {
+                if (player.ID == playerID)
+                    return player.Name;
+            }
+
+            return "not found";
+        }
+
+        private void GameBoard_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                unlock_Click(unlock, new EventArgs());
+            }
+
+            if (e.KeyCode == Keys.I)
+            {
+                button1_Click(button1, new EventArgs());
             }
         }
     }

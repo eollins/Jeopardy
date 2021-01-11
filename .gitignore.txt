@@ -362,3 +362,4 @@ MigrationBackup/
 FodyWeavers.xsd
 Jeopardy/Key.txt
 Jeopardy/keys.config
+Jeopardy/bin/Debug/keys.config

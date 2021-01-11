@@ -17,6 +17,7 @@ namespace Jeopardy
         public static string Answer = "ANSWER";
         public static bool Lock = false;
         public static string DailyDoubles = "";
+        public static int PlayerCount = 0;
         public Controller()
         {
             InitializeComponent();
@@ -31,47 +32,47 @@ namespace Jeopardy
 
         private void generate_Click(object sender, EventArgs e)
         {
-            if (auto.Checked)
+            if (autoRadioBtn.Checked)
                 board.AdjustSettings(0, 0);
-            else if (custom.Checked)
+            else if (customRadioBtn.Checked)
                 board.AdjustSettings(0, 1);
 
-            board.generateBtn_Click(generate, new EventArgs());
+            board.generateBtn_Click(generateBtn, new EventArgs());
         }
 
         private void revealQuestion_Click(object sender, EventArgs e)
         {
-            board.reveal_Click(revealQuestion, new EventArgs());
+            board.reveal_Click(revealButton, new EventArgs());
         }
 
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
-            board.AdjustSettings(2, (int)numericUpDown2.Value);
+            board.AdjustSettings(2, (int)customWager.Value);
         }
 
         private void response_Click(object sender, EventArgs e)
         {
-            board.revealResponse_Click(response, new EventArgs());
+            board.revealResponse_Click(revealResponse, new EventArgs());
         }
 
         private void clear_Click(object sender, EventArgs e)
         {
-            board.clear_Click(clear, new EventArgs());
+            board.clear_Click(clearBtn, new EventArgs());
         }
 
         private void image_Click(object sender, EventArgs e)
         {
-            board.button1_Click(image, new EventArgs());
+            board.button1_Click(button1, new EventArgs());
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
-            board.endBtn_Click(button18, new EventArgs());
+            board.endBtn_Click(endBtn, new EventArgs());
         }
 
         private void sound_Click(object sender, EventArgs e)
         {
-            board.soundBtn_Click(sound, new EventArgs());
+            board.soundBtn_Click(soundBtn, new EventArgs());
         }
 
         private void export_Click(object sender, EventArgs e)
@@ -81,32 +82,121 @@ namespace Jeopardy
 
         private void button2_Click(object sender, EventArgs e)
         {
-            board.unlock_Click(button2, new EventArgs());
+            board.unlock_Click(unlock, new EventArgs());
             if (Lock)
             {
-                button2.Text = "Unlock";
+                unlock.Text = "Unlock";
             }
             else
             {
-                button2.Text = "Lock";
+                unlock.Text = "Lock";
             }
         }
 
         private void award1_Click(object sender, EventArgs e)
         {
-            board.awardAndRemove_Click((Button)sender, new EventArgs());
+
         }
 
         private void answerTimer_Tick(object sender, EventArgs e)
         {
+
+        }
+
+        private void awardAndRemove_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            board.awardAndRemove_Click(btn, new EventArgs());
+        }
+
+        private void infoUpdate_Tick(object sender, EventArgs e)
+        {
+            doubles.Text = DailyDoubles;
+            answerBox.Text = Answer;
+
             answerBox.Text = Answer;
             if (Lock)
             {
-                button2.Text = "Unlock";
+                unlock.Text = "Unlock";
             }
             else
             {
-                button2.Text = "Lock";
+                unlock.Text = "Lock";
+            }
+
+            if (PlayerCount == 0)
+            {
+                foreach (var btn in Controls.OfType<Button>().Where(x => x.Tag.ToString() != "" && int.Parse(x.Tag.ToString()) < 7))
+                {
+                    btn.Visible = false;
+                }
+            }
+            else if (PlayerCount == 1)
+            {
+                foreach (var btn in Controls.OfType<Button>().Where(x => x.Tag.ToString() != "" && int.Parse(x.Tag.ToString()) > 1))
+                {
+                    btn.Visible = false;
+                }
+
+                foreach (var btn in Controls.OfType<Button>().Where(x => x.Tag.ToString() != "" && int.Parse(x.Tag.ToString()) <= 1))
+                {
+                    btn.Visible = true;
+                }
+            }
+            else if (PlayerCount == 1)
+            {
+                foreach (var btn in Controls.OfType<Button>().Where(x => x.Tag.ToString() != "" && int.Parse(x.Tag.ToString()) > 2))
+                {
+                    btn.Visible = false;
+                }
+
+                foreach (var btn in Controls.OfType<Button>().Where(x => x.Tag.ToString() != "" && int.Parse(x.Tag.ToString()) <= 2))
+                {
+                    btn.Visible = true;
+                }
+            }
+            else if (PlayerCount == 1)
+            {
+                foreach (var btn in Controls.OfType<Button>().Where(x => x.Tag.ToString() != "" && int.Parse(x.Tag.ToString()) > 3))
+                {
+                    btn.Visible = false;
+                }
+
+                foreach (var btn in Controls.OfType<Button>().Where(x => x.Tag.ToString() != "" && int.Parse(x.Tag.ToString()) <= 3))
+                {
+                    btn.Visible = true;
+                }
+            }
+            else if (PlayerCount == 1)
+            {
+                foreach (var btn in Controls.OfType<Button>().Where(x => x.Tag.ToString() != "" && int.Parse(x.Tag.ToString()) > 4))
+                {
+                    btn.Visible = false;
+                }
+
+                foreach (var btn in Controls.OfType<Button>().Where(x => x.Tag.ToString() != "" && int.Parse(x.Tag.ToString()) <= 4))
+                {
+                    btn.Visible = true;
+                }
+            }
+            else if (PlayerCount == 1)
+            {
+                foreach (var btn in Controls.OfType<Button>().Where(x => x.Tag.ToString() != "" && int.Parse(x.Tag.ToString()) > 5))
+                {
+                    btn.Visible = false;
+                }
+
+                foreach (var btn in Controls.OfType<Button>().Where(x => x.Tag.ToString() != "" && int.Parse(x.Tag.ToString()) <= 5))
+                {
+                    btn.Visible = true;
+                }
+            }
+            else if (PlayerCount == 1)
+            {
+                foreach (var btn in Controls.OfType<Button>().Where(x => x.Tag.ToString() != "" && int.Parse(x.Tag.ToString()) <= 6))
+                {
+                    btn.Visible = true;
+                }
             }
         }
     }

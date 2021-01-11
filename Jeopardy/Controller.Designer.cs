@@ -29,528 +29,464 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.generate = new System.Windows.Forms.Button();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
-            this.sound = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
-            this.clear = new System.Windows.Forms.Button();
-            this.doubles = new System.Windows.Forms.Label();
-            this.revealQuestion = new System.Windows.Forms.Button();
-            this.finalJeopardy = new System.Windows.Forms.RadioButton();
-            this.doubleJeopardy = new System.Windows.Forms.RadioButton();
-            this.jeopardy = new System.Windows.Forms.RadioButton();
-            this.answerBox = new System.Windows.Forms.Label();
-            this.auto = new System.Windows.Forms.RadioButton();
+            this.button1 = new System.Windows.Forms.Button();
+            this.revealResponse = new System.Windows.Forms.Button();
+            this.unlock = new System.Windows.Forms.Button();
+            this.export = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.custom = new System.Windows.Forms.RadioButton();
-            this.award1 = new System.Windows.Forms.Button();
-            this.remove1 = new System.Windows.Forms.Button();
-            this.remove2 = new System.Windows.Forms.Button();
-            this.award2 = new System.Windows.Forms.Button();
-            this.remove4 = new System.Windows.Forms.Button();
-            this.award4 = new System.Windows.Forms.Button();
-            this.remove3 = new System.Windows.Forms.Button();
-            this.award3 = new System.Windows.Forms.Button();
+            this.customRadioBtn = new System.Windows.Forms.RadioButton();
+            this.autoRadioBtn = new System.Windows.Forms.RadioButton();
+            this.customWager = new System.Windows.Forms.NumericUpDown();
+            this.dollarSign = new System.Windows.Forms.Label();
+            this.soundBtn = new System.Windows.Forms.Button();
+            this.endBtn = new System.Windows.Forms.Button();
+            this.clearBtn = new System.Windows.Forms.Button();
+            this.doubles = new System.Windows.Forms.Label();
+            this.revealButton = new System.Windows.Forms.Button();
+            this.finalJeopardyBtn = new System.Windows.Forms.RadioButton();
+            this.doubleJeopardyBtn = new System.Windows.Forms.RadioButton();
+            this.jeopardyRadioBtn = new System.Windows.Forms.RadioButton();
+            this.customWagerLabel = new System.Windows.Forms.Label();
+            this.answerBox = new System.Windows.Forms.Label();
+            this.generateBtn = new System.Windows.Forms.Button();
             this.remove6 = new System.Windows.Forms.Button();
             this.award6 = new System.Windows.Forms.Button();
             this.remove5 = new System.Windows.Forms.Button();
             this.award5 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.answerTimer = new System.Windows.Forms.Timer(this.components);
-            this.export = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.image = new System.Windows.Forms.Button();
-            this.response = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            this.remove4 = new System.Windows.Forms.Button();
+            this.award4 = new System.Windows.Forms.Button();
+            this.remove3 = new System.Windows.Forms.Button();
+            this.award3 = new System.Windows.Forms.Button();
+            this.remove2 = new System.Windows.Forms.Button();
+            this.award2 = new System.Windows.Forms.Button();
+            this.remove1 = new System.Windows.Forms.Button();
+            this.award1 = new System.Windows.Forms.Button();
+            this.infoUpdate = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.customWager)).BeginInit();
             this.SuspendLayout();
             // 
-            // generate
+            // button1
             // 
-            this.generate.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.generate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.generate.Location = new System.Drawing.Point(12, 12);
-            this.generate.Name = "generate";
-            this.generate.Size = new System.Drawing.Size(206, 49);
-            this.generate.TabIndex = 85;
-            this.generate.Tag = "j";
-            this.generate.Text = "Generate Game";
-            this.generate.UseVisualStyleBackColor = true;
-            this.generate.Click += new System.EventHandler(this.generate_Click);
+            this.button1.BackColor = System.Drawing.Color.MidnightBlue;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(874, 128);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(79, 31);
+            this.button1.TabIndex = 143;
+            this.button1.Tag = "";
+            this.button1.Text = "Image";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.image_Click);
             // 
-            // radioButton5
+            // revealResponse
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(121, -374);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(91, 17);
-            this.radioButton5.TabIndex = 99;
-            this.radioButton5.Text = "Custom Game";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.revealResponse.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.revealResponse.Location = new System.Drawing.Point(535, 128);
+            this.revealResponse.Name = "revealResponse";
+            this.revealResponse.Size = new System.Drawing.Size(160, 31);
+            this.revealResponse.TabIndex = 142;
+            this.revealResponse.Tag = "";
+            this.revealResponse.Text = "Reveal Response";
+            this.revealResponse.UseVisualStyleBackColor = true;
+            this.revealResponse.Visible = false;
+            this.revealResponse.Click += new System.EventHandler(this.response_Click);
             // 
-            // radioButton4
+            // unlock
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Checked = true;
-            this.radioButton4.Location = new System.Drawing.Point(2, -374);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(103, 17);
-            this.radioButton4.TabIndex = 98;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Automatic Game";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.unlock.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.unlock.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.unlock.Location = new System.Drawing.Point(228, 128);
+            this.unlock.Name = "unlock";
+            this.unlock.Size = new System.Drawing.Size(131, 31);
+            this.unlock.TabIndex = 141;
+            this.unlock.Tag = "";
+            this.unlock.Text = "Unlock";
+            this.unlock.UseVisualStyleBackColor = true;
+            this.unlock.Click += new System.EventHandler(this.button2_Click);
             // 
-            // numericUpDown2
+            // export
             // 
-            this.numericUpDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown2.Increment = new decimal(new int[] {
+            this.export.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.export.Location = new System.Drawing.Point(874, 105);
+            this.export.Name = "export";
+            this.export.Size = new System.Drawing.Size(79, 20);
+            this.export.TabIndex = 140;
+            this.export.Tag = "";
+            this.export.Text = "Export";
+            this.export.UseVisualStyleBackColor = true;
+            this.export.Click += new System.EventHandler(this.export_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.customRadioBtn);
+            this.panel1.Controls.Add(this.autoRadioBtn);
+            this.panel1.Location = new System.Drawing.Point(12, 134);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(206, 23);
+            this.panel1.TabIndex = 138;
+            // 
+            // customRadioBtn
+            // 
+            this.customRadioBtn.AutoSize = true;
+            this.customRadioBtn.ForeColor = System.Drawing.SystemColors.Control;
+            this.customRadioBtn.Location = new System.Drawing.Point(119, 3);
+            this.customRadioBtn.Name = "customRadioBtn";
+            this.customRadioBtn.Size = new System.Drawing.Size(91, 17);
+            this.customRadioBtn.TabIndex = 84;
+            this.customRadioBtn.Text = "Custom Game";
+            this.customRadioBtn.UseVisualStyleBackColor = true;
+            // 
+            // autoRadioBtn
+            // 
+            this.autoRadioBtn.AutoSize = true;
+            this.autoRadioBtn.Checked = true;
+            this.autoRadioBtn.ForeColor = System.Drawing.SystemColors.Control;
+            this.autoRadioBtn.Location = new System.Drawing.Point(0, 3);
+            this.autoRadioBtn.Name = "autoRadioBtn";
+            this.autoRadioBtn.Size = new System.Drawing.Size(103, 17);
+            this.autoRadioBtn.TabIndex = 83;
+            this.autoRadioBtn.TabStop = true;
+            this.autoRadioBtn.Text = "Automatic Game";
+            this.autoRadioBtn.UseVisualStyleBackColor = true;
+            // 
+            // customWager
+            // 
+            this.customWager.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customWager.Increment = new decimal(new int[] {
             100,
             0,
             0,
             0});
-            this.numericUpDown2.Location = new System.Drawing.Point(195, 97);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
+            this.customWager.Location = new System.Drawing.Point(577, 73);
+            this.customWager.Maximum = new decimal(new int[] {
             99999,
             0,
             0,
             0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(89, 26);
-            this.numericUpDown2.TabIndex = 87;
-            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
+            this.customWager.Name = "customWager";
+            this.customWager.Size = new System.Drawing.Size(89, 26);
+            this.customWager.TabIndex = 127;
             // 
-            // label9
+            // dollarSign
             // 
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.SystemColors.Control;
-            this.label9.Location = new System.Drawing.Point(171, 97);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(25, 27);
-            this.label9.TabIndex = 97;
-            this.label9.Text = "$";
+            this.dollarSign.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dollarSign.ForeColor = System.Drawing.SystemColors.Control;
+            this.dollarSign.Location = new System.Drawing.Point(553, 73);
+            this.dollarSign.Name = "dollarSign";
+            this.dollarSign.Size = new System.Drawing.Size(25, 27);
+            this.dollarSign.TabIndex = 137;
+            this.dollarSign.Text = "$";
             // 
-            // sound
+            // soundBtn
             // 
-            this.sound.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.sound.Location = new System.Drawing.Point(633, 67);
-            this.sound.Name = "sound";
-            this.sound.Size = new System.Drawing.Size(72, 23);
-            this.sound.TabIndex = 96;
-            this.sound.Tag = "c";
-            this.sound.Text = "Sound";
-            this.sound.UseVisualStyleBackColor = true;
-            this.sound.Click += new System.EventHandler(this.sound_Click);
+            this.soundBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.soundBtn.Location = new System.Drawing.Point(1001, 66);
+            this.soundBtn.Name = "soundBtn";
+            this.soundBtn.Size = new System.Drawing.Size(78, 33);
+            this.soundBtn.TabIndex = 136;
+            this.soundBtn.Tag = "";
+            this.soundBtn.Text = "Play Sound";
+            this.soundBtn.UseVisualStyleBackColor = true;
+            this.soundBtn.Click += new System.EventHandler(this.sound_Click);
             // 
-            // button18
+            // endBtn
             // 
-            this.button18.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button18.Location = new System.Drawing.Point(633, 94);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(72, 33);
-            this.button18.TabIndex = 95;
-            this.button18.Tag = "c";
-            this.button18.Text = "End";
-            this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
+            this.endBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.endBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.endBtn.Location = new System.Drawing.Point(1001, 103);
+            this.endBtn.Name = "endBtn";
+            this.endBtn.Size = new System.Drawing.Size(78, 54);
+            this.endBtn.TabIndex = 135;
+            this.endBtn.Tag = "";
+            this.endBtn.Text = "End";
+            this.endBtn.UseVisualStyleBackColor = true;
+            this.endBtn.Click += new System.EventHandler(this.button18_Click);
             // 
-            // clear
+            // clearBtn
             // 
-            this.clear.BackColor = System.Drawing.SystemColors.Control;
-            this.clear.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.clear.Location = new System.Drawing.Point(473, 85);
-            this.clear.Name = "clear";
-            this.clear.Size = new System.Drawing.Size(61, 39);
-            this.clear.TabIndex = 94;
-            this.clear.Tag = "c";
-            this.clear.Text = "Clear";
-            this.clear.UseVisualStyleBackColor = false;
-            this.clear.Click += new System.EventHandler(this.clear_Click);
+            this.clearBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.clearBtn.Location = new System.Drawing.Point(365, 128);
+            this.clearBtn.Name = "clearBtn";
+            this.clearBtn.Size = new System.Drawing.Size(122, 31);
+            this.clearBtn.TabIndex = 134;
+            this.clearBtn.Tag = "";
+            this.clearBtn.Text = "Clear";
+            this.clearBtn.UseVisualStyleBackColor = true;
+            this.clearBtn.Click += new System.EventHandler(this.clear_Click);
             // 
             // doubles
             // 
             this.doubles.AutoSize = true;
-            this.doubles.BackColor = System.Drawing.SystemColors.Control;
-            this.doubles.Location = new System.Drawing.Point(299, 85);
+            this.doubles.ForeColor = System.Drawing.SystemColors.Control;
+            this.doubles.Location = new System.Drawing.Point(871, 62);
             this.doubles.Name = "doubles";
             this.doubles.Size = new System.Drawing.Size(82, 39);
-            this.doubles.TabIndex = 93;
+            this.doubles.TabIndex = 133;
             this.doubles.Text = "Daily Doubles:\r\nc1v200\r\nc2v400 c3v600";
             // 
-            // revealQuestion
+            // revealButton
             // 
-            this.revealQuestion.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.revealQuestion.Location = new System.Drawing.Point(12, 96);
-            this.revealQuestion.Name = "revealQuestion";
-            this.revealQuestion.Size = new System.Drawing.Size(152, 27);
-            this.revealQuestion.TabIndex = 92;
-            this.revealQuestion.Tag = "cont";
-            this.revealQuestion.Text = "Reveal Question or Category";
-            this.revealQuestion.UseVisualStyleBackColor = true;
-            this.revealQuestion.Click += new System.EventHandler(this.revealQuestion_Click);
+            this.revealButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.revealButton.Location = new System.Drawing.Point(535, 128);
+            this.revealButton.Name = "revealButton";
+            this.revealButton.Size = new System.Drawing.Size(160, 31);
+            this.revealButton.TabIndex = 132;
+            this.revealButton.Tag = "";
+            this.revealButton.Text = "Reveal Question or Category";
+            this.revealButton.UseVisualStyleBackColor = true;
+            this.revealButton.Click += new System.EventHandler(this.revealQuestion_Click);
             // 
-            // finalJeopardy
+            // finalJeopardyBtn
             // 
-            this.finalJeopardy.AutoSize = true;
-            this.finalJeopardy.ForeColor = System.Drawing.SystemColors.Control;
-            this.finalJeopardy.Location = new System.Drawing.Point(443, 62);
-            this.finalJeopardy.Name = "finalJeopardy";
-            this.finalJeopardy.Size = new System.Drawing.Size(96, 17);
-            this.finalJeopardy.TabIndex = 91;
-            this.finalJeopardy.Text = "Final Jeopardy!";
-            this.finalJeopardy.UseVisualStyleBackColor = true;
+            this.finalJeopardyBtn.AutoSize = true;
+            this.finalJeopardyBtn.ForeColor = System.Drawing.SystemColors.Control;
+            this.finalJeopardyBtn.Location = new System.Drawing.Point(738, 123);
+            this.finalJeopardyBtn.Name = "finalJeopardyBtn";
+            this.finalJeopardyBtn.Size = new System.Drawing.Size(96, 17);
+            this.finalJeopardyBtn.TabIndex = 131;
+            this.finalJeopardyBtn.Text = "Final Jeopardy!";
+            this.finalJeopardyBtn.UseVisualStyleBackColor = true;
             // 
-            // doubleJeopardy
+            // doubleJeopardyBtn
             // 
-            this.doubleJeopardy.AutoSize = true;
-            this.doubleJeopardy.ForeColor = System.Drawing.SystemColors.Control;
-            this.doubleJeopardy.Location = new System.Drawing.Point(329, 62);
-            this.doubleJeopardy.Name = "doubleJeopardy";
-            this.doubleJeopardy.Size = new System.Drawing.Size(108, 17);
-            this.doubleJeopardy.TabIndex = 90;
-            this.doubleJeopardy.Text = "Double Jeopardy!";
-            this.doubleJeopardy.UseVisualStyleBackColor = true;
+            this.doubleJeopardyBtn.AutoSize = true;
+            this.doubleJeopardyBtn.ForeColor = System.Drawing.SystemColors.Control;
+            this.doubleJeopardyBtn.Location = new System.Drawing.Point(738, 103);
+            this.doubleJeopardyBtn.Name = "doubleJeopardyBtn";
+            this.doubleJeopardyBtn.Size = new System.Drawing.Size(108, 17);
+            this.doubleJeopardyBtn.TabIndex = 130;
+            this.doubleJeopardyBtn.Text = "Double Jeopardy!";
+            this.doubleJeopardyBtn.UseVisualStyleBackColor = true;
             // 
-            // jeopardy
+            // jeopardyRadioBtn
             // 
-            this.jeopardy.AutoSize = true;
-            this.jeopardy.Checked = true;
-            this.jeopardy.ForeColor = System.Drawing.SystemColors.Control;
-            this.jeopardy.Location = new System.Drawing.Point(244, 62);
-            this.jeopardy.Name = "jeopardy";
-            this.jeopardy.Size = new System.Drawing.Size(71, 17);
-            this.jeopardy.TabIndex = 89;
-            this.jeopardy.TabStop = true;
-            this.jeopardy.Text = "Jeopardy!";
-            this.jeopardy.UseVisualStyleBackColor = true;
+            this.jeopardyRadioBtn.AutoSize = true;
+            this.jeopardyRadioBtn.Checked = true;
+            this.jeopardyRadioBtn.ForeColor = System.Drawing.SystemColors.Control;
+            this.jeopardyRadioBtn.Location = new System.Drawing.Point(738, 83);
+            this.jeopardyRadioBtn.Name = "jeopardyRadioBtn";
+            this.jeopardyRadioBtn.Size = new System.Drawing.Size(71, 17);
+            this.jeopardyRadioBtn.TabIndex = 129;
+            this.jeopardyRadioBtn.TabStop = true;
+            this.jeopardyRadioBtn.Text = "Jeopardy!";
+            this.jeopardyRadioBtn.UseVisualStyleBackColor = true;
+            // 
+            // customWagerLabel
+            // 
+            this.customWagerLabel.AutoSize = true;
+            this.customWagerLabel.ForeColor = System.Drawing.SystemColors.Control;
+            this.customWagerLabel.Location = new System.Drawing.Point(590, 105);
+            this.customWagerLabel.Name = "customWagerLabel";
+            this.customWagerLabel.Size = new System.Drawing.Size(58, 13);
+            this.customWagerLabel.TabIndex = 128;
+            this.customWagerLabel.Text = "Clue Value";
             // 
             // answerBox
             // 
             this.answerBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.answerBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.answerBox.ForeColor = System.Drawing.SystemColors.Control;
-            this.answerBox.Location = new System.Drawing.Point(224, 12);
+            this.answerBox.Location = new System.Drawing.Point(228, 68);
             this.answerBox.Name = "answerBox";
-            this.answerBox.Size = new System.Drawing.Size(326, 49);
-            this.answerBox.TabIndex = 86;
+            this.answerBox.Size = new System.Drawing.Size(259, 52);
+            this.answerBox.TabIndex = 126;
             this.answerBox.Text = "ANSWER";
             this.answerBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // auto
+            // generateBtn
             // 
-            this.auto.AutoSize = true;
-            this.auto.Checked = true;
-            this.auto.ForeColor = System.Drawing.SystemColors.Control;
-            this.auto.Location = new System.Drawing.Point(0, 2);
-            this.auto.Name = "auto";
-            this.auto.Size = new System.Drawing.Size(103, 17);
-            this.auto.TabIndex = 83;
-            this.auto.TabStop = true;
-            this.auto.Text = "Automatic Game";
-            this.auto.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.custom);
-            this.panel1.Controls.Add(this.auto);
-            this.panel1.Location = new System.Drawing.Point(12, 65);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(206, 23);
-            this.panel1.TabIndex = 100;
-            // 
-            // custom
-            // 
-            this.custom.AutoSize = true;
-            this.custom.ForeColor = System.Drawing.SystemColors.Control;
-            this.custom.Location = new System.Drawing.Point(119, 2);
-            this.custom.Name = "custom";
-            this.custom.Size = new System.Drawing.Size(91, 17);
-            this.custom.TabIndex = 84;
-            this.custom.Text = "Custom Game";
-            this.custom.UseVisualStyleBackColor = true;
-            // 
-            // award1
-            // 
-            this.award1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.award1.Location = new System.Drawing.Point(12, 141);
-            this.award1.Name = "award1";
-            this.award1.Size = new System.Drawing.Size(96, 27);
-            this.award1.TabIndex = 101;
-            this.award1.Tag = "1";
-            this.award1.Text = "Award";
-            this.award1.UseVisualStyleBackColor = true;
-            this.award1.Click += new System.EventHandler(this.award1_Click);
-            // 
-            // remove1
-            // 
-            this.remove1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.remove1.Location = new System.Drawing.Point(12, 169);
-            this.remove1.Name = "remove1";
-            this.remove1.Size = new System.Drawing.Size(96, 27);
-            this.remove1.TabIndex = 102;
-            this.remove1.Tag = "1";
-            this.remove1.Text = "Remove";
-            this.remove1.UseVisualStyleBackColor = true;
-            this.remove1.Click += new System.EventHandler(this.award1_Click);
-            // 
-            // remove2
-            // 
-            this.remove2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.remove2.Location = new System.Drawing.Point(131, 169);
-            this.remove2.Name = "remove2";
-            this.remove2.Size = new System.Drawing.Size(96, 27);
-            this.remove2.TabIndex = 104;
-            this.remove2.Tag = "2";
-            this.remove2.Text = "Remove";
-            this.remove2.UseVisualStyleBackColor = true;
-            this.remove2.Click += new System.EventHandler(this.award1_Click);
-            // 
-            // award2
-            // 
-            this.award2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.award2.Location = new System.Drawing.Point(131, 141);
-            this.award2.Name = "award2";
-            this.award2.Size = new System.Drawing.Size(96, 27);
-            this.award2.TabIndex = 103;
-            this.award2.Tag = "2";
-            this.award2.Text = "Award";
-            this.award2.UseVisualStyleBackColor = true;
-            this.award2.Click += new System.EventHandler(this.award1_Click);
-            // 
-            // remove4
-            // 
-            this.remove4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.remove4.Location = new System.Drawing.Point(371, 169);
-            this.remove4.Name = "remove4";
-            this.remove4.Size = new System.Drawing.Size(96, 27);
-            this.remove4.TabIndex = 108;
-            this.remove4.Tag = "4";
-            this.remove4.Text = "Remove";
-            this.remove4.UseVisualStyleBackColor = true;
-            this.remove4.Click += new System.EventHandler(this.award1_Click);
-            // 
-            // award4
-            // 
-            this.award4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.award4.Location = new System.Drawing.Point(371, 141);
-            this.award4.Name = "award4";
-            this.award4.Size = new System.Drawing.Size(96, 27);
-            this.award4.TabIndex = 107;
-            this.award4.Tag = "4";
-            this.award4.Text = "Award";
-            this.award4.UseVisualStyleBackColor = true;
-            this.award4.Click += new System.EventHandler(this.award1_Click);
-            // 
-            // remove3
-            // 
-            this.remove3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.remove3.Location = new System.Drawing.Point(252, 169);
-            this.remove3.Name = "remove3";
-            this.remove3.Size = new System.Drawing.Size(96, 27);
-            this.remove3.TabIndex = 106;
-            this.remove3.Tag = "3";
-            this.remove3.Text = "Remove";
-            this.remove3.UseVisualStyleBackColor = true;
-            this.remove3.Click += new System.EventHandler(this.award1_Click);
-            // 
-            // award3
-            // 
-            this.award3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.award3.Location = new System.Drawing.Point(252, 141);
-            this.award3.Name = "award3";
-            this.award3.Size = new System.Drawing.Size(96, 27);
-            this.award3.TabIndex = 105;
-            this.award3.Tag = "3";
-            this.award3.Text = "Award";
-            this.award3.UseVisualStyleBackColor = true;
-            this.award3.Click += new System.EventHandler(this.award1_Click);
+            this.generateBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.generateBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.generateBtn.Location = new System.Drawing.Point(12, 68);
+            this.generateBtn.Name = "generateBtn";
+            this.generateBtn.Size = new System.Drawing.Size(206, 60);
+            this.generateBtn.TabIndex = 125;
+            this.generateBtn.Tag = "";
+            this.generateBtn.Text = "Generate Game";
+            this.generateBtn.UseVisualStyleBackColor = true;
+            this.generateBtn.Click += new System.EventHandler(this.generate_Click);
             // 
             // remove6
             // 
             this.remove6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.remove6.Location = new System.Drawing.Point(609, 169);
+            this.remove6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.remove6.Location = new System.Drawing.Point(1003, 12);
             this.remove6.Name = "remove6";
-            this.remove6.Size = new System.Drawing.Size(96, 27);
-            this.remove6.TabIndex = 112;
+            this.remove6.Size = new System.Drawing.Size(78, 30);
+            this.remove6.TabIndex = 155;
             this.remove6.Tag = "6";
             this.remove6.Text = "Remove";
             this.remove6.UseVisualStyleBackColor = true;
-            this.remove6.Click += new System.EventHandler(this.award1_Click);
+            this.remove6.Visible = false;
+            this.remove6.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
             // award6
             // 
             this.award6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.award6.Location = new System.Drawing.Point(609, 141);
+            this.award6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.award6.Location = new System.Drawing.Point(915, 12);
             this.award6.Name = "award6";
-            this.award6.Size = new System.Drawing.Size(96, 27);
-            this.award6.TabIndex = 111;
+            this.award6.Size = new System.Drawing.Size(82, 30);
+            this.award6.TabIndex = 154;
             this.award6.Tag = "6";
             this.award6.Text = "Award";
             this.award6.UseVisualStyleBackColor = true;
-            this.award6.Click += new System.EventHandler(this.award1_Click);
+            this.award6.Visible = false;
+            this.award6.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
             // remove5
             // 
             this.remove5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.remove5.Location = new System.Drawing.Point(490, 169);
+            this.remove5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.remove5.Location = new System.Drawing.Point(822, 12);
             this.remove5.Name = "remove5";
-            this.remove5.Size = new System.Drawing.Size(96, 27);
-            this.remove5.TabIndex = 110;
+            this.remove5.Size = new System.Drawing.Size(78, 30);
+            this.remove5.TabIndex = 153;
             this.remove5.Tag = "5";
             this.remove5.Text = "Remove";
             this.remove5.UseVisualStyleBackColor = true;
-            this.remove5.Click += new System.EventHandler(this.award1_Click);
+            this.remove5.Visible = false;
+            this.remove5.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
             // award5
             // 
             this.award5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.award5.Location = new System.Drawing.Point(490, 141);
+            this.award5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.award5.Location = new System.Drawing.Point(734, 12);
             this.award5.Name = "award5";
-            this.award5.Size = new System.Drawing.Size(96, 27);
-            this.award5.TabIndex = 109;
+            this.award5.Size = new System.Drawing.Size(82, 30);
+            this.award5.TabIndex = 152;
             this.award5.Tag = "5";
             this.award5.Text = "Award";
             this.award5.UseVisualStyleBackColor = true;
-            this.award5.Click += new System.EventHandler(this.award1_Click);
+            this.award5.Visible = false;
+            this.award5.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
-            // label1
+            // remove4
             // 
-            this.label1.ForeColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(12, 200);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 13);
-            this.label1.TabIndex = 113;
-            this.label1.Text = "Player One";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.remove4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.remove4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.remove4.Location = new System.Drawing.Point(641, 12);
+            this.remove4.Name = "remove4";
+            this.remove4.Size = new System.Drawing.Size(78, 30);
+            this.remove4.TabIndex = 151;
+            this.remove4.Tag = "4";
+            this.remove4.Text = "Remove";
+            this.remove4.UseVisualStyleBackColor = true;
+            this.remove4.Visible = false;
+            this.remove4.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
-            // label2
+            // award4
             // 
-            this.label2.ForeColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(131, 198);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 15);
-            this.label2.TabIndex = 114;
-            this.label2.Text = "Player Two";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.award4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.award4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.award4.Location = new System.Drawing.Point(553, 12);
+            this.award4.Name = "award4";
+            this.award4.Size = new System.Drawing.Size(82, 30);
+            this.award4.TabIndex = 150;
+            this.award4.Tag = "4";
+            this.award4.Text = "Award";
+            this.award4.UseVisualStyleBackColor = true;
+            this.award4.Visible = false;
+            this.award4.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
-            // label3
+            // remove3
             // 
-            this.label3.ForeColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(252, 198);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(96, 15);
-            this.label3.TabIndex = 115;
-            this.label3.Text = "Player Three";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.remove3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.remove3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.remove3.Location = new System.Drawing.Point(462, 12);
+            this.remove3.Name = "remove3";
+            this.remove3.Size = new System.Drawing.Size(78, 30);
+            this.remove3.TabIndex = 149;
+            this.remove3.Tag = "3";
+            this.remove3.Text = "Remove";
+            this.remove3.UseVisualStyleBackColor = true;
+            this.remove3.Visible = false;
+            this.remove3.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
-            // label4
+            // award3
             // 
-            this.label4.ForeColor = System.Drawing.SystemColors.Control;
-            this.label4.Location = new System.Drawing.Point(371, 198);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(96, 15);
-            this.label4.TabIndex = 116;
-            this.label4.Text = "Player Four";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.award3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.award3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.award3.Location = new System.Drawing.Point(374, 12);
+            this.award3.Name = "award3";
+            this.award3.Size = new System.Drawing.Size(82, 30);
+            this.award3.TabIndex = 148;
+            this.award3.Tag = "3";
+            this.award3.Text = "Award";
+            this.award3.UseVisualStyleBackColor = true;
+            this.award3.Visible = false;
+            this.award3.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
-            // label5
+            // remove2
             // 
-            this.label5.ForeColor = System.Drawing.SystemColors.Control;
-            this.label5.Location = new System.Drawing.Point(490, 198);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(96, 15);
-            this.label5.TabIndex = 117;
-            this.label5.Text = "Player Five";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.remove2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.remove2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.remove2.Location = new System.Drawing.Point(281, 12);
+            this.remove2.Name = "remove2";
+            this.remove2.Size = new System.Drawing.Size(78, 30);
+            this.remove2.TabIndex = 147;
+            this.remove2.Tag = "2";
+            this.remove2.Text = "Remove";
+            this.remove2.UseVisualStyleBackColor = true;
+            this.remove2.Visible = false;
+            this.remove2.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
-            // label6
+            // award2
             // 
-            this.label6.ForeColor = System.Drawing.SystemColors.Control;
-            this.label6.Location = new System.Drawing.Point(609, 198);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(96, 15);
-            this.label6.TabIndex = 118;
-            this.label6.Text = "Player Six";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.award2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.award2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.award2.Location = new System.Drawing.Point(193, 12);
+            this.award2.Name = "award2";
+            this.award2.Size = new System.Drawing.Size(82, 30);
+            this.award2.TabIndex = 146;
+            this.award2.Tag = "2";
+            this.award2.Text = "Award";
+            this.award2.UseVisualStyleBackColor = true;
+            this.award2.Visible = false;
+            this.award2.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
-            // answerTimer
+            // remove1
             // 
-            this.answerTimer.Enabled = true;
-            this.answerTimer.Interval = 250;
-            this.answerTimer.Tick += new System.EventHandler(this.answerTimer_Tick);
+            this.remove1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.remove1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.remove1.Location = new System.Drawing.Point(100, 12);
+            this.remove1.Name = "remove1";
+            this.remove1.Size = new System.Drawing.Size(78, 30);
+            this.remove1.TabIndex = 145;
+            this.remove1.Tag = "1";
+            this.remove1.Text = "Remove";
+            this.remove1.UseVisualStyleBackColor = true;
+            this.remove1.Visible = false;
+            this.remove1.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
-            // export
+            // award1
             // 
-            this.export.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.export.Location = new System.Drawing.Point(556, 67);
-            this.export.Name = "export";
-            this.export.Size = new System.Drawing.Size(71, 23);
-            this.export.TabIndex = 119;
-            this.export.Tag = "c";
-            this.export.Text = "Export";
-            this.export.UseVisualStyleBackColor = true;
-            this.export.Click += new System.EventHandler(this.export_Click);
+            this.award1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.award1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.award1.Location = new System.Drawing.Point(12, 12);
+            this.award1.Name = "award1";
+            this.award1.Size = new System.Drawing.Size(82, 30);
+            this.award1.TabIndex = 144;
+            this.award1.Tag = "1";
+            this.award1.Text = "Award";
+            this.award1.UseVisualStyleBackColor = true;
+            this.award1.Visible = false;
+            this.award1.Click += new System.EventHandler(this.awardAndRemove_Click);
             // 
-            // button2
+            // infoUpdate
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(556, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(149, 49);
-            this.button2.TabIndex = 120;
-            this.button2.Tag = "1";
-            this.button2.Text = "Unlock";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // image
-            // 
-            this.image.BackColor = System.Drawing.SystemColors.Control;
-            this.image.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.image.Location = new System.Drawing.Point(556, 94);
-            this.image.Name = "image";
-            this.image.Size = new System.Drawing.Size(71, 33);
-            this.image.TabIndex = 121;
-            this.image.Tag = "c";
-            this.image.Text = "Image";
-            this.image.UseVisualStyleBackColor = false;
-            this.image.Click += new System.EventHandler(this.image_Click);
-            // 
-            // response
-            // 
-            this.response.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.response.Location = new System.Drawing.Point(387, 85);
-            this.response.Name = "response";
-            this.response.Size = new System.Drawing.Size(80, 39);
-            this.response.TabIndex = 122;
-            this.response.Tag = "cont";
-            this.response.Text = "Reveal Response";
-            this.response.UseVisualStyleBackColor = true;
-            this.response.Click += new System.EventHandler(this.response_Click);
+            this.infoUpdate.Enabled = true;
+            this.infoUpdate.Tick += new System.EventHandler(this.infoUpdate_Tick);
             // 
             // Controller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkBlue;
-            this.ClientSize = new System.Drawing.Size(717, 217);
-            this.Controls.Add(this.response);
-            this.Controls.Add(this.image);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.export);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(1089, 166);
             this.Controls.Add(this.remove6);
             this.Controls.Add(this.award6);
             this.Controls.Add(this.remove5);
@@ -563,73 +499,74 @@
             this.Controls.Add(this.award2);
             this.Controls.Add(this.remove1);
             this.Controls.Add(this.award1);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.revealResponse);
+            this.Controls.Add(this.unlock);
+            this.Controls.Add(this.export);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.generate);
-            this.Controls.Add(this.radioButton5);
-            this.Controls.Add(this.radioButton4);
-            this.Controls.Add(this.numericUpDown2);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.sound);
-            this.Controls.Add(this.button18);
-            this.Controls.Add(this.clear);
+            this.Controls.Add(this.customWager);
+            this.Controls.Add(this.dollarSign);
+            this.Controls.Add(this.soundBtn);
+            this.Controls.Add(this.endBtn);
+            this.Controls.Add(this.clearBtn);
             this.Controls.Add(this.doubles);
-            this.Controls.Add(this.revealQuestion);
-            this.Controls.Add(this.finalJeopardy);
-            this.Controls.Add(this.doubleJeopardy);
-            this.Controls.Add(this.jeopardy);
+            this.Controls.Add(this.revealButton);
+            this.Controls.Add(this.finalJeopardyBtn);
+            this.Controls.Add(this.doubleJeopardyBtn);
+            this.Controls.Add(this.jeopardyRadioBtn);
+            this.Controls.Add(this.customWagerLabel);
             this.Controls.Add(this.answerBox);
+            this.Controls.Add(this.generateBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Controller";
             this.Text = "Controller";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.customWager)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
+        private void EndBtn_Click(object sender, System.EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
         #endregion
 
-        private System.Windows.Forms.Button generate;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button sound;
-        private System.Windows.Forms.Button button18;
-        private System.Windows.Forms.Button clear;
-        private System.Windows.Forms.Label doubles;
-        private System.Windows.Forms.Button revealQuestion;
-        private System.Windows.Forms.RadioButton finalJeopardy;
-        private System.Windows.Forms.RadioButton doubleJeopardy;
-        private System.Windows.Forms.RadioButton jeopardy;
-        private System.Windows.Forms.Label answerBox;
-        private System.Windows.Forms.RadioButton auto;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button revealResponse;
+        private System.Windows.Forms.Button unlock;
+        private System.Windows.Forms.Button export;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton custom;
-        private System.Windows.Forms.Button award1;
-        private System.Windows.Forms.Button remove1;
-        private System.Windows.Forms.Button remove2;
-        private System.Windows.Forms.Button award2;
-        private System.Windows.Forms.Button remove4;
-        private System.Windows.Forms.Button award4;
-        private System.Windows.Forms.Button remove3;
-        private System.Windows.Forms.Button award3;
+        private System.Windows.Forms.RadioButton customRadioBtn;
+        private System.Windows.Forms.RadioButton autoRadioBtn;
+        private System.Windows.Forms.NumericUpDown customWager;
+        private System.Windows.Forms.Label dollarSign;
+        private System.Windows.Forms.Button soundBtn;
+        private System.Windows.Forms.Button endBtn;
+        private System.Windows.Forms.Button clearBtn;
+        private System.Windows.Forms.Label doubles;
+        private System.Windows.Forms.Button revealButton;
+        private System.Windows.Forms.RadioButton finalJeopardyBtn;
+        private System.Windows.Forms.RadioButton doubleJeopardyBtn;
+        private System.Windows.Forms.RadioButton jeopardyRadioBtn;
+        private System.Windows.Forms.Label customWagerLabel;
+        private System.Windows.Forms.Label answerBox;
+        private System.Windows.Forms.Button generateBtn;
         private System.Windows.Forms.Button remove6;
         private System.Windows.Forms.Button award6;
         private System.Windows.Forms.Button remove5;
         private System.Windows.Forms.Button award5;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Timer answerTimer;
-        private System.Windows.Forms.Button export;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button image;
-        private System.Windows.Forms.Button response;
+        private System.Windows.Forms.Button remove4;
+        private System.Windows.Forms.Button award4;
+        private System.Windows.Forms.Button remove3;
+        private System.Windows.Forms.Button award3;
+        private System.Windows.Forms.Button remove2;
+        private System.Windows.Forms.Button award2;
+        private System.Windows.Forms.Button remove1;
+        private System.Windows.Forms.Button award1;
+        private System.Windows.Forms.Timer infoUpdate;
     }
 }
