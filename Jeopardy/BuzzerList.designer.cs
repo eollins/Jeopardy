@@ -29,75 +29,140 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listOfBuzzes = new System.Windows.Forms.ListBox();
             this.checkForBuzzes = new System.Windows.Forms.Timer(this.components);
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.allowNew = new System.Windows.Forms.CheckBox();
+            this.earlyPenalty = new System.Windows.Forms.CheckBox();
+            this.autoImg = new System.Windows.Forms.CheckBox();
+            this.timerLength = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.randomSelection = new System.Windows.Forms.CheckBox();
+            this.millis = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.timerLength)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.millis)).BeginInit();
             this.SuspendLayout();
             // 
-            // listBox1
+            // listOfBuzzes
             // 
-            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 24;
-            this.listBox1.Location = new System.Drawing.Point(13, 13);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(287, 124);
-            this.listBox1.TabIndex = 0;
+            this.listOfBuzzes.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listOfBuzzes.FormattingEnabled = true;
+            this.listOfBuzzes.ItemHeight = 24;
+            this.listOfBuzzes.Location = new System.Drawing.Point(13, 13);
+            this.listOfBuzzes.Name = "listOfBuzzes";
+            this.listOfBuzzes.Size = new System.Drawing.Size(287, 124);
+            this.listOfBuzzes.TabIndex = 0;
             // 
             // checkForBuzzes
             // 
             this.checkForBuzzes.Enabled = true;
             this.checkForBuzzes.Tick += new System.EventHandler(this.checkForBuzzes_Tick);
             // 
-            // checkBox1
+            // allowNew
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox1.Location = new System.Drawing.Point(13, 143);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(113, 17);
-            this.checkBox1.TabIndex = 1;
-            this.checkBox1.Text = "Allow New Players";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.allowNew.AutoSize = true;
+            this.allowNew.Checked = true;
+            this.allowNew.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.allowNew.ForeColor = System.Drawing.SystemColors.Control;
+            this.allowNew.Location = new System.Drawing.Point(13, 143);
+            this.allowNew.Name = "allowNew";
+            this.allowNew.Size = new System.Drawing.Size(113, 17);
+            this.allowNew.TabIndex = 1;
+            this.allowNew.Text = "Allow New Players";
+            this.allowNew.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // earlyPenalty
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox2.Location = new System.Drawing.Point(13, 165);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(113, 17);
-            this.checkBox2.TabIndex = 2;
-            this.checkBox2.Text = "Early Buzz Penalty";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.earlyPenalty.AutoSize = true;
+            this.earlyPenalty.Checked = true;
+            this.earlyPenalty.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.earlyPenalty.ForeColor = System.Drawing.SystemColors.Control;
+            this.earlyPenalty.Location = new System.Drawing.Point(13, 165);
+            this.earlyPenalty.Name = "earlyPenalty";
+            this.earlyPenalty.Size = new System.Drawing.Size(113, 17);
+            this.earlyPenalty.TabIndex = 2;
+            this.earlyPenalty.Text = "Early Buzz Penalty";
+            this.earlyPenalty.UseVisualStyleBackColor = true;
+            this.earlyPenalty.CheckedChanged += new System.EventHandler(this.earlyPenalty_CheckedChanged);
             // 
-            // checkBox3
+            // autoImg
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.ForeColor = System.Drawing.SystemColors.Control;
-            this.checkBox3.Location = new System.Drawing.Point(13, 187);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(110, 17);
-            this.checkBox3.TabIndex = 3;
-            this.checkBox3.Text = "Automatic Images";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.autoImg.AutoSize = true;
+            this.autoImg.ForeColor = System.Drawing.SystemColors.Control;
+            this.autoImg.Location = new System.Drawing.Point(13, 187);
+            this.autoImg.Name = "autoImg";
+            this.autoImg.Size = new System.Drawing.Size(110, 17);
+            this.autoImg.TabIndex = 3;
+            this.autoImg.Text = "Automatic Images";
+            this.autoImg.UseVisualStyleBackColor = true;
+            this.autoImg.CheckedChanged += new System.EventHandler(this.autoImg_CheckedChanged);
+            // 
+            // timerLength
+            // 
+            this.timerLength.Location = new System.Drawing.Point(156, 143);
+            this.timerLength.Name = "timerLength";
+            this.timerLength.Size = new System.Drawing.Size(43, 20);
+            this.timerLength.TabIndex = 4;
+            this.timerLength.Value = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+            this.timerLength.ValueChanged += new System.EventHandler(this.timerLength_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.SystemColors.Control;
+            this.label1.Location = new System.Drawing.Point(205, 145);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(96, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "seconds to answer";
+            // 
+            // randomSelection
+            // 
+            this.randomSelection.AutoSize = true;
+            this.randomSelection.ForeColor = System.Drawing.SystemColors.Control;
+            this.randomSelection.Location = new System.Drawing.Point(13, 210);
+            this.randomSelection.Name = "randomSelection";
+            this.randomSelection.Size = new System.Drawing.Size(270, 17);
+            this.randomSelection.TabIndex = 6;
+            this.randomSelection.Text = "Randomize selection under                    milliseconds";
+            this.randomSelection.UseVisualStyleBackColor = true;
+            this.randomSelection.CheckedChanged += new System.EventHandler(this.randomSelection_CheckedChanged);
+            // 
+            // millis
+            // 
+            this.millis.Location = new System.Drawing.Point(168, 209);
+            this.millis.Name = "millis";
+            this.millis.Size = new System.Drawing.Size(44, 20);
+            this.millis.TabIndex = 7;
+            this.millis.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             // 
             // BuzzerList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Navy;
-            this.ClientSize = new System.Drawing.Size(313, 212);
-            this.Controls.Add(this.checkBox3);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.listBox1);
+            this.ClientSize = new System.Drawing.Size(313, 234);
+            this.Controls.Add(this.millis);
+            this.Controls.Add(this.randomSelection);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.timerLength);
+            this.Controls.Add(this.autoImg);
+            this.Controls.Add(this.earlyPenalty);
+            this.Controls.Add(this.allowNew);
+            this.Controls.Add(this.listOfBuzzes);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "BuzzerList";
             this.Text = "Buzzer List";
+            ((System.ComponentModel.ISupportInitialize)(this.timerLength)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.millis)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -105,10 +170,14 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listOfBuzzes;
         private System.Windows.Forms.Timer checkForBuzzes;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox allowNew;
+        private System.Windows.Forms.CheckBox earlyPenalty;
+        private System.Windows.Forms.CheckBox autoImg;
+        private System.Windows.Forms.NumericUpDown timerLength;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox randomSelection;
+        private System.Windows.Forms.NumericUpDown millis;
     }
 }

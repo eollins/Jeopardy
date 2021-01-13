@@ -40,17 +40,9 @@ namespace Jeopardy
         CategoryInfo finalJepInfo;
         int numberOfPlayers = 1;
         string gameCodeNum = "";
-        int highlightedPlayer = 0;
         Clue currentClue;
         Button unlockBtnRef;
-
-        string tournamentConfigLocation;
-        TournamentInfo tournamentInfo = new TournamentInfo();
-
-        public void Test()
-        {
-            MessageBox.Show("Test");
-        }
+        public static string GameCode = "";
 
         public class Player
         {
@@ -191,6 +183,8 @@ namespace Jeopardy
             btn.Tag = "gaert@" + value;
             prevBuzzed.Clear();
 
+            timeToAnswer.Maximum = (BuzzerList.SecondsToGive * 1000);
+            timeToAnswer.Value = (BuzzerList.SecondsToGive * 1000);
             clue.Visible = true;
 
             int valueIndex = 0;
@@ -271,12 +265,14 @@ namespace Jeopardy
             {
                 btnn.Hide();
             }
+            codeLabel.Visible = false;
         }
 
         public void ShowBoard()
         {
             gameCode.Hide();
             website.Hide();
+            timeToAnswer.Hide();
             pictureBox.Visible = false;
             clueImage.Visible = false;
             foreach (var btnn in Controls.OfType<Button>().Where(x => x.Tag.ToString()[0] == 'b'))
@@ -284,6 +280,7 @@ namespace Jeopardy
                 btnn.Show();
                 answerBox.Text = "";
             }
+            codeLabel.Visible = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -309,6 +306,7 @@ namespace Jeopardy
             gameCode.Text = code;
             gameCodeNum = code;
             codeLabel.Text = "Game Code: " + code;
+            GameCode = code;
 
             System.Timers.Timer t = new System.Timers.Timer(400);
             t.Elapsed += new ElapsedEventHandler(playerTimerHandler);
@@ -404,6 +402,16 @@ namespace Jeopardy
 
             if (sorted.Count > 0)
             {
+                int index = 0;
+
+                if (BuzzerList.RandomizeSelection[0] == 1)
+                {
+                    if (int.Parse(sorted[1].timestamp) - int.Parse(sorted[0].timestamp) < BuzzerList.RandomizeSelection[1])
+                    {
+                        index = random.Next(0, 2);
+                    }
+                }
+
                 buzzed = true;
                 buzzID = int.Parse(sorted[0].playerID);
 
@@ -832,6 +840,7 @@ namespace Jeopardy
                     string json2 = reader2.ReadToEnd();
                     cat2 = JsonConvert.DeserializeObject<CategoryInfo>(json2);
                     int i = random.Next(0, cat2.clues.Length);
+                    currentClue = cat2.clues[i];
                     clue.Text = cat2.clues[i].question;
                     answerBox.Text = cat2.clues[i].answer;
                 }
@@ -856,32 +865,32 @@ namespace Jeopardy
                 return;
             }
 
-            if (clue.Text == cat1label.Text)
+            if (clue.Text.Replace("&", "&&") == cat1label.Text)
             {
                 clue.Text = cat2label.Text;
                 return;
             }
-            else if (clue.Text == cat2label.Text)
+            else if (clue.Text.Replace("&", "&&") == cat2label.Text)
             {
                 clue.Text = cat3label.Text;
                 return;
             }
-            else if (clue.Text == cat3label.Text)
+            else if (clue.Text.Replace("&", "&&") == cat3label.Text)
             {
                 clue.Text = cat4label.Text;
                 return;
             }
-            else if (clue.Text == cat4label.Text)
+            else if (clue.Text.Replace("&", "&&") == cat4label.Text)
             {
                 clue.Text = cat5label.Text;
                 return;
             }
-            else if (clue.Text == cat5label.Text)
+            else if (clue.Text.Replace("&", "&&") == cat5label.Text)
             {
                 clue.Text = cat6label.Text;
                 return;
             }
-            else if (clue.Text == cat6label.Text)
+            else if (clue.Text.Replace("&", "&&") == cat6label.Text)
             {
                 cat1label.Visible = true;
                 cat2label.Visible = true;
@@ -921,6 +930,7 @@ namespace Jeopardy
             }
         }
 
+        int highlightedPlayer = 0;
         public void awardAndRemove_Click(object sender, EventArgs e)
         {
             if (customWager.Value > 0)
@@ -938,8 +948,7 @@ namespace Jeopardy
 
                 if (!dailyDoubleState && !finalJeopardy)
                 {
-                    unlock_Click(unlockBtnRef, new EventArgs());
-                    Controller.Lock = false;
+                    Unlock();
                 }
 
                 dailyDoubleState = false;
@@ -1063,6 +1072,7 @@ namespace Jeopardy
         {
             clue.Visible = false;
             customWager.Value = 0;
+            countDown = false;
             ShowBoard();
 
             string data = GameFunction("setGameLock", gameCodeNum, "2");
@@ -1070,14 +1080,15 @@ namespace Jeopardy
 
             if (unlock.Text == "Lock")
             {
-                unlock_Click(unlockBtnRef, new EventArgs());
-                Controller.Lock = false;
+                Lock();
             }
 
             for (int i = 1; i < 7; i++)
             {
                 ColorBoxes(i, Color.White);
             }
+
+            ColorBoxes(highlightedPlayer, Color.LightPink);
         }
 
         public void endBtn_Click(object sender, EventArgs e)
@@ -1155,36 +1166,6 @@ namespace Jeopardy
         private void textBox6_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private int PlayerNameToID(string playerName)
-        {
-            string connectionString = "Server=" + tournamentInfo.url + ";Database=" + tournamentInfo.db + ";Uid=" + tournamentInfo.user + ";Pwd=" + tournamentInfo.pswd + ";";
-            MySql.Data.MySqlClient.MySqlConnection connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
-            connection.Open();
-            MySqlCommand command = new MySqlCommand("select PlayerID from Players where playerName = '" + playerName + "'");
-            command.Connection = connection;
-
-            Dictionary<string, int> players = new Dictionary<string, int>();
-            MySqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                return int.Parse(reader[0].ToString());
-            }
-
-            return 0;
-        }
-
-        private MySqlDataReader ExecuteQuery(string query)
-        {
-            string connectionString = "Server=" + tournamentInfo.url + ";Database=" + tournamentInfo.db + ";Uid=" + tournamentInfo.user + ";Pwd=" + tournamentInfo.pswd + ";";
-            MySql.Data.MySqlClient.MySqlConnection connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
-            connection.Open();
-            MySqlCommand command = new MySqlCommand(query);
-            command.Connection = connection;
-
-            Dictionary<string, int> players = new Dictionary<string, int>();
-            return command.ExecuteReader();
         }
 
         private void categoryLabel_Click(object sender, EventArgs e)
@@ -1385,7 +1366,7 @@ namespace Jeopardy
             Controller controller = new Controller(this);
             controller.Show();
             magnitude = true;
-            this.Size = new Size(this.Width, 607);
+            this.Size = new Size(this.Width, 629);
             //unlockBtnRef = controller.unlock;
             clock.Enabled = true;
             activeController = controller;
@@ -1603,6 +1584,7 @@ namespace Jeopardy
         }
 
         int lastAmount = 0;
+        bool prevEarlyBuzz = false;
         private void updateNames_Tick(object sender, EventArgs e)
         {
             if (hidePlates)
@@ -1704,31 +1686,60 @@ namespace Jeopardy
             }
         }
 
+        bool countDown = false;
+        DateTime start;
         public void unlock_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
             if (btn.Text == "Unlock")
             {
-                buzzTimer.Enabled = true;
-                string data = GameFunction("setGameLock", gameCodeNum, "0");
-                btn.Text = "Lock";
-                Controller.Lock = false;
+                Unlock();
             }
             else if (btn.Text == "Lock")
             {
-                buzzTimer.Enabled = false;
-                string data = GameFunction("setGameLock", gameCodeNum, "1");
-                btn.Text = "Unlock";
-                Controller.Lock = true;
+                Lock();
             }
         }
 
+        public void Lock()
+        {
+            buzzTimer.Enabled = false;
+            string data = GameFunction("setGameLock", gameCodeNum, "1");
+            unlock.Text = "Unlock";
+            Controller.Lock = true;
+            countDown = false;
+            ResizeTimer(-1);
+        }
+
+        public void Unlock()
+        {
+            buzzTimer.Enabled = true;
+            string data = GameFunction("setGameLock", gameCodeNum, "0");
+            unlock.Text = "Lock";
+            Controller.Lock = false;
+            countDown = true;
+            ResizeTimer(0);
+            start = DateTime.Now;
+        }
+
+        bool indivResponse = false;
         private void synchBuzzTimer_Tick(object sender, EventArgs e)
         {
+            if (BuzzerList.EarlyBuzzPenalty != prevEarlyBuzz)
+            {
+                if (BuzzerList.EarlyBuzzPenalty)
+                {
+                    GameFunction("setPenalty", gameCodeNum, "1");
+                }
+                else
+                {
+                    GameFunction("setPenalty", gameCodeNum, "0");
+                }
+            }
+
             if (buzzed)
             {
-                unlock_Click(unlockBtnRef, new EventArgs());
-                Controller.Lock = true;
+                Lock();
                 synchBuzzTimer.Enabled = false;
                 int i = 1;
                 foreach (Player player in gamePlayers)
@@ -1747,6 +1758,10 @@ namespace Jeopardy
                 player.Play();
 
                 ColorBoxes(i, Color.LightBlue);
+                ResizeTimer(i);
+                start = DateTime.Now;
+                indivResponse = true;
+                countDown = true;
 
                 synchBuzzTimer.Enabled = true;
             }
@@ -1794,7 +1809,7 @@ namespace Jeopardy
             }
         }
 
-        private string GameFunction(string function, string var1, string var2)
+        public string GameFunction(string function, string var1, string var2)
         {
             Uri uri = new Uri(@"http://hamijeopardy.com/gameFunctions.php");
             WebRequest request = WebRequest.Create(uri);
@@ -1834,7 +1849,7 @@ namespace Jeopardy
             return null;
         }
 
-        private async Task<string> GameFunctionAsync(string function, string var1, string var2)
+        public async Task<string> GameFunctionAsync(string function, string var1, string var2)
         {
             Uri uri = new Uri(@"http://hamijeopardy.com/gameFunctions.php");
             WebRequest request = WebRequest.Create(uri);
@@ -1885,6 +1900,11 @@ namespace Jeopardy
             ColorBoxes(5, Color.White);
             ColorBoxes(6, Color.White);
 
+            if (gamePlayers.Count == 0)
+            {
+                return;
+            }
+
             if (gamePlayers[0].Visited == 2)
             {
                 endBtn_Click(endBtn, new EventArgs());
@@ -1933,12 +1953,20 @@ namespace Jeopardy
 
                 clue.Visible = false;
                 clueImage.Visible = true;
+                pictureBox.Visible = true;
 
                 var result = JsonConvert.DeserializeObject<JToken>(data);
                 string link = result.Last.First.First["link"].ToString();
                 clueImage.Text = currentClue.question;
-                pictureBox.Url = new Uri(link);
-                pictureBox.Visible = true;
+
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                request = WebRequest.Create(new Uri(link));
+                using (var response = request.GetResponse())
+                using (var stream = response.GetResponseStream())
+                {
+                    pictureBox.Image = Bitmap.FromStream(stream);
+                }
             }
             catch
             {
@@ -1983,6 +2011,81 @@ namespace Jeopardy
             if (e.KeyCode == Keys.I)
             {
                 button1_Click(button1, new EventArgs());
+            }
+        }
+
+        private void updateBar_Tick(object sender, EventArgs e)
+        {
+            if (countDown)
+            {
+                TimeSpan span = DateTime.Now - start;
+                timeToAnswer.Maximum = (BuzzerList.SecondsToGive * 1000);
+                double seconds = (BuzzerList.SecondsToGive * 1000) - span.TotalMilliseconds;
+
+                if (seconds < 0)
+                {
+                    countDown = false;
+                    player.SoundLocation = "Time.wav";
+                    player.Play();
+
+                    if (!indivResponse)
+                    {
+                        Lock();
+                    }
+
+                    indivResponse = false;
+                }
+                else
+                {
+                    timeToAnswer.Value = (int)seconds;
+                }
+            }
+        }
+
+        public void ResizeTimer(int player)
+        {
+            switch (player)
+            {
+                case -1:
+                    timeToAnswer.Size = new Size(1069, 15);
+                    timeToAnswer.Location = new Point(12, 563);
+                    timeToAnswer.Visible = false;
+                    break;
+                case 0:
+                    timeToAnswer.Size = new Size(1069, 20);
+                    timeToAnswer.Location = new Point(12, 563);
+                    timeToAnswer.Visible = true;
+                    break;
+                case 1:
+                    timeToAnswer.Size = new Size(166, 15);
+                    timeToAnswer.Location = new Point(12, 563);
+                    timeToAnswer.Visible = true;
+                    break;
+                case 2:
+                    timeToAnswer.Size = new Size(166, 15);
+                    timeToAnswer.Location = new Point(193, 563);
+                    timeToAnswer.Visible = true;
+                    break;
+                case 3:
+                    timeToAnswer.Size = new Size(166, 15);
+                    timeToAnswer.Location = new Point(374, 563);
+                    timeToAnswer.Visible = true;
+                    break;
+                case 4:
+                    timeToAnswer.Size = new Size(166, 15);
+                    timeToAnswer.Location = new Point(553, 563);
+                    timeToAnswer.Visible = true;
+                    break;
+                case 5:
+                    timeToAnswer.Size = new Size(166, 15);
+                    timeToAnswer.Location = new Point(734, 563);
+                    timeToAnswer.Visible = true;
+                    break;
+                case 6:
+                    timeToAnswer.Size = new Size(166, 15);
+                    timeToAnswer.Location = new Point(915, 563);
+                    timeToAnswer.Visible = true;
+                    break;
             }
         }
     }

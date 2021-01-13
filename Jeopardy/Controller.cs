@@ -143,7 +143,7 @@ namespace Jeopardy
                     btn.Visible = true;
                 }
             }
-            else if (PlayerCount == 1)
+            else if (PlayerCount == 2)
             {
                 foreach (var btn in Controls.OfType<Button>().Where(x => x.Tag.ToString() != "" && int.Parse(x.Tag.ToString()) > 2))
                 {
@@ -155,7 +155,7 @@ namespace Jeopardy
                     btn.Visible = true;
                 }
             }
-            else if (PlayerCount == 1)
+            else if (PlayerCount == 3)
             {
                 foreach (var btn in Controls.OfType<Button>().Where(x => x.Tag.ToString() != "" && int.Parse(x.Tag.ToString()) > 3))
                 {
@@ -167,7 +167,7 @@ namespace Jeopardy
                     btn.Visible = true;
                 }
             }
-            else if (PlayerCount == 1)
+            else if (PlayerCount == 4)
             {
                 foreach (var btn in Controls.OfType<Button>().Where(x => x.Tag.ToString() != "" && int.Parse(x.Tag.ToString()) > 4))
                 {
@@ -179,7 +179,7 @@ namespace Jeopardy
                     btn.Visible = true;
                 }
             }
-            else if (PlayerCount == 1)
+            else if (PlayerCount == 5)
             {
                 foreach (var btn in Controls.OfType<Button>().Where(x => x.Tag.ToString() != "" && int.Parse(x.Tag.ToString()) > 5))
                 {
@@ -191,7 +191,7 @@ namespace Jeopardy
                     btn.Visible = true;
                 }
             }
-            else if (PlayerCount == 1)
+            else if (PlayerCount == 6)
             {
                 foreach (var btn in Controls.OfType<Button>().Where(x => x.Tag.ToString() != "" && int.Parse(x.Tag.ToString()) <= 6))
                 {

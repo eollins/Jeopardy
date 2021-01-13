@@ -129,11 +129,14 @@
             this.award6 = new System.Windows.Forms.Button();
             this.revealResponse = new System.Windows.Forms.Button();
             this.clueImage = new System.Windows.Forms.Label();
-            this.pictureBox = new System.Windows.Forms.WebBrowser();
             this.button1 = new System.Windows.Forms.Button();
             this.codeLabel = new System.Windows.Forms.Label();
+            this.timeToAnswer = new System.Windows.Forms.ProgressBar();
+            this.updateBar = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.customWager)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // c1v200
@@ -820,7 +823,7 @@
             // 
             this.generateBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.generateBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.generateBtn.Location = new System.Drawing.Point(12, 655);
+            this.generateBtn.Location = new System.Drawing.Point(12, 681);
             this.generateBtn.Name = "generateBtn";
             this.generateBtn.Size = new System.Drawing.Size(206, 60);
             this.generateBtn.TabIndex = 54;
@@ -834,7 +837,7 @@
             // 
             this.answerBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.answerBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.answerBox.Location = new System.Drawing.Point(228, 655);
+            this.answerBox.Location = new System.Drawing.Point(228, 681);
             this.answerBox.Name = "answerBox";
             this.answerBox.Size = new System.Drawing.Size(259, 52);
             this.answerBox.TabIndex = 55;
@@ -849,7 +852,7 @@
             0,
             0,
             0});
-            this.customWager.Location = new System.Drawing.Point(577, 660);
+            this.customWager.Location = new System.Drawing.Point(577, 686);
             this.customWager.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -862,7 +865,7 @@
             // customWagerLabel
             // 
             this.customWagerLabel.AutoSize = true;
-            this.customWagerLabel.Location = new System.Drawing.Point(590, 692);
+            this.customWagerLabel.Location = new System.Drawing.Point(590, 718);
             this.customWagerLabel.Name = "customWagerLabel";
             this.customWagerLabel.Size = new System.Drawing.Size(58, 13);
             this.customWagerLabel.TabIndex = 60;
@@ -872,7 +875,7 @@
             // 
             this.jeopardyRadioBtn.AutoSize = true;
             this.jeopardyRadioBtn.Checked = true;
-            this.jeopardyRadioBtn.Location = new System.Drawing.Point(738, 670);
+            this.jeopardyRadioBtn.Location = new System.Drawing.Point(738, 696);
             this.jeopardyRadioBtn.Name = "jeopardyRadioBtn";
             this.jeopardyRadioBtn.Size = new System.Drawing.Size(71, 17);
             this.jeopardyRadioBtn.TabIndex = 61;
@@ -883,7 +886,7 @@
             // doubleJeopardyBtn
             // 
             this.doubleJeopardyBtn.AutoSize = true;
-            this.doubleJeopardyBtn.Location = new System.Drawing.Point(738, 690);
+            this.doubleJeopardyBtn.Location = new System.Drawing.Point(738, 716);
             this.doubleJeopardyBtn.Name = "doubleJeopardyBtn";
             this.doubleJeopardyBtn.Size = new System.Drawing.Size(108, 17);
             this.doubleJeopardyBtn.TabIndex = 62;
@@ -893,7 +896,7 @@
             // finalJeopardyBtn
             // 
             this.finalJeopardyBtn.AutoSize = true;
-            this.finalJeopardyBtn.Location = new System.Drawing.Point(738, 710);
+            this.finalJeopardyBtn.Location = new System.Drawing.Point(738, 736);
             this.finalJeopardyBtn.Name = "finalJeopardyBtn";
             this.finalJeopardyBtn.Size = new System.Drawing.Size(96, 17);
             this.finalJeopardyBtn.TabIndex = 63;
@@ -914,7 +917,7 @@
             // revealButton
             // 
             this.revealButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.revealButton.Location = new System.Drawing.Point(535, 715);
+            this.revealButton.Location = new System.Drawing.Point(535, 741);
             this.revealButton.Name = "revealButton";
             this.revealButton.Size = new System.Drawing.Size(160, 31);
             this.revealButton.TabIndex = 65;
@@ -926,7 +929,7 @@
             // doubles
             // 
             this.doubles.AutoSize = true;
-            this.doubles.Location = new System.Drawing.Point(871, 649);
+            this.doubles.Location = new System.Drawing.Point(871, 675);
             this.doubles.Name = "doubles";
             this.doubles.Size = new System.Drawing.Size(82, 39);
             this.doubles.TabIndex = 66;
@@ -936,7 +939,7 @@
             // 
             this.clearBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.clearBtn.Location = new System.Drawing.Point(365, 715);
+            this.clearBtn.Location = new System.Drawing.Point(365, 741);
             this.clearBtn.Name = "clearBtn";
             this.clearBtn.Size = new System.Drawing.Size(122, 31);
             this.clearBtn.TabIndex = 67;
@@ -950,7 +953,7 @@
             // 
             this.endBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.endBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.endBtn.Location = new System.Drawing.Point(1001, 690);
+            this.endBtn.Location = new System.Drawing.Point(1001, 716);
             this.endBtn.Name = "endBtn";
             this.endBtn.Size = new System.Drawing.Size(78, 54);
             this.endBtn.TabIndex = 80;
@@ -963,7 +966,7 @@
             // soundBtn
             // 
             this.soundBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.soundBtn.Location = new System.Drawing.Point(1001, 653);
+            this.soundBtn.Location = new System.Drawing.Point(1001, 679);
             this.soundBtn.Name = "soundBtn";
             this.soundBtn.Size = new System.Drawing.Size(78, 33);
             this.soundBtn.TabIndex = 81;
@@ -976,7 +979,7 @@
             // dollarSign
             // 
             this.dollarSign.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dollarSign.Location = new System.Drawing.Point(553, 660);
+            this.dollarSign.Location = new System.Drawing.Point(553, 686);
             this.dollarSign.Name = "dollarSign";
             this.dollarSign.Size = new System.Drawing.Size(25, 27);
             this.dollarSign.TabIndex = 82;
@@ -1013,7 +1016,7 @@
             // 
             this.panel1.Controls.Add(this.customRadioBtn);
             this.panel1.Controls.Add(this.autoRadioBtn);
-            this.panel1.Location = new System.Drawing.Point(12, 721);
+            this.panel1.Location = new System.Drawing.Point(12, 747);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(206, 23);
             this.panel1.TabIndex = 85;
@@ -1021,7 +1024,7 @@
             // popOutBtn
             // 
             this.popOutBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.popOutBtn.Location = new System.Drawing.Point(874, 692);
+            this.popOutBtn.Location = new System.Drawing.Point(874, 718);
             this.popOutBtn.Name = "popOutBtn";
             this.popOutBtn.Size = new System.Drawing.Size(26, 20);
             this.popOutBtn.TabIndex = 86;
@@ -1033,12 +1036,14 @@
             // 
             // clock
             // 
+            this.clock.Enabled = true;
             this.clock.Interval = 50;
+            this.clock.Tick += new System.EventHandler(this.clock_Tick);
             // 
             // export
             // 
             this.export.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.export.Location = new System.Drawing.Point(904, 692);
+            this.export.Location = new System.Drawing.Point(904, 718);
             this.export.Name = "export";
             this.export.Size = new System.Drawing.Size(49, 20);
             this.export.TabIndex = 87;
@@ -1194,7 +1199,7 @@
             // 
             this.remove1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.remove1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.remove1.Location = new System.Drawing.Point(100, 597);
+            this.remove1.Location = new System.Drawing.Point(100, 623);
             this.remove1.Name = "remove1";
             this.remove1.Size = new System.Drawing.Size(78, 30);
             this.remove1.TabIndex = 108;
@@ -1209,7 +1214,7 @@
             // 
             this.award1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.award1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.award1.Location = new System.Drawing.Point(12, 597);
+            this.award1.Location = new System.Drawing.Point(12, 623);
             this.award1.Name = "award1";
             this.award1.Size = new System.Drawing.Size(82, 30);
             this.award1.TabIndex = 107;
@@ -1224,7 +1229,7 @@
             // 
             this.unlock.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unlock.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.unlock.Location = new System.Drawing.Point(228, 715);
+            this.unlock.Location = new System.Drawing.Point(228, 741);
             this.unlock.Name = "unlock";
             this.unlock.Size = new System.Drawing.Size(131, 31);
             this.unlock.TabIndex = 109;
@@ -1244,7 +1249,7 @@
             // 
             this.remove2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.remove2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.remove2.Location = new System.Drawing.Point(281, 597);
+            this.remove2.Location = new System.Drawing.Point(281, 623);
             this.remove2.Name = "remove2";
             this.remove2.Size = new System.Drawing.Size(78, 30);
             this.remove2.TabIndex = 111;
@@ -1259,7 +1264,7 @@
             // 
             this.award2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.award2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.award2.Location = new System.Drawing.Point(193, 597);
+            this.award2.Location = new System.Drawing.Point(193, 623);
             this.award2.Name = "award2";
             this.award2.Size = new System.Drawing.Size(82, 30);
             this.award2.TabIndex = 110;
@@ -1274,7 +1279,7 @@
             // 
             this.remove3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.remove3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.remove3.Location = new System.Drawing.Point(462, 597);
+            this.remove3.Location = new System.Drawing.Point(462, 623);
             this.remove3.Name = "remove3";
             this.remove3.Size = new System.Drawing.Size(78, 30);
             this.remove3.TabIndex = 113;
@@ -1289,7 +1294,7 @@
             // 
             this.award3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.award3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.award3.Location = new System.Drawing.Point(374, 597);
+            this.award3.Location = new System.Drawing.Point(374, 623);
             this.award3.Name = "award3";
             this.award3.Size = new System.Drawing.Size(82, 30);
             this.award3.TabIndex = 112;
@@ -1304,7 +1309,7 @@
             // 
             this.remove4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.remove4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.remove4.Location = new System.Drawing.Point(641, 597);
+            this.remove4.Location = new System.Drawing.Point(641, 623);
             this.remove4.Name = "remove4";
             this.remove4.Size = new System.Drawing.Size(78, 30);
             this.remove4.TabIndex = 115;
@@ -1319,7 +1324,7 @@
             // 
             this.award4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.award4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.award4.Location = new System.Drawing.Point(553, 597);
+            this.award4.Location = new System.Drawing.Point(553, 623);
             this.award4.Name = "award4";
             this.award4.Size = new System.Drawing.Size(82, 30);
             this.award4.TabIndex = 114;
@@ -1334,7 +1339,7 @@
             // 
             this.remove5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.remove5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.remove5.Location = new System.Drawing.Point(822, 597);
+            this.remove5.Location = new System.Drawing.Point(822, 623);
             this.remove5.Name = "remove5";
             this.remove5.Size = new System.Drawing.Size(78, 30);
             this.remove5.TabIndex = 117;
@@ -1349,7 +1354,7 @@
             // 
             this.award5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.award5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.award5.Location = new System.Drawing.Point(734, 597);
+            this.award5.Location = new System.Drawing.Point(734, 623);
             this.award5.Name = "award5";
             this.award5.Size = new System.Drawing.Size(82, 30);
             this.award5.TabIndex = 116;
@@ -1364,7 +1369,7 @@
             // 
             this.remove6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.remove6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.remove6.Location = new System.Drawing.Point(1003, 597);
+            this.remove6.Location = new System.Drawing.Point(1003, 623);
             this.remove6.Name = "remove6";
             this.remove6.Size = new System.Drawing.Size(78, 30);
             this.remove6.TabIndex = 119;
@@ -1379,7 +1384,7 @@
             // 
             this.award6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.award6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.award6.Location = new System.Drawing.Point(915, 597);
+            this.award6.Location = new System.Drawing.Point(915, 623);
             this.award6.Name = "award6";
             this.award6.Size = new System.Drawing.Size(82, 30);
             this.award6.TabIndex = 118;
@@ -1393,7 +1398,7 @@
             // revealResponse
             // 
             this.revealResponse.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.revealResponse.Location = new System.Drawing.Point(535, 715);
+            this.revealResponse.Location = new System.Drawing.Point(535, 741);
             this.revealResponse.Name = "revealResponse";
             this.revealResponse.Size = new System.Drawing.Size(160, 31);
             this.revealResponse.TabIndex = 120;
@@ -1414,20 +1419,11 @@
             this.clueImage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.clueImage.Visible = false;
             // 
-            // pictureBox
-            // 
-            this.pictureBox.Location = new System.Drawing.Point(553, 75);
-            this.pictureBox.MinimumSize = new System.Drawing.Size(20, 20);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(528, 374);
-            this.pictureBox.TabIndex = 123;
-            this.pictureBox.Visible = false;
-            // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.MidnightBlue;
             this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(874, 715);
+            this.button1.Location = new System.Drawing.Point(874, 741);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(79, 31);
             this.button1.TabIndex = 124;
@@ -1439,19 +1435,49 @@
             // 
             // codeLabel
             // 
-            this.codeLabel.Location = new System.Drawing.Point(374, -1);
+            this.codeLabel.Location = new System.Drawing.Point(374, 456);
             this.codeLabel.Name = "codeLabel";
-            this.codeLabel.Size = new System.Drawing.Size(345, 26);
+            this.codeLabel.Size = new System.Drawing.Size(345, 16);
             this.codeLabel.TabIndex = 125;
             this.codeLabel.Text = "Game Code: 000000";
             this.codeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.codeLabel.Visible = false;
+            // 
+            // timeToAnswer
+            // 
+            this.timeToAnswer.Location = new System.Drawing.Point(12, 562);
+            this.timeToAnswer.Maximum = 5000;
+            this.timeToAnswer.Name = "timeToAnswer";
+            this.timeToAnswer.Size = new System.Drawing.Size(1069, 15);
+            this.timeToAnswer.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.timeToAnswer.TabIndex = 126;
+            this.timeToAnswer.Value = 5000;
+            this.timeToAnswer.Visible = false;
+            // 
+            // updateBar
+            // 
+            this.updateBar.Enabled = true;
+            this.updateBar.Interval = 25;
+            this.updateBar.Tick += new System.EventHandler(this.updateBar_Tick);
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.BackColor = System.Drawing.Color.SteelBlue;
+            this.pictureBox.Location = new System.Drawing.Point(553, 75);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(528, 374);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox.TabIndex = 127;
+            this.pictureBox.TabStop = false;
+            this.pictureBox.Visible = false;
             // 
             // GameBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Navy;
-            this.ClientSize = new System.Drawing.Size(1093, 754);
+            this.ClientSize = new System.Drawing.Size(1093, 780);
+            this.Controls.Add(this.timeToAnswer);
             this.Controls.Add(this.codeLabel);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.revealResponse);
@@ -1559,6 +1585,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.customWager)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1666,9 +1693,11 @@
         private System.Windows.Forms.Button award6;
         private System.Windows.Forms.Button revealResponse;
         private System.Windows.Forms.Label clueImage;
-        private System.Windows.Forms.WebBrowser pictureBox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label codeLabel;
+        private System.Windows.Forms.ProgressBar timeToAnswer;
+        private System.Windows.Forms.Timer updateBar;
+        private System.Windows.Forms.PictureBox pictureBox;
     }
 }
 
