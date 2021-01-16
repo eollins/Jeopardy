@@ -851,12 +851,12 @@ namespace Jeopardy
                     answerBox.Text = finalJepInfo.clues[0].answer;
                 }
 
-                cat1label.Text = cat2.title.ToUpper().Replace("&", "&&");
-                cat2label.Text = cat2.title.ToUpper().Replace("&", "&&");
-                cat3label.Text = cat2.title.ToUpper().Replace("&", "&&");
-                cat4label.Text = cat2.title.ToUpper().Replace("&", "&&");
-                cat5label.Text = cat2.title.ToUpper().Replace("&", "&&");
-                cat6label.Text = cat2.title.ToUpper().Replace("&", "&&");
+                cat1label.Text = cat2.title.ToUpper().Replace('&', ' ');
+                cat2label.Text = cat2.title.ToUpper().Replace('&', ' ');
+                cat3label.Text = cat2.title.ToUpper().Replace('&', ' ');
+                cat4label.Text = cat2.title.ToUpper().Replace('&', ' ');
+                cat5label.Text = cat2.title.ToUpper().Replace('&', ' ');
+                cat6label.Text = cat2.title.ToUpper().Replace('&', ' ');
 
                 cat1label.Visible = true; cat2label.Visible = true; cat3label.Visible = true; cat4label.Visible = true; cat5label.Visible = true; cat6label.Visible = true;
                 revealButton.Visible = false;
@@ -865,32 +865,32 @@ namespace Jeopardy
                 return;
             }
 
-            if (clue.Text.Replace("&", "&&") == cat1label.Text)
+            if (clue.Text.Replace('&', ' ') == cat1label.Text.Replace('&', ' '))
             {
                 clue.Text = cat2label.Text;
                 return;
             }
-            else if (clue.Text.Replace("&", "&&") == cat2label.Text)
+            else if (clue.Text.Replace('&', ' ') == cat2label.Text.Replace('&', ' '))
             {
                 clue.Text = cat3label.Text;
                 return;
             }
-            else if (clue.Text.Replace("&", "&&") == cat3label.Text)
+            else if (clue.Text.Replace('&', ' ') == cat3label.Text.Replace('&', ' '))
             {
                 clue.Text = cat4label.Text;
                 return;
             }
-            else if (clue.Text.Replace("&", "&&") == cat4label.Text)
+            else if (clue.Text.Replace('&', ' ') == cat4label.Text.Replace('&', ' '))
             {
                 clue.Text = cat5label.Text;
                 return;
             }
-            else if (clue.Text.Replace("&", "&&") == cat5label.Text)
+            else if (clue.Text.Replace('&', ' ') == cat5label.Text.Replace('&', ' '))
             {
                 clue.Text = cat6label.Text;
                 return;
             }
-            else if (clue.Text.Replace("&", "&&") == cat6label.Text)
+            else if (clue.Text.Replace('&', ' ') == cat6label.Text.Replace('&', ' '))
             {
                 cat1label.Visible = true;
                 cat2label.Visible = true;

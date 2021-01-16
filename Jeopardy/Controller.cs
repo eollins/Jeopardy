@@ -18,6 +18,7 @@ namespace Jeopardy
         public static bool Lock = false;
         public static string DailyDoubles = "";
         public static int PlayerCount = 0;
+
         public Controller()
         {
             InitializeComponent();
@@ -37,12 +38,30 @@ namespace Jeopardy
             else if (customRadioBtn.Checked)
                 board.AdjustSettings(0, 1);
 
+            if (jeopardyRadioBtn.Checked)
+                board.AdjustSettings(1, 0);
+            else if (doubleJeopardyBtn.Checked)
+                board.AdjustSettings(1, 1);
+            else if (finalJeopardyBtn.Checked)
+                board.AdjustSettings(1, 2);
+
+            if (jeopardyRadioBtn.Checked || doubleJeopardyBtn.Checked)
+            {
+                revealButton.Visible = true;
+                revealResponse.Visible = false;
+            }
+
             board.generateBtn_Click(generateBtn, new EventArgs());
         }
 
         private void revealQuestion_Click(object sender, EventArgs e)
         {
             board.reveal_Click(revealButton, new EventArgs());
+            if (finalJeopardyBtn.Checked)
+            {
+                revealButton.Visible = false;
+                revealResponse.Visible = true;
+            }
         }
 
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
@@ -106,6 +125,7 @@ namespace Jeopardy
         private void awardAndRemove_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
+            board.AdjustSettings(2, (int)customWager.Value);
             board.awardAndRemove_Click(btn, new EventArgs());
         }
 
