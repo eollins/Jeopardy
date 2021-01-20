@@ -18,6 +18,7 @@ namespace Jeopardy
         public static bool Lock = false;
         public static string DailyDoubles = "";
         public static int PlayerCount = 0;
+        public static int WagerValue = 0;
 
         public Controller()
         {
@@ -143,6 +144,8 @@ namespace Jeopardy
             {
                 unlock.Text = "Lock";
             }
+
+            customWager.Value = WagerValue;
 
             if (PlayerCount == 0)
             {

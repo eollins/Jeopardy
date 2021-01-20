@@ -69,6 +69,7 @@
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.textBox9 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // c6v1000
@@ -465,9 +466,9 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(192, 474);
+            this.textBox1.Location = new System.Drawing.Point(192, 508);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(526, 35);
+            this.textBox1.Size = new System.Drawing.Size(535, 35);
             this.textBox1.TabIndex = 73;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -475,9 +476,9 @@
             // 
             this.button1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(733, 474);
+            this.button1.Location = new System.Drawing.Point(733, 480);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(166, 35);
+            this.button1.Size = new System.Drawing.Size(166, 63);
             this.button1.TabIndex = 74;
             this.button1.Tag = "gaert";
             this.button1.Text = "Confirm";
@@ -576,7 +577,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(192, 515);
+            this.button2.Location = new System.Drawing.Point(192, 549);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(707, 65);
             this.button2.TabIndex = 81;
@@ -589,11 +590,21 @@
             // 
             this.saveFileDialog1.Filter = "XML files|*.xml";
             // 
+            // textBox9
+            // 
+            this.textBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox9.Location = new System.Drawing.Point(192, 480);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(535, 22);
+            this.textBox9.TabIndex = 82;
+            this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1092, 592);
+            this.ClientSize = new System.Drawing.Size(1092, 624);
+            this.Controls.Add(this.textBox9);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox8);
             this.Controls.Add(this.textBox7);
@@ -684,6 +695,7 @@
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.TextBox textBox9;
     }
 }
 

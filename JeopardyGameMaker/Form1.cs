@@ -82,6 +82,12 @@ namespace JeopardyGameMaker
             el.SetAttribute("answer", textBox1.Text);
             el.SetAttribute("value", value);
 
+            if (textBox9.Text != "")
+            {
+                el.Attributes.Append(doc.CreateAttribute("image"));
+                el.SetAttribute("image", textBox9.Text);
+            }
+
             XmlNode nodes = doc.FirstChild.ChildNodes[int.Parse(category)];
 
             if (!present)

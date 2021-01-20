@@ -743,79 +743,73 @@
             // player1name
             // 
             this.player1name.BackColor = System.Drawing.Color.MistyRose;
-            this.player1name.Enabled = false;
             this.player1name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player1name.Location = new System.Drawing.Point(12, 528);
             this.player1name.Name = "player1name";
             this.player1name.Size = new System.Drawing.Size(166, 29);
             this.player1name.TabIndex = 48;
             this.player1name.Tag = "1";
-            this.player1name.Text = "Reigning Champ";
+            this.player1name.Text = "`";
             this.player1name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.player1name.Visible = false;
             // 
             // player2name
             // 
-            this.player2name.Enabled = false;
             this.player2name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player2name.Location = new System.Drawing.Point(193, 528);
             this.player2name.Name = "player2name";
             this.player2name.Size = new System.Drawing.Size(166, 29);
             this.player2name.TabIndex = 49;
             this.player2name.Tag = "2";
-            this.player2name.Text = "Player Two";
+            this.player2name.Text = "`";
             this.player2name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.player2name.Visible = false;
             // 
             // player3name
             // 
-            this.player3name.Enabled = false;
             this.player3name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player3name.Location = new System.Drawing.Point(374, 528);
             this.player3name.Name = "player3name";
             this.player3name.Size = new System.Drawing.Size(166, 29);
             this.player3name.TabIndex = 50;
             this.player3name.Tag = "3";
-            this.player3name.Text = "Player Three";
+            this.player3name.Text = "`";
             this.player3name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.player3name.Visible = false;
             // 
             // player4name
             // 
-            this.player4name.Enabled = false;
             this.player4name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player4name.Location = new System.Drawing.Point(553, 528);
             this.player4name.Name = "player4name";
             this.player4name.Size = new System.Drawing.Size(166, 29);
             this.player4name.TabIndex = 51;
             this.player4name.Tag = "4";
-            this.player4name.Text = "Player Four";
+            this.player4name.Text = "`";
             this.player4name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.player4name.Visible = false;
             // 
             // player5name
             // 
-            this.player5name.Enabled = false;
             this.player5name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player5name.Location = new System.Drawing.Point(734, 527);
             this.player5name.Name = "player5name";
             this.player5name.Size = new System.Drawing.Size(166, 29);
             this.player5name.TabIndex = 52;
             this.player5name.Tag = "5";
-            this.player5name.Text = "Player Five";
+            this.player5name.Text = "`";
             this.player5name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.player5name.Visible = false;
             // 
             // player6name
             // 
-            this.player6name.Enabled = false;
             this.player6name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player6name.Location = new System.Drawing.Point(915, 527);
             this.player6name.Name = "player6name";
             this.player6name.Size = new System.Drawing.Size(166, 29);
             this.player6name.TabIndex = 53;
             this.player6name.Tag = "6";
-            this.player6name.Text = "Player Six";
+            this.player6name.Text = "`";
             this.player6name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.player6name.Visible = false;
             // 
@@ -1205,7 +1199,7 @@
             this.remove1.TabIndex = 108;
             this.remove1.TabStop = false;
             this.remove1.Tag = "1";
-            this.remove1.Text = "Remove";
+            this.remove1.Text = "Deny";
             this.remove1.UseVisualStyleBackColor = true;
             this.remove1.Visible = false;
             this.remove1.Click += new System.EventHandler(this.awardAndRemove_Click);
@@ -1220,7 +1214,7 @@
             this.award1.TabIndex = 107;
             this.award1.TabStop = false;
             this.award1.Tag = "1";
-            this.award1.Text = "Award";
+            this.award1.Text = "Admit";
             this.award1.UseVisualStyleBackColor = true;
             this.award1.Visible = false;
             this.award1.Click += new System.EventHandler(this.awardAndRemove_Click);
@@ -1255,7 +1249,7 @@
             this.remove2.TabIndex = 111;
             this.remove2.TabStop = false;
             this.remove2.Tag = "2";
-            this.remove2.Text = "Remove";
+            this.remove2.Text = "Deny";
             this.remove2.UseVisualStyleBackColor = true;
             this.remove2.Visible = false;
             this.remove2.Click += new System.EventHandler(this.awardAndRemove_Click);
@@ -1270,7 +1264,7 @@
             this.award2.TabIndex = 110;
             this.award2.TabStop = false;
             this.award2.Tag = "2";
-            this.award2.Text = "Award";
+            this.award2.Text = "Admit";
             this.award2.UseVisualStyleBackColor = true;
             this.award2.Visible = false;
             this.award2.Click += new System.EventHandler(this.awardAndRemove_Click);
@@ -1285,7 +1279,7 @@
             this.remove3.TabIndex = 113;
             this.remove3.TabStop = false;
             this.remove3.Tag = "3";
-            this.remove3.Text = "Remove";
+            this.remove3.Text = "Deny";
             this.remove3.UseVisualStyleBackColor = true;
             this.remove3.Visible = false;
             this.remove3.Click += new System.EventHandler(this.awardAndRemove_Click);
@@ -1300,7 +1294,7 @@
             this.award3.TabIndex = 112;
             this.award3.TabStop = false;
             this.award3.Tag = "3";
-            this.award3.Text = "Award";
+            this.award3.Text = "Admit";
             this.award3.UseVisualStyleBackColor = true;
             this.award3.Visible = false;
             this.award3.Click += new System.EventHandler(this.awardAndRemove_Click);
@@ -1315,7 +1309,7 @@
             this.remove4.TabIndex = 115;
             this.remove4.TabStop = false;
             this.remove4.Tag = "4";
-            this.remove4.Text = "Remove";
+            this.remove4.Text = "Deny";
             this.remove4.UseVisualStyleBackColor = true;
             this.remove4.Visible = false;
             this.remove4.Click += new System.EventHandler(this.awardAndRemove_Click);
@@ -1330,7 +1324,7 @@
             this.award4.TabIndex = 114;
             this.award4.TabStop = false;
             this.award4.Tag = "4";
-            this.award4.Text = "Award";
+            this.award4.Text = "Admit";
             this.award4.UseVisualStyleBackColor = true;
             this.award4.Visible = false;
             this.award4.Click += new System.EventHandler(this.awardAndRemove_Click);
@@ -1345,7 +1339,7 @@
             this.remove5.TabIndex = 117;
             this.remove5.TabStop = false;
             this.remove5.Tag = "5";
-            this.remove5.Text = "Remove";
+            this.remove5.Text = "Deny";
             this.remove5.UseVisualStyleBackColor = true;
             this.remove5.Visible = false;
             this.remove5.Click += new System.EventHandler(this.awardAndRemove_Click);
@@ -1360,7 +1354,7 @@
             this.award5.TabIndex = 116;
             this.award5.TabStop = false;
             this.award5.Tag = "5";
-            this.award5.Text = "Award";
+            this.award5.Text = "Admit";
             this.award5.UseVisualStyleBackColor = true;
             this.award5.Visible = false;
             this.award5.Click += new System.EventHandler(this.awardAndRemove_Click);
@@ -1375,7 +1369,7 @@
             this.remove6.TabIndex = 119;
             this.remove6.TabStop = false;
             this.remove6.Tag = "6";
-            this.remove6.Text = "Remove";
+            this.remove6.Text = "Deny";
             this.remove6.UseVisualStyleBackColor = true;
             this.remove6.Visible = false;
             this.remove6.Click += new System.EventHandler(this.awardAndRemove_Click);
@@ -1390,7 +1384,7 @@
             this.award6.TabIndex = 118;
             this.award6.TabStop = false;
             this.award6.Tag = "6";
-            this.award6.Text = "Award";
+            this.award6.Text = "Admit";
             this.award6.UseVisualStyleBackColor = true;
             this.award6.Visible = false;
             this.award6.Click += new System.EventHandler(this.awardAndRemove_Click);
