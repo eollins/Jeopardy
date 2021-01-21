@@ -404,8 +404,7 @@ namespace Jeopardy
         }
 
         public static BuzzList buzzes;
-        bool earlyBuzzed = false;
-        int earlyBuzzID = 0;
+        bool[] earlyBuzzed = new bool[6];
         private async void CheckForBuzzes(object sender, ElapsedEventArgs e)
         {
             string data = await GameFunctionAsync("buzzerInfo", gameCodeNum, null);
@@ -413,6 +412,7 @@ namespace Jeopardy
             List<Buzz> sorted = b.buzzes.OrderBy(o => o.timestamp).ToList();
             buzzes = b;
 
+            List<Buzz> remove = new List<Buzz>();
             for (int i = 0; i < sorted.Count; i++)
             {
                 if (sorted[i].early == "1")
@@ -423,13 +423,17 @@ namespace Jeopardy
                     {
                         if (gamePlayers[v].ID.ToString() == playerID)
                         {
-                            earlyBuzzed = true;
-                            earlyBuzzID = v;
+                            earlyBuzzed[v] = true;
                         }
                     }
 
-                    sorted.RemoveAt(i);
+                    remove.Add(sorted[i]);
                 }
+            }
+
+            foreach (Buzz s in remove)
+            {
+                sorted.Remove(s);
             }
 
             if (checkBuzzes)
@@ -1869,15 +1873,16 @@ namespace Jeopardy
                 }
             }
 
-            if (earlyBuzzed)
+            for (int i = 0; i < 6; i++)
             {
-                ColorBoxes(earlyBuzzID + 1, Color.LightYellow);
-                player.SoundLocation = "Early.wav";
-                player.Play();
-
-                earlyBuzzed = false;
-                earlyBuzzID = 0;
+                if (earlyBuzzed[i] && !buzzed)
+                {
+                    ColorBoxes(i + 1, Color.LightYellow);
+                    player.SoundLocation = "Early.wav";
+                    player.Play();
+                }
             }
+            earlyBuzzed = new bool[6];
 
             if (buzzed)
             {
@@ -2034,6 +2039,7 @@ namespace Jeopardy
         public void revealResponse_Click(object sender, EventArgs e)
         {
             HideBoard();
+            pictureBox.Visible = false;
             clue.Visible = true;
             ColorBoxes(1, Color.White);
             ColorBoxes(2, Color.White);
@@ -2056,7 +2062,7 @@ namespace Jeopardy
             for (int i = gamePlayers.Count - 1; i >= 0; i--)
             {
                 Player player = gamePlayers[i];
-                if (player.Score < 0 || player.Wager == null)
+                if (player.Score <= 0 || player.Wager == null)
                 {
                     continue;
                 }

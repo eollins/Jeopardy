@@ -742,7 +742,7 @@
             // 
             // player1name
             // 
-            this.player1name.BackColor = System.Drawing.Color.MistyRose;
+            this.player1name.BackColor = System.Drawing.SystemColors.Window;
             this.player1name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player1name.Location = new System.Drawing.Point(12, 528);
             this.player1name.Name = "player1name";
