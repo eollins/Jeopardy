@@ -54,6 +54,7 @@ namespace Jeopardy
             public string Answer { get; set; }
             public int Visited { get; set; }
             public int Admitted { get; set; }
+            public Player Teammate { get; set; }
 
             public Player(string Name, int ID)
             {
@@ -61,11 +62,13 @@ namespace Jeopardy
                 this.ID = ID;
                 Visited = 0;
                 Admitted = 0;
+                Teammate = null;
             }
         }
 
         public static List<Player> gamePlayers = new List<Player>();
         List<int> prevBuzzed = new List<int>();
+        List<int> TeammateIDs = new List<int>();
 
         int endStage = 1;
 
@@ -73,7 +76,7 @@ namespace Jeopardy
         string doublePreload;
         string finalPreload;
 
-        bool magnitude = false;
+        bool clueOpen = false;
         System.Timers.Timer buzzTimer = new System.Timers.Timer();
 
         System.Media.SoundPlayer player = new System.Media.SoundPlayer();
@@ -185,6 +188,7 @@ namespace Jeopardy
             HideBoard();
             btn.Tag = "gaert@" + value;
             prevBuzzed.Clear();
+            clueOpen = true;
 
             timeToAnswer.Maximum = (BuzzerList.SecondsToGive * 1000);
             timeToAnswer.Value = (BuzzerList.SecondsToGive * 1000);
@@ -351,7 +355,7 @@ namespace Jeopardy
                 string p = players[i];
                 string[] comp = p.Split('`');
 
-                if (!PlayerPresent(int.Parse(comp[1])))
+                if (!PlayerPresent(int.Parse(comp[1])) && !TeammateIDs.Contains(int.Parse(comp[1])))
                 {
                     gamePlayers.Add(new Player(comp[0], int.Parse(comp[1])));
                 }
@@ -412,28 +416,31 @@ namespace Jeopardy
             List<Buzz> sorted = b.buzzes.OrderBy(o => o.timestamp).ToList();
             buzzes = b;
 
-            List<Buzz> remove = new List<Buzz>();
-            for (int i = 0; i < sorted.Count; i++)
+            if (clueOpen)
             {
-                if (sorted[i].early == "1")
+                List<Buzz> remove = new List<Buzz>();
+                for (int i = 0; i < sorted.Count; i++)
                 {
-                    string playerID = sorted[i].playerID;
-                    
-                    for (int v = 0; v < gamePlayers.Count; v++)
+                    if (sorted[i].early == "1")
                     {
-                        if (gamePlayers[v].ID.ToString() == playerID)
+                        string playerID = sorted[i].playerID;
+
+                        for (int v = 0; v < gamePlayers.Count; v++)
                         {
-                            earlyBuzzed[v] = true;
+                            if (gamePlayers[v].ID.ToString() == playerID)
+                            {
+                                earlyBuzzed[v] = true;
+                            }
                         }
+
+                        remove.Add(sorted[i]);
                     }
-
-                    remove.Add(sorted[i]);
                 }
-            }
 
-            foreach (Buzz s in remove)
-            {
-                sorted.Remove(s);
+                foreach (Buzz s in remove)
+                {
+                    sorted.Remove(s);
+                }
             }
 
             if (checkBuzzes)
@@ -456,7 +463,7 @@ namespace Jeopardy
                     buzzed = true;
                     buzzID = int.Parse(sorted[0].playerID);
 
-                    Debug.WriteLine("Chosen: " + buzzID);
+                        Debug.WriteLine("Chosen: " + buzzID);
 
                     for (int i = 1; i < sorted.Count; i++)
                     {
@@ -465,18 +472,23 @@ namespace Jeopardy
 
                     foreach (Player player in gamePlayers)
                     {
-                        if (player1name.Text == player.Name && buzzID == player.ID)
+                        if ((player1name.Text == player.Name && buzzID == player.ID) || (player.Teammate != null && player.Teammate.ID == buzzID))
                             buzzIndex = 1;
-                        if (player2name.Text == player.Name && buzzID == player.ID)
+                        else if ((player2name.Text == player.Name && buzzID == player.ID) || (player.Teammate != null && player.Teammate.ID == buzzID))
                             buzzIndex = 2;
-                        if (player3name.Text == player.Name && buzzID == player.ID)
+                        else if ((player3name.Text == player.Name && buzzID == player.ID) || (player.Teammate != null && player.Teammate.ID == buzzID))
                             buzzIndex = 3;
-                        if (player4name.Text == player.Name && buzzID == player.ID)
+                        else if ((player4name.Text == player.Name && buzzID == player.ID) || (player.Teammate != null && player.Teammate.ID == buzzID))
                             buzzIndex = 4;
-                        if (player5name.Text == player.Name && buzzID == player.ID)
+                        else if ((player5name.Text == player.Name && buzzID == player.ID) || (player.Teammate != null && player.Teammate.ID == buzzID))
                             buzzIndex = 5;
-                        if (player6name.Text == player.Name && buzzID == player.ID)
+                        else if ((player6name.Text == player.Name && buzzID == player.ID) || (player.Teammate != null && player.Teammate.ID == buzzID))
                             buzzIndex = 6;
+
+                        if (player.Teammate != null && player.Teammate.ID == buzzID)
+                        {
+                            buzzID = player.ID;
+                        }
                     }
                 }
             }
@@ -517,6 +529,13 @@ namespace Jeopardy
 
             categories.Clear();
             clues.Clear();
+
+            player1name.Enabled = false;
+            player2name.Enabled = false;
+            player3name.Enabled = false;
+            player4name.Enabled = false;
+            player5name.Enabled = false;
+            player6name.Enabled = false;
 
             if (customRadioBtn.Checked)
             {
@@ -1122,6 +1141,7 @@ namespace Jeopardy
             customWager.Value = 0;
             countDown = false;
             ShowBoard();
+            clueOpen = false;
 
             string data = GameFunction("setGameLock", gameCodeNum, "2");
             buzzes = new BuzzList();
@@ -1209,11 +1229,6 @@ namespace Jeopardy
             cat4label.Visible = false;
             cat5label.Visible = false;
             cat6label.Visible = false;
-        }
-
-        private void textBox6_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void categoryLabel_Click(object sender, EventArgs e)
@@ -1420,7 +1435,6 @@ namespace Jeopardy
         {
             Controller controller = new Controller(this);
             controller.Show();
-            magnitude = true;
             this.Size = new Size(this.Width, 629);
             //unlockBtnRef = controller.unlock;
             clock.Enabled = true;
@@ -1690,13 +1704,15 @@ namespace Jeopardy
 
                 lastAmount = gamePlayers.Count;
 
-                string[] comp = new string[] { player.Name, player.ID.ToString() };
-
                 if (i == 0)
                 {
-                    if (player1name.Text == "`")
+                    if (player.Teammate == null)
                     {
-                        player1name.Text = comp[0];
+                        player1name.Text = player.Name;
+                    }
+                    else
+                    {
+                        player1name.Text = player.Name + "/" + player.Teammate.Name;
                     }
 
                     ToggleNamePlate(1, true);
@@ -1709,9 +1725,13 @@ namespace Jeopardy
                 }
                 else if (i == 1)
                 {
-                    if (player2name.Text == "`")
+                    if (player.Teammate == null)
                     {
-                        player2name.Text = comp[0];
+                        player2name.Text = player.Name;
+                    }
+                    else
+                    {
+                        player2name.Text = player.Name + "/" + player.Teammate.Name;
                     }
 
                     ToggleNamePlate(2, true);
@@ -1724,9 +1744,13 @@ namespace Jeopardy
                 }
                 else if (i == 2)
                 {
-                    if (player3name.Text == "`")
+                    if (player.Teammate == null)
                     {
-                        player3name.Text = comp[0];
+                        player3name.Text = player.Name;
+                    }
+                    else
+                    {
+                        player3name.Text = player.Name + "/" + player.Teammate.Name;
                     }
 
                     ToggleNamePlate(3, true);
@@ -1739,9 +1763,13 @@ namespace Jeopardy
                 }
                 else if (i == 3)
                 {
-                    if (player4name.Text == "`")
+                    if (player.Teammate == null)
                     {
-                        player4name.Text = comp[0];
+                        player4name.Text = player.Name;
+                    }
+                    else
+                    {
+                        player4name.Text = player.Name + "/" + player.Teammate.Name;
                     }
 
                     ToggleNamePlate(4, true);
@@ -1754,9 +1782,13 @@ namespace Jeopardy
                 }
                 else if (i == 4)
                 {
-                    if (player5name.Text == "`")
+                    if (player.Teammate == null)
                     {
-                        player5name.Text = comp[0];
+                        player5name.Text = player.Name;
+                    }
+                    else
+                    {
+                        player5name.Text = player.Name + "/" + player.Teammate.Name;
                     }
 
                     ToggleNamePlate(5, true);
@@ -1769,9 +1801,13 @@ namespace Jeopardy
                 }
                 else if (i == 5)
                 {
-                    if (player6name.Text == "`")
+                    if (player.Teammate == null)
                     {
-                        player6name.Text = comp[0];
+                        player6name.Text = player.Name;
+                    }
+                    else
+                    {
+                        player6name.Text = player.Name + "/" + player.Teammate.Name;
                     }
 
                     ToggleNamePlate(6, true);
@@ -2035,17 +2071,33 @@ namespace Jeopardy
 
                 if (player.Visited == 0)
                 {
-                    clue.Text = player.Answer;
-                    player.Visited++;
-                    cat1label.Text = player.Name; cat2label.Text = player.Name; cat3label.Text = player.Name; cat4label.Text = player.Name; cat5label.Text = player.Name; cat6label.Text = player.Name;
+                    if (player.Teammate == null)
+                    {
+                        clue.Text = player.Answer;
+                        player.Visited++;
+                        cat1label.Text = player.Name; cat2label.Text = player.Name; cat3label.Text = player.Name; cat4label.Text = player.Name; cat5label.Text = player.Name; cat6label.Text = player.Name;
+                    }
+                    else
+                    {
+                        clue.Text = player.Name + ": " + player.Answer + "\n" + player.Teammate.Name + ": " + player.Teammate.Answer;
+                        player.Visited++;
+                        cat1label.Text = player.Name; cat2label.Text = player.Teammate.Name; cat3label.Text = player.Name; cat4label.Text = player.Teammate.Name; cat5label.Text = player.Name; cat6label.Text = player.Teammate.Name;
+                    }
                     break;
                 }
                 else if (player.Visited == 1)
                 {
-                    clue.Text = player.Answer + "\n\n$" + player.Wager;
-                    customWager.Value = int.Parse(player.Wager);
-                    player.Visited++;
-                    cat1label.Text = player.Name; cat2label.Text = player.Name; cat3label.Text = player.Name; cat4label.Text = player.Name; cat5label.Text = player.Name; cat6label.Text = player.Name;
+                    if (player.Teammate == null)
+                    {
+                        clue.Text = player.Answer + "\n\n$" + player.Wager;
+                        customWager.Value = int.Parse(player.Wager);
+                        player.Visited++;
+                    }
+                    else
+                    {
+                        clue.Text = player.Name + ": " + player.Answer + " - $" + player.Wager + "\n" + player.Teammate.Name + ": " + player.Teammate.Answer + " - $" + player.Teammate.Wager;
+                        player.Visited++;
+                    }
                     break;
                 }
                 else if (player.Visited == 2)
@@ -2205,6 +2257,46 @@ namespace Jeopardy
                     timeToAnswer.Visible = true;
                     break;
             }
+        }
+
+        int[] clickedNames = new int[2] { -1, -1 };
+        private void NameClicked(object sender, EventArgs e)
+        {
+            TextBox box = (TextBox)sender;
+            box.BackColor = Color.LightSteelBlue;
+
+            if (clickedNames[0] == -1)
+            {
+                clickedNames[0] = int.Parse(box.Tag.ToString()) - 1;
+            }
+            else if (clickedNames[1] == -1)
+            {
+                clickedNames[1] = int.Parse(box.Tag.ToString()) - 1;
+
+                TeammateIDs.Add(gamePlayers[clickedNames[1]].ID);
+                gamePlayers[clickedNames[0]].Teammate = gamePlayers[clickedNames[1]];
+                gamePlayers.RemoveAt(clickedNames[1]);
+                clickedNames = new int[] { -1, -1 };
+
+                ToggleNamePlate(1, false);
+                ToggleNamePlate(2, false);
+                ToggleNamePlate(3, false);
+                ToggleNamePlate(4, false);
+                ToggleNamePlate(5, false);
+                ToggleNamePlate(6, false);
+
+                ColorBoxes(1, Color.White);
+                ColorBoxes(2, Color.White);
+                ColorBoxes(3, Color.White);
+                ColorBoxes(4, Color.White);
+                ColorBoxes(5, Color.White);
+                ColorBoxes(6, Color.White);
+            }
+        }
+
+        private void NameClicked(object sender, MouseEventArgs e)
+        {
+            
         }
     }
 }

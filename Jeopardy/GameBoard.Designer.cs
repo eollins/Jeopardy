@@ -744,81 +744,93 @@
             // player1name
             // 
             this.player1name.BackColor = System.Drawing.SystemColors.Window;
-            this.player1name.Enabled = false;
             this.player1name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player1name.Location = new System.Drawing.Point(12, 528);
             this.player1name.Name = "player1name";
+            this.player1name.ReadOnly = true;
             this.player1name.Size = new System.Drawing.Size(166, 29);
             this.player1name.TabIndex = 48;
             this.player1name.Tag = "1";
             this.player1name.Text = "`";
             this.player1name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.player1name.Visible = false;
+            this.player1name.Click += new System.EventHandler(this.NameClicked);
+            this.player1name.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NameClicked);
             // 
             // player2name
             // 
-            this.player2name.Enabled = false;
             this.player2name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player2name.Location = new System.Drawing.Point(193, 528);
             this.player2name.Name = "player2name";
+            this.player2name.ReadOnly = true;
             this.player2name.Size = new System.Drawing.Size(166, 29);
             this.player2name.TabIndex = 49;
             this.player2name.Tag = "2";
             this.player2name.Text = "`";
             this.player2name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.player2name.Visible = false;
+            this.player2name.Click += new System.EventHandler(this.NameClicked);
+            this.player2name.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NameClicked);
             // 
             // player3name
             // 
-            this.player3name.Enabled = false;
             this.player3name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player3name.Location = new System.Drawing.Point(374, 528);
             this.player3name.Name = "player3name";
+            this.player3name.ReadOnly = true;
             this.player3name.Size = new System.Drawing.Size(166, 29);
             this.player3name.TabIndex = 50;
             this.player3name.Tag = "3";
             this.player3name.Text = "`";
             this.player3name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.player3name.Visible = false;
+            this.player3name.Click += new System.EventHandler(this.NameClicked);
+            this.player3name.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NameClicked);
             // 
             // player4name
             // 
-            this.player4name.Enabled = false;
             this.player4name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player4name.Location = new System.Drawing.Point(553, 528);
             this.player4name.Name = "player4name";
+            this.player4name.ReadOnly = true;
             this.player4name.Size = new System.Drawing.Size(166, 29);
             this.player4name.TabIndex = 51;
             this.player4name.Tag = "4";
             this.player4name.Text = "`";
             this.player4name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.player4name.Visible = false;
+            this.player4name.Click += new System.EventHandler(this.NameClicked);
+            this.player4name.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NameClicked);
             // 
             // player5name
             // 
-            this.player5name.Enabled = false;
             this.player5name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player5name.Location = new System.Drawing.Point(734, 527);
             this.player5name.Name = "player5name";
+            this.player5name.ReadOnly = true;
             this.player5name.Size = new System.Drawing.Size(166, 29);
             this.player5name.TabIndex = 52;
             this.player5name.Tag = "5";
             this.player5name.Text = "`";
             this.player5name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.player5name.Visible = false;
+            this.player5name.Click += new System.EventHandler(this.NameClicked);
+            this.player5name.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NameClicked);
             // 
             // player6name
             // 
-            this.player6name.Enabled = false;
             this.player6name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player6name.Location = new System.Drawing.Point(915, 527);
             this.player6name.Name = "player6name";
+            this.player6name.ReadOnly = true;
             this.player6name.Size = new System.Drawing.Size(166, 29);
             this.player6name.TabIndex = 53;
             this.player6name.Tag = "6";
             this.player6name.Text = "`";
             this.player6name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.player6name.Visible = false;
+            this.player6name.Click += new System.EventHandler(this.NameClicked);
+            this.player6name.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NameClicked);
             // 
             // generateBtn
             // 
@@ -866,11 +878,11 @@
             // customWagerLabel
             // 
             this.customWagerLabel.AutoSize = true;
-            this.customWagerLabel.Location = new System.Drawing.Point(590, 718);
+            this.customWagerLabel.Location = new System.Drawing.Point(567, 720);
             this.customWagerLabel.Name = "customWagerLabel";
-            this.customWagerLabel.Size = new System.Drawing.Size(58, 13);
+            this.customWagerLabel.Size = new System.Drawing.Size(105, 13);
             this.customWagerLabel.TabIndex = 60;
-            this.customWagerLabel.Text = "Clue Value";
+            this.customWagerLabel.Text = "Clue Value or Wager";
             // 
             // jeopardyRadioBtn
             // 
