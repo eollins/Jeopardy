@@ -64,7 +64,7 @@ namespace Jeopardy
             }
         }
 
-        List<Player> gamePlayers = new List<Player>();
+        public static List<Player> gamePlayers = new List<Player>();
         List<int> prevBuzzed = new List<int>();
 
         int endStage = 1;
@@ -1660,10 +1660,11 @@ namespace Jeopardy
                     gamePlayers.RemoveAt(c);
                 }
             }
-            
+
+            int offset = 0;
             for (int i = 0; i < gamePlayers.Count; i++)
             {
-                Player player = gamePlayers[i];
+                Player player = gamePlayers[i - offset];
                 if (gamePlayers.Count < lastAmount)
                 {
                     ToggleNamePlate(1, false);
@@ -1672,6 +1673,19 @@ namespace Jeopardy
                     ToggleNamePlate(4, false);
                     ToggleNamePlate(5, false);
                     ToggleNamePlate(6, false);
+                }
+
+                if (player.Admitted == 0)
+                {
+                    offset++;
+                    continue;
+                }
+
+                if (player.Admitted == 2)
+                {
+                    offset++;
+                    //call to deny
+                    continue;
                 }
 
                 lastAmount = gamePlayers.Count;
@@ -1692,14 +1706,6 @@ namespace Jeopardy
                     {
                         player1name.BackColor = Color.LightGreen;
                     }
-
-                    if (gamePlayers[0].Admitted == 1)
-                    {
-                        player1name.Enabled = false;
-                        award1.Text = "Award";
-                        remove1.Text = "Remove";
-                        gamePlayers[0].Name = player1name.Text;
-                    }
                 }
                 else if (i == 1)
                 {
@@ -1714,14 +1720,6 @@ namespace Jeopardy
                     if (player.Wager != null && finalJeopardy && player.Score > 0)
                     {
                         player2name.BackColor = Color.LightGreen;
-                    }
-
-                    if (gamePlayers[1].Admitted == 1)
-                    {
-                        player2name.Enabled = false;
-                        award2.Text = "Award";
-                        remove2.Text = "Remove";
-                        gamePlayers[1].Name = player2name.Text;
                     }
                 }
                 else if (i == 2)
@@ -1738,14 +1736,6 @@ namespace Jeopardy
                     {
                         player3name.BackColor = Color.LightGreen;
                     }
-
-                    if (gamePlayers[2].Admitted == 1)
-                    {
-                        player3name.Enabled = false;
-                        award3.Text = "Award";
-                        remove3.Text = "Remove";
-                        gamePlayers[2].Name = player3name.Text;
-                    }
                 }
                 else if (i == 3)
                 {
@@ -1760,14 +1750,6 @@ namespace Jeopardy
                     if (player.Wager != null && finalJeopardy && player.Score > 0)
                     {
                         player4name.BackColor = Color.LightGreen;
-                    }
-
-                    if (gamePlayers[3].Admitted == 1)
-                    {
-                        player4name.Enabled = false;
-                        award4.Text = "Award";
-                        remove4.Text = "Remove";
-                        gamePlayers[3].Name = player4name.Text;
                     }
                 }
                 else if (i == 4)
@@ -1784,14 +1766,6 @@ namespace Jeopardy
                     {
                         player5name.BackColor = Color.LightGreen;
                     }
-
-                    if (gamePlayers[4].Admitted == 1)
-                    {
-                        player5name.Enabled = false;
-                        award5.Text = "Award";
-                        remove5.Text = "Remove";
-                        gamePlayers[4].Name = player5name.Text;
-                    }
                 }
                 else if (i == 5)
                 {
@@ -1806,14 +1780,6 @@ namespace Jeopardy
                     if (player.Wager != null && finalJeopardy && player.Score > 0)
                     {
                         player6name.BackColor = Color.LightGreen;
-                    }
-
-                    if (gamePlayers[5].Admitted == 1)
-                    {
-                        player6name.Enabled = false;
-                        award6.Text = "Award";
-                        remove6.Text = "Remove";
-                        gamePlayers[5].Name = player6name.Text;
                     }
                 }
             }

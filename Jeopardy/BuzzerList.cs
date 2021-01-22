@@ -24,6 +24,9 @@ namespace Jeopardy
             InitializeComponent();
         }
 
+        bool playerDisplayed = false;
+        GameBoard.Player currentPlayer;
+        List<GameBoard.Player> toBeAdmitted = new List<GameBoard.Player>();
         GameBoard.BuzzList lastList = null;
         private void checkForBuzzes_Tick(object sender, EventArgs e)
         {
@@ -36,6 +39,37 @@ namespace Jeopardy
                     listOfBuzzes.Items.Add(Board.IDtoName(int.Parse(b.playerID)) + " - " + (int)(double .Parse(b.timestamp) - timestampOne));
                 }
                 lastList = GameBoard.buzzes;
+            }
+
+            List<GameBoard.Player> players = GameBoard.gamePlayers;
+            foreach (GameBoard.Player player in players)
+            {
+                if (player.Admitted == 0 && !toBeAdmitted.Contains(player))
+                {
+                    if (!checkBox1.Checked)
+                        player.Admitted = 1;
+                    else
+                        toBeAdmitted.Add(player);
+                }
+            }
+
+            if (!playerDisplayed && toBeAdmitted.Count > 0)
+            {
+                noPlayersMsg.Visible = false;
+                nameBox.Visible = true;
+                admit.Visible = true;
+                deny.Visible = true;
+
+                nameBox.Text = toBeAdmitted[0].Name;
+                currentPlayer = toBeAdmitted[0];
+                playerDisplayed = true;
+            }
+            else if (toBeAdmitted.Count == 0)
+            {
+                noPlayersMsg.Visible = true;
+                nameBox.Visible = false;
+                admit.Visible = false;
+                deny.Visible = false;
             }
         }
 
@@ -72,6 +106,35 @@ namespace Jeopardy
             else
             {
                 Board.GameFunction("setPenalty", GameBoard.GameCode, "0");
+            }
+        }
+
+        private void admit_Click(object sender, EventArgs e)
+        {
+            currentPlayer.Name = nameBox.Text;
+            currentPlayer.Admitted = 1;
+            toBeAdmitted.Remove(currentPlayer);
+            Board.GameFunction("renamePlayer", nameBox.Text, currentPlayer.ID.ToString());
+            playerDisplayed = false;
+        }
+
+        private void deny_Click(object sender, EventArgs e)
+        {
+            GameBoard.gamePlayers.Remove(currentPlayer);
+            Board.GameFunction("removePlayer", currentPlayer.Name, null);
+            toBeAdmitted.Remove(currentPlayer);
+            playerDisplayed = false;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                this.Size = new Size(329, 432);
+            }
+            else
+            {
+                this.Size = new Size(329, 302);
             }
         }
     }
