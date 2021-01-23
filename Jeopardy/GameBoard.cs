@@ -255,6 +255,7 @@ namespace Jeopardy
                     currentValue *= 2;
                 }
                 customWager.Value = currentValue;
+                Controller.WagerValue = (int)customWager.Value;
 
                 if (clue.Text.ToLower().Contains("seen here"))
                 {
@@ -890,7 +891,7 @@ namespace Jeopardy
                 else
                 {
                     cat2 = finalJepInfo;
-                    clue.Text = finalJepInfo.clues[0].question;
+                    clue.Text = finalJepInfo.clues[0].question.Replace("&", "&&") ;
                     answerBox.Text = finalJepInfo.clues[0].answer;
                 }
 
@@ -2098,6 +2099,7 @@ namespace Jeopardy
                         clue.Text = player.Name + ": " + player.Answer + " - $" + player.Wager + "\n" + player.Teammate.Name + ": " + player.Teammate.Answer + " - $" + player.Teammate.Wager;
                         player.Visited++;
                     }
+                    Controller.WagerValue = int.Parse(player.Wager);
                     break;
                 }
                 else if (player.Visited == 2)
@@ -2145,7 +2147,13 @@ namespace Jeopardy
             Controller.Answer = answerBox.Text;
             Controller.DailyDoubles = doubles.Text;
             Controller.PlayerCount = gamePlayers.Count;
-            Controller.WagerValue = (int)customWager.Value;
+            foreach (Player p in gamePlayers)
+            {
+                if (p.Admitted == 0)
+                {
+                    Controller.PlayerCount--;
+                }
+            }
 
             if (unlock.Text == "Unlock")
             {

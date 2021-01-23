@@ -744,6 +744,7 @@
             // player1name
             // 
             this.player1name.BackColor = System.Drawing.SystemColors.Window;
+            this.player1name.Enabled = false;
             this.player1name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player1name.Location = new System.Drawing.Point(12, 528);
             this.player1name.Name = "player1name";
@@ -759,6 +760,7 @@
             // 
             // player2name
             // 
+            this.player2name.Enabled = false;
             this.player2name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player2name.Location = new System.Drawing.Point(193, 528);
             this.player2name.Name = "player2name";
@@ -774,6 +776,7 @@
             // 
             // player3name
             // 
+            this.player3name.Enabled = false;
             this.player3name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player3name.Location = new System.Drawing.Point(374, 528);
             this.player3name.Name = "player3name";
@@ -789,6 +792,7 @@
             // 
             // player4name
             // 
+            this.player4name.Enabled = false;
             this.player4name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player4name.Location = new System.Drawing.Point(553, 528);
             this.player4name.Name = "player4name";
@@ -804,6 +808,7 @@
             // 
             // player5name
             // 
+            this.player5name.Enabled = false;
             this.player5name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player5name.Location = new System.Drawing.Point(734, 527);
             this.player5name.Name = "player5name";
@@ -819,6 +824,7 @@
             // 
             // player6name
             // 
+            this.player6name.Enabled = false;
             this.player6name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.player6name.Location = new System.Drawing.Point(915, 527);
             this.player6name.Name = "player6name";
@@ -1461,7 +1467,7 @@
             this.timeToAnswer.Location = new System.Drawing.Point(12, 562);
             this.timeToAnswer.Maximum = 5000;
             this.timeToAnswer.Name = "timeToAnswer";
-            this.timeToAnswer.Size = new System.Drawing.Size(1069, 15);
+            this.timeToAnswer.Size = new System.Drawing.Size(1069, 20);
             this.timeToAnswer.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.timeToAnswer.TabIndex = 126;
             this.timeToAnswer.Value = 5000;
@@ -1487,7 +1493,7 @@
             // label3
             // 
             this.label3.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label3.Location = new System.Drawing.Point(-4, 587);
+            this.label3.Location = new System.Drawing.Point(-4, 591);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(1101, 3);
             this.label3.TabIndex = 128;

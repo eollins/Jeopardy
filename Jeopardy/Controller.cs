@@ -127,6 +127,8 @@ namespace Jeopardy
         {
             Button btn = (Button)sender;
             board.AdjustSettings(2, (int)customWager.Value);
+            customWager.Value = 0;
+            WagerValue = 0;
             board.awardAndRemove_Click(btn, new EventArgs());
         }
 
@@ -145,7 +147,10 @@ namespace Jeopardy
                 unlock.Text = "Lock";
             }
 
-            customWager.Value = WagerValue;
+            if (WagerValue != 0 && customWager.Value == 0)
+            {
+                customWager.Value = WagerValue;
+            }
 
             if (PlayerCount == 0)
             {
