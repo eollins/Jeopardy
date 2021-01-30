@@ -254,8 +254,6 @@ namespace Jeopardy
                 {
                     currentValue *= 2;
                 }
-                customWager.Value = currentValue;
-                Controller.WagerValue = (int)customWager.Value;
 
                 if (clue.Text.ToLower().Contains("seen here"))
                 {
@@ -326,7 +324,6 @@ namespace Jeopardy
 
             buzzTimer = new System.Timers.Timer(400);
             buzzTimer.Elapsed += new ElapsedEventHandler(CheckForBuzzes);
-            buzzTimer.Enabled = true;
             unlockBtnRef = unlock;
 
             updateNames.Enabled = true;
@@ -405,7 +402,6 @@ namespace Jeopardy
         {
             public string timestamp { get; set; }
             public string playerID { get; set; }
-            public string early { get; set; }
         }
 
         public static BuzzList buzzes;
@@ -416,33 +412,6 @@ namespace Jeopardy
             BuzzList b = JsonConvert.DeserializeObject<BuzzList>(data);
             List<Buzz> sorted = b.buzzes.OrderBy(o => o.timestamp).ToList();
             buzzes = b;
-
-            if (clueOpen)
-            {
-                List<Buzz> remove = new List<Buzz>();
-                for (int i = 0; i < sorted.Count; i++)
-                {
-                    if (sorted[i].early == "1")
-                    {
-                        string playerID = sorted[i].playerID;
-
-                        for (int v = 0; v < gamePlayers.Count; v++)
-                        {
-                            if (gamePlayers[v].ID.ToString() == playerID)
-                            {
-                                earlyBuzzed[v] = true;
-                            }
-                        }
-
-                        remove.Add(sorted[i]);
-                    }
-                }
-
-                foreach (Buzz s in remove)
-                {
-                    sorted.Remove(s);
-                }
-            }
 
             if (checkBuzzes)
             {
@@ -674,7 +643,7 @@ namespace Jeopardy
                         index = i;
                     }
                 }
-                highlightedPlayer = index;
+                highlightedPlayer = index + 1;
                 ColorBoxes(1, Color.White);
                 ColorBoxes(2, Color.White);
                 ColorBoxes(3, Color.White);
@@ -682,7 +651,7 @@ namespace Jeopardy
                 ColorBoxes(5, Color.White);
                 ColorBoxes(6, Color.White);
 
-                ColorBoxes(index, Color.LightPink);
+                ColorBoxes(index + 1, Color.LightPink);
             }
 
             if (c1v200.Enabled == false && !finalJeopardyBtn.Checked)
@@ -977,7 +946,6 @@ namespace Jeopardy
         int highlightedPlayer = 0;
         public void awardAndRemove_Click(object sender, EventArgs e)
         {
-            currentValue = (int)customWager.Value;
             Button btn = (Button)sender;
             string tag;
             tag = btn.Tag.ToString();
@@ -1008,6 +976,11 @@ namespace Jeopardy
                     player6name.Text = "`";
 
                 return;
+            }
+
+            if (customWager.Value != 0)
+            {
+                currentValue = (int)customWager.Value;
             }
 
             if ((btn.Text == "Remove" && currentValue > 0) || (btn.Text == "Award" && currentValue < 0))
@@ -1840,7 +1813,7 @@ namespace Jeopardy
         bool checkBuzzes = false;
         public void Lock()
         {
-            //buzzTimer.Enabled = false;
+            buzzTimer.Enabled = false;
             checkBuzzes = false;
             string data = GameFunction("setGameLock", gameCodeNum, "1");
             unlock.Text = "Unlock";
@@ -1851,7 +1824,7 @@ namespace Jeopardy
 
         public void Unlock()
         {
-            //buzzTimer.Enabled = true;
+            buzzTimer.Enabled = true;
             checkBuzzes = true;
             string data = GameFunction("setGameLock", gameCodeNum, "0");
             unlock.Text = "Lock";

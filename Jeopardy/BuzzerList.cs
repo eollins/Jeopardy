@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -136,6 +138,21 @@ namespace Jeopardy
             {
                 this.Size = new Size(329, 302);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            WebRequest request = WebRequest.Create("https://random-word-api.herokuapp.com/word?number=1");
+            WebResponse resp = request.GetResponse();
+            StreamReader reader = new StreamReader(resp.GetResponseStream());
+            string data = reader.ReadToEnd().Substring(2);
+            string word = "";
+            word += data[0].ToString().ToUpper();
+            for (int i = 1; i < data.Length - 2; i++)
+            {
+                word += data[i];
+            }
+            nameBox.Text = word + " " + nameBox.Text;
         }
     }
 }

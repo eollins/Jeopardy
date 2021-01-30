@@ -44,6 +44,7 @@
             this.admit = new System.Windows.Forms.Button();
             this.deny = new System.Windows.Forms.Button();
             this.noPlayersMsg = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.timerLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.millis)).BeginInit();
             this.SuspendLayout();
@@ -220,12 +221,23 @@
             this.noPlayersMsg.Text = "No players in queue";
             this.noPlayersMsg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(13, 284);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(32, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Adj";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // BuzzerList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Navy;
             this.ClientSize = new System.Drawing.Size(313, 393);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.deny);
             this.Controls.Add(this.admit);
             this.Controls.Add(this.nameBox);
@@ -268,5 +280,6 @@
         private System.Windows.Forms.Button admit;
         private System.Windows.Forms.Button deny;
         private System.Windows.Forms.Label noPlayersMsg;
+        private System.Windows.Forms.Button button1;
     }
 }
