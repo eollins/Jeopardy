@@ -26,6 +26,11 @@ namespace Jeopardy
             InitializeComponent();
         }
 
+        public void ChangeAcceptanceSetting(bool setting)
+        {
+            checkBox1.Checked = setting;
+        }
+
         bool playerDisplayed = false;
         GameBoard.Player currentPlayer;
         List<GameBoard.Player> toBeAdmitted = new List<GameBoard.Player>();
@@ -43,16 +48,23 @@ namespace Jeopardy
                 lastList = GameBoard.buzzes;
             }
 
-            List<GameBoard.Player> players = GameBoard.gamePlayers;
-            foreach (GameBoard.Player player in players)
+            try
             {
-                if (player.Admitted == 0 && !toBeAdmitted.Contains(player))
+                List<GameBoard.Player> players = GameBoard.gamePlayers;
+                foreach (GameBoard.Player player in players)
                 {
-                    if (!checkBox1.Checked)
-                        player.Admitted = 1;
-                    else
-                        toBeAdmitted.Add(player);
+                    if (player.Admitted == 0 && !toBeAdmitted.Contains(player))
+                    {
+                        if (!checkBox1.Checked)
+                            player.Admitted = 1;
+                        else
+                            toBeAdmitted.Add(player);
+                    }
                 }
+            }
+            catch
+            {
+                return;
             }
 
             if (!playerDisplayed && toBeAdmitted.Count > 0)

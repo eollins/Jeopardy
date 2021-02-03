@@ -114,6 +114,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TournamentControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TournamentControls.Designer.cs">
+      <DependentUpon>TournamentControls.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="BuzzerList.resx">
       <DependentUpon>BuzzerList.cs</DependentUpon>
     </EmbeddedResource>
@@ -131,7 +137,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TournamentControls.resx">
+      <DependentUpon>TournamentControls.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="keys.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -148,6 +158,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jeopardy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\jeopardy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\final.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\double.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

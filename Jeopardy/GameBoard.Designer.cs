@@ -1196,7 +1196,7 @@
             this.gameCode.Name = "gameCode";
             this.gameCode.Size = new System.Drawing.Size(1069, 128);
             this.gameCode.TabIndex = 105;
-            this.gameCode.Text = "000000";
+            this.gameCode.Text = "Waiting for host";
             this.gameCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // website
@@ -1505,6 +1505,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Navy;
             this.ClientSize = new System.Drawing.Size(1093, 780);
+            this.Controls.Add(this.gameCode);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.timeToAnswer);
             this.Controls.Add(this.codeLabel);
@@ -1524,7 +1525,6 @@
             this.Controls.Add(this.remove1);
             this.Controls.Add(this.award1);
             this.Controls.Add(this.website);
-            this.Controls.Add(this.gameCode);
             this.Controls.Add(this.roundBox);
             this.Controls.Add(this.finalIndicator);
             this.Controls.Add(this.djepIndicator);
