@@ -346,27 +346,37 @@ namespace Jeopardy
         bool hidePlates = false;
         private async void playerTimerHandler(object sender, ElapsedEventArgs e)
         {
-            string data = await GameFunctionAsync("getPlayers", gameCodeNum, null);
-
-            string[] players = data.Split(new string[] { "<br>" }, StringSplitOptions.None);
-            for (int i = 0; i < players.Length - 1; i++)
+            string data;
+            string[] players;
+            try
             {
-                string p = players[i];
-                string[] comp = p.Split('`');
+                data = await GameFunctionAsync("getPlayers", gameCodeNum, null);
 
-                if (!PlayerPresent(int.Parse(comp[1])) && !TeammateIDs.Contains(int.Parse(comp[1])))
+                players = data.Split(new string[] { "<br>" }, StringSplitOptions.None);
+                for (int i = 0; i < players.Length - 1; i++)
                 {
-                    gamePlayers.Add(new Player(comp[0], int.Parse(comp[1])));
+                    string p = players[i];
+                    string[] comp = p.Split('`');
+
+                    if (!PlayerPresent(int.Parse(comp[1])) && !TeammateIDs.Contains(int.Parse(comp[1])))
+                    {
+                        gamePlayers.Add(new Player(comp[0], int.Parse(comp[1])));
+                    }
+                }
+
+                for (int i = 0; i < gamePlayers.Count; i++)
+                {
+                    if (!data.Contains(gamePlayers[i].ID.ToString()))
+                    {
+                        gamePlayers.RemoveAt(i);
+                        hidePlates = true;
+                    }
                 }
             }
-
-            for (int i = 0; i < gamePlayers.Count; i++)
+            catch
             {
-                if (!data.Contains(gamePlayers[i].ID.ToString()))
-                {
-                    gamePlayers.RemoveAt(i);
-                    hidePlates = true;
-                }
+                MessageBox.Show("Error accessing players.");
+                return;
             }
 
             if (finalJeopardy)
@@ -397,6 +407,7 @@ namespace Jeopardy
         public class BuzzList
         {
             public Buzz[] buzzes { get; set; }
+            public string startTime { get; set; }
         }
 
         public class Buzz
@@ -413,6 +424,15 @@ namespace Jeopardy
             BuzzList b = JsonConvert.DeserializeObject<BuzzList>(data);
             List<Buzz> sorted = b.buzzes.OrderBy(o => o.timestamp).ToList();
             buzzes = b;
+
+            for (int i = 0; i < sorted.Count; i++)
+            {
+                Buzz bz = sorted[i];
+                if (double.Parse(bz.timestamp) < double.Parse(b.startTime))
+                {
+                    sorted.Remove(bz);
+                }
+            }
 
             if (checkBuzzes)
             {
@@ -1852,22 +1872,22 @@ namespace Jeopardy
         }
 
         bool checkBuzzes = false;
-        public void Lock()
+        public async void Lock()
         {
             buzzTimer.Enabled = false;
             checkBuzzes = false;
-            string data = GameFunction("setGameLock", gameCodeNum, "1");
-            unlock.Text = "Unlock";
+            string data = await GameFunctionAsync("setGameLock", gameCodeNum, "1");
             Controller.Lock = true;
             countDown = false;
+            unlock.Text = "Unlock";
             ResizeTimer(-1);
         }
 
-        public void Unlock()
+        public async void Unlock()
         {
             buzzTimer.Enabled = true;
             checkBuzzes = true;
-            string data = GameFunction("setGameLock", gameCodeNum, "0");
+            string data = await GameFunctionAsync("setGameLock", gameCodeNum, "0");
             unlock.Text = "Lock";
             Controller.Lock = false;
             countDown = true;
