@@ -200,3 +200,4 @@ D:\Jej\Jeopardy\Jeopardy\bin\Debug\Jeopardy.exe.config
 D:\Jej\Jeopardy\Jeopardy\bin\Debug\Jeopardy.exe
 D:\Jej\Jeopardy\Jeopardy\bin\Debug\Jeopardy.pdb
 D:\Jej\Jeopardy\Jeopardy\obj\Debug\Jeopardy.TournamentControls.resources
+E:\Jej\Jeopardy\Jeopardy\obj\Debug\Jeopardy.TournamentControls.resources

@@ -425,14 +425,14 @@ namespace Jeopardy
             List<Buzz> sorted = b.buzzes.OrderBy(o => o.timestamp).ToList();
             buzzes = b;
 
-            for (int i = 0; i < sorted.Count; i++)
+            /*for (int i = 0; i < sorted.Count; i++)
             {
                 Buzz bz = sorted[i];
                 if (double.Parse(bz.timestamp) < double.Parse(b.startTime))
                 {
                     sorted.Remove(bz);
                 }
-            }
+            }*/
 
             if (checkBuzzes)
             {
@@ -456,10 +456,7 @@ namespace Jeopardy
 
                         Debug.WriteLine("Chosen: " + buzzID);
 
-                    for (int i = 1; i < sorted.Count; i++)
-                    {
-                        data = await GameFunctionAsync("clear", gameCodeNum, sorted[i].playerID);
-                    }
+                    await GameFunctionAsync("acknowledge", buzzID.ToString(), null);
 
                     foreach (Player player in gamePlayers)
                     {
@@ -900,7 +897,13 @@ namespace Jeopardy
             if (finalJeopardyBtn.Checked)
             {
                 CategoryInfo cat2 = null;
-                if (autoRadioBtn.Checked)
+                if (TournamentControls.PreloadedFinal != null)
+                {
+                    cat2 = TournamentControls.PreloadedFinal.ElementAt(0).Value;
+                    clue.Text = cat2.clues[0].question.Replace("&", "&&");
+                    answerBox.Text = cat2.clues[0].answer;
+                }
+                else if (autoRadioBtn.Checked)
                 {
                     WebRequest clueRequest = WebRequest.Create("http://jservice.io/api/category?id=" + finalJep.id);
                     WebResponse clueResponse = clueRequest.GetResponse();
@@ -917,12 +920,6 @@ namespace Jeopardy
                     cat2 = finalJepInfo;
                     clue.Text = finalJepInfo.clues[0].question.Replace("&", "&&");
                     answerBox.Text = finalJepInfo.clues[0].answer;
-                }
-                else if (TournamentControls.PreloadedFinal != null)
-                {
-                    cat2 = TournamentControls.PreloadedFinal.ElementAt(0).Value;
-                    clue.Text = cat2.clues[0].question.Replace("&", "&&");
-                    answerBox.Text = cat2.clues[0].answer;
                 }
 
                 cat1label.Text = cat2.title.ToUpper().Replace('&', ' ');
@@ -1050,7 +1047,7 @@ namespace Jeopardy
 
                 if (!dailyDoubleState && !finalJeopardy)
                 {
-                    Unlock();
+                    //Unlock();
                 }
 
                 dailyDoubleState = false;
