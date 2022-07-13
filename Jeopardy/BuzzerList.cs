@@ -154,17 +154,17 @@ namespace Jeopardy
 
         private void button1_Click(object sender, EventArgs e)
         {
-            WebRequest request = WebRequest.Create("https://random-word-api.herokuapp.com/word?number=1");
-            WebResponse resp = request.GetResponse();
-            StreamReader reader = new StreamReader(resp.GetResponseStream());
-            string data = reader.ReadToEnd().Substring(2);
-            string word = "";
-            word += data[0].ToString().ToUpper();
-            for (int i = 1; i < data.Length - 2; i++)
-            {
-                word += data[i];
-            }
-            nameBox.Text = word + " " + nameBox.Text;
+            //WebRequest request = WebRequest.Create("https://random-word-api.herokuapp.com/word?number=1");
+            //WebResponse resp = request.GetResponse();
+            //StreamReader reader = new StreamReader(resp.GetResponseStream());
+            //string data = reader.ReadToEnd().Substring(2);
+            //string word = "";
+            //word += data[0].ToString().ToUpper();
+            //for (int i = 1; i < data.Length - 2; i++)
+            //{
+            //    word += data[i];
+            //}
+            //nameBox.Text = word + " " + nameBox.Text;
         }
     }
 }

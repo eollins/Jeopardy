@@ -135,6 +135,7 @@
             this.updateBar = new System.Windows.Forms.Timer(this.components);
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.errorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.customWager)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -1499,6 +1500,18 @@
             this.label3.TabIndex = 128;
             this.label3.Text = "label3";
             // 
+            // errorLabel
+            // 
+            this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.RosyBrown;
+            this.errorLabel.Location = new System.Drawing.Point(12, 25);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(1069, 447);
+            this.errorLabel.TabIndex = 129;
+            this.errorLabel.Text = "hamijeopardy.com";
+            this.errorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.errorLabel.Visible = false;
+            // 
             // GameBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1602,6 +1615,7 @@
             this.Controls.Add(this.clue);
             this.Controls.Add(this.clueImage);
             this.Controls.Add(this.pictureBox);
+            this.Controls.Add(this.errorLabel);
             this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
@@ -1728,6 +1742,7 @@
         private System.Windows.Forms.Timer updateBar;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label errorLabel;
     }
 }
 

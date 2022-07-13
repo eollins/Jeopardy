@@ -44,6 +44,8 @@ namespace Jeopardy
         Button unlockBtnRef;
         public static string GameCode = "";
         bool gameStarted = false;
+        bool networkError = false;
+        bool playerTimerEnabled = false;
 
         public class Player
         {
@@ -313,9 +315,10 @@ namespace Jeopardy
             Controller.DailyDoubles = doubles.Text;
             gameModeComboBox.SelectedIndex = 0;
 
-            System.Timers.Timer t = new System.Timers.Timer(400);
-            t.Elapsed += new ElapsedEventHandler(playerTimerHandler);
-            t.Start();
+            System.Timers.Timer playerTimer = new System.Timers.Timer(400);
+            playerTimer.Elapsed += new ElapsedEventHandler(playerTimerHandler);
+            playerTimer.Start();
+            playerTimerEnabled = true;
 
             BuzzerList list = new BuzzerList(this);
             list.Show();
@@ -326,6 +329,7 @@ namespace Jeopardy
             buzzTimer = new System.Timers.Timer(400);
             buzzTimer.Elapsed += new ElapsedEventHandler(CheckForBuzzes);
             unlockBtnRef = unlock;
+            website.Text = ConfigurationManager.AppSettings["DisplayedURL"]; 
 
             updateNames.Enabled = true;
         }
@@ -346,37 +350,39 @@ namespace Jeopardy
         bool hidePlates = false;
         private async void playerTimerHandler(object sender, ElapsedEventArgs e)
         {
+            if (playerTimerEnabled == false)
+            {
+                return;
+            }
+
             string data;
             string[] players;
-            try
+
+            data = await GameFunctionAsync("getPlayers", gameCodeNum, null);
+            if (data == null)
             {
-                data = await GameFunctionAsync("getPlayers", gameCodeNum, null);
+                return;
+            }
 
-                players = data.Split(new string[] { "<br>" }, StringSplitOptions.None);
-                for (int i = 0; i < players.Length - 1; i++)
+            players = data.Split(new string[] { "<br>" }, StringSplitOptions.None);
+            for (int i = 0; i < players.Length - 1; i++)
+            {
+                string p = players[i];
+                string[] comp = p.Split('`');
+
+                if (!PlayerPresent(int.Parse(comp[1])) && !TeammateIDs.Contains(int.Parse(comp[1])))
                 {
-                    string p = players[i];
-                    string[] comp = p.Split('`');
-
-                    if (!PlayerPresent(int.Parse(comp[1])) && !TeammateIDs.Contains(int.Parse(comp[1])))
-                    {
-                        gamePlayers.Add(new Player(comp[0], int.Parse(comp[1])));
-                    }
-                }
-
-                for (int i = 0; i < gamePlayers.Count; i++)
-                {
-                    if (!data.Contains(gamePlayers[i].ID.ToString()))
-                    {
-                        gamePlayers.RemoveAt(i);
-                        hidePlates = true;
-                    }
+                    gamePlayers.Add(new Player(comp[0], int.Parse(comp[1])));
                 }
             }
-            catch
+
+            for (int i = 0; i < gamePlayers.Count; i++)
             {
-                MessageBox.Show("Error accessing players.");
-                return;
+                if (!data.Contains(gamePlayers[i].ID.ToString()))
+                {
+                    gamePlayers.RemoveAt(i);
+                    hidePlates = true;
+                }
             }
 
             if (finalJeopardy)
@@ -975,9 +981,20 @@ namespace Jeopardy
                 return;
             }
 
-            char category = currentBtn[1];
-            int catID = int.Parse(category.ToString()) - 1;
-            string value = currentBtn.Substring(3);
+            char category;
+            int catID;
+            string value;
+            try
+            {
+                category = currentBtn[1];
+                catID = int.Parse(category.ToString()) - 1;
+                value = currentBtn.Substring(3);
+            }
+            catch
+            {
+                MessageBox.Show("Error! Please re-generate board.");
+                return;
+            }
 
             Clue[] cl = clues[categories[catID]].clues;
             foreach (Clue c in cl)
@@ -1265,6 +1282,11 @@ namespace Jeopardy
 
         private void categoryLabel_Click(object sender, EventArgs e)
         {
+            if (clues.Keys.Count == 0)
+            {
+                return;
+            }
+
             Label lbl = (Label)sender;
 
             foreach (Category c in clues.Keys)
@@ -1992,7 +2014,10 @@ namespace Jeopardy
 
         public string GameFunction(string function, string var1, string var2)
         {
-            Uri uri = new Uri(@"http://hamijeopardy.com/gameFunctions.php");
+            if (networkError)
+                return null;
+
+            Uri uri = new Uri(ConfigurationManager.AppSettings["WebURL"]  + "/gameFunctions.php");
             WebRequest request = WebRequest.Create(uri);
             request.Method = "POST";
 
@@ -2022,9 +2047,13 @@ namespace Jeopardy
 
                 return reader.ReadToEnd();
             }
-            catch
+            catch (WebException ex)
             {
-                MessageBox.Show("Network error.");
+                clock.Enabled = false;
+                synchBuzzTimer.Enabled = false;
+                networkError = true;
+                playerTimerEnabled = false;
+                UpdateError(ex.Status);
             }
 
             return null;
@@ -2032,7 +2061,7 @@ namespace Jeopardy
 
         public async Task<string> GameFunctionAsync(string function, string var1, string var2)
         {
-            Uri uri = new Uri(@"http://hamijeopardy.com/gameFunctions.php");
+            Uri uri = new Uri(ConfigurationManager.AppSettings["WebURL"] + "/gameFunctions.php");
             WebRequest request = WebRequest.Create(uri);
             request.Method = "POST";
 
@@ -2062,12 +2091,29 @@ namespace Jeopardy
 
                 return await reader.ReadToEndAsync();
             }
-            catch
+            catch (WebException ex)
             {
-                MessageBox.Show("Network error.");
+                clock.Enabled = false;
+                synchBuzzTimer.Enabled = false;
+                networkError = true;
+                playerTimerEnabled = false;
+                new Task(() => { UpdateError(ex.Status); }).Start();
             }
 
             return null;
+        }
+
+        public void UpdateError(WebExceptionStatus status)
+        {
+            //errorLabel.Visible = true;
+            //gameCode.Visible = false;
+            //website.Visible = false;
+            //playerTimerEnabled = false;
+            if (status.ToString() == "NameResolutionFailure")
+            {
+                MessageBox.Show("Web Error:\nGame system could not be reached. Check your internet connection.");
+                Application.Exit();
+            }
         }
 
         public void revealResponse_Click(object sender, EventArgs e)

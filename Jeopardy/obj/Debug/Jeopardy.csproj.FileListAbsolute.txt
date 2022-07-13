@@ -201,3 +201,7 @@ D:\Jej\Jeopardy\Jeopardy\bin\Debug\Jeopardy.exe
 D:\Jej\Jeopardy\Jeopardy\bin\Debug\Jeopardy.pdb
 D:\Jej\Jeopardy\Jeopardy\obj\Debug\Jeopardy.TournamentControls.resources
 E:\Jej\Jeopardy\Jeopardy\obj\Debug\Jeopardy.TournamentControls.resources
+C:\Users\ethan\Documents\Jeopardy\Jeopardy\bin\Debug\keys.config
+C:\Users\ethan\Documents\Jeopardy\Jeopardy\bin\Debug\MySql.Web.xml
+C:\Users\ethan\Documents\Jeopardy\Jeopardy\obj\Debug\Jeopardy.BuzzerList.resources
+C:\Users\ethan\Documents\Jeopardy\Jeopardy\obj\Debug\Jeopardy.TournamentControls.resources
